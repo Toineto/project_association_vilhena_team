@@ -30,8 +30,8 @@ Fique por dentro dos próximos eventos emocionantes que a associação estará p
 
 Para obter mais informações, entre em contato conosco através dos seguintes meios:
 
-- Email: contato@vilhenajiu-jitsu.com
-- Telefone: (XX) XXXX-XXXX
+- Email: augusto.vilhena4@gmail.com
+- Telefone: +55 (94) 98179-8360
 
 ## Como Contribuir
 
@@ -45,7 +45,7 @@ Este projeto está aberto a contribuições. Se você deseja melhorar o design, 
 
 ## Licença
 
-Este projeto está sob a licença [MIT](LICENSE).
+Este projeto está sob a licença de Augusto Vilhena
 
 ---
 
