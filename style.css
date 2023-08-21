@@ -1,0 +1,160 @@
+/* Estilos gerais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font: 400 1rem var(--body-font);
+  color: var(--text-color);
+  background: var(--body-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* Estilos para o cabeçalho */
+header {
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1rem;
+}
+
+/* Estilos para a barra de navegação */
+nav {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #007bff;
+}
+
+/* Estilos para as seções */
+section {
+  padding: 1rem;
+  text-align: justify;
+}
+
+/* Estilos para os links nas seções */
+section a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* Estilos para a seção de instrutores */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* Estilos para o rodapé */
+footer {
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Estilos para títulos */
+h1, h2 {
+  color: #333;
+  font-size: 1.5rem;
+}
+
+/* Estilos para parágrafos */
+p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Estilos para links */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+/* Estilos para telas menores (celulares) */
+@media (max-width: 767px) {
+  header h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+  }
+  
+  header p {
+      font-size: 0.9rem;
+  }
+
+  nav {
+      padding: 0.5rem 0;
+  }
+
+  nav a {
+      margin: 0 5px;
+      font-size: 0.9rem;
+  }
+
+  section {
+      padding: 1rem;
+  }
+
+  ul li {
+      margin-bottom: 0.3rem;
+  }
+
+  h1, h2 {
+      font-size: 1.3rem;
+  }
+
+  p {
+      font-size: 0.9rem;
+  }
+}
