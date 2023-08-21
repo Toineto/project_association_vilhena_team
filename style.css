@@ -56,15 +56,15 @@ nav {
 }
 
 nav a {
-  color: #fff;
+  color: #bbbbbb;
   text-decoration: none;
-  margin: 0 10px;
-  font-size: 1rem;
-  transition: color 0.3s;
+  margin: 0 15px;
+  font-size: 1.2rem;
+  transition: color 0.2s;
 }
 
 nav a:hover {
-  color: #007bff;
+  color: rgb(255, 255, 255);
 }
 
 /* Estilos para as seções */
@@ -75,7 +75,7 @@ section {
 
 /* Estilos para os links nas seções */
 section a {
-  color: #007bff;
+  color: red;
   text-decoration: none;
 }
 
@@ -99,8 +99,13 @@ footer {
 }
 
 /* Estilos para títulos */
-h1, h2 {
-  color: #333;
+h1 {
+  color: #ff0000;
+  font-size: 1.5rem;
+}
+
+h2 {
+  color: #424242;
   font-size: 1.5rem;
 }
 
@@ -113,13 +118,19 @@ p {
 
 /* Estilos para links */
 a {
-  color: #007bff;
+  color: red;
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-  color: #0056b3;
+a::after {
+  content: '';
+  width: 0%;
+  height: 2px;
+  background: red;
+  position: absolute;
+  left: 0;
+  bottom: -1.5rem;
+  transition: width 0.2s;
 }
 
 /* Estilos para telas menores (celulares) */
