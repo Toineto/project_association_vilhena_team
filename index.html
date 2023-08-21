@@ -1,65 +1,271 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt_BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Associação Equipe Vilhena Jiu-Jitsu</title>
-  <link rel="stylesheet" href="style.css">
+  <!-- PAGE INFO -->
+  <meta charset="UTF-8" />
+  <link rel="icon" href="img/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Associação Equipe Vilhena Jiu-jitsu</title>
+
+  <!-- Icones -->
+  <link rel="stylesheet" href="assets/fonts/style.css" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+  <!-- STYLES -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap"
+    rel="stylesheet" />
 </head>
 
 <body>
-  <nav>
-    <a href="#sobre">Sobre Nós</a>
-    <a href="#aulas">Aulas</a>
-    <a href="#instrutores">Instrutores</a>
-    <a href="#eventos">Eventos</a>
-    <a href="#contato">Contato</a>
-  </nav>
-  <header>
-    <h1>Associação Equipe Vilhena Jiu-Jitsu</h1>
-    <p>Desenvolvendo habilidades através do Jiu-Jitsu</p>
+  <header id="header">
+    <nav class="container">
+      <a class="logo" href="#">Associação<span> Equipe Vilhena </span>Jiu-jitsu</a>
+      <!-- menu -->
+      <div class="menu">
+        <ul class="grid">
+          <li><a class="title" href="#home">Início</a></li>
+          <li><a class="title" href="#about">Sobre Nós</a></li>
+          <li><a class="title" href="#mission">Missão</a></li>
+          <li><a class="title" href="#Instructors">Instrutores</a></li>
+          <li><a class="title" href="#contact">Contato</a></li>
+        </ul>
+      </div>
+      <!-- /menu -->
+      <div class="toggle icon-menu"></div>
+      <div class="toggle icon-close"></div>
+    </nav>
   </header>
-  <section id="sobre">
-    <h2>Sobre Nós</h2>
-    <p>A Associação Equipe Vilhena Jiu-Jitsu é dedicada a fornecer treinamento de alta qualidade em Jiu-Jitsu para
-      pessoas de todas as idades e níveis de habilidade. Nossa missão é promover a saúde, a confiança e o respeito mútuo
-      através da prática do esporte.</p>
-  </section>
-  <section id="aulas">
-    <h2>Aulas</h2>
-    <p>Nossas aulas são projetadas para atender a diferentes níveis de experiência, desde iniciantes até avançados.
-      Oferecemos treinamento em técnicas de solo, posições de controle, finalizações e defesa pessoal. Também
-      enfatizamos o condicionamento físico e mental.</p>
-  </section>
-  <section id="instrutores">
-    <h2>Instrutores</h2>
-    <p>Nossa equipe de instrutores altamente qualificados possui anos de experiência no Jiu-Jitsu. Eles estão
-      comprometidos em orientar os alunos de forma cuidadosa, ajudando-os a desenvolver suas habilidades e atingir seus
-      objetivos no esporte.</p>
-    <ul>
-      <li><strong>João Silva</strong> - Faixa Preta, Campeão Nacional</li>
-      <li><strong>Maria Santos</strong> - Faixa Roxa, Especialista em Defesa Pessoal</li>
-      <li><strong>Carlos Oliveira</strong> - Faixa Marrom, Instrutor de Crianças</li>
-    </ul>
-  </section>
-  <section id="eventos">
-    <h2>Eventos</h2>
-    <p>Fique por dentro dos nossos próximos eventos emocionantes:</p>
-    <ul>
-      <li>Torneio Aberto de Verão - Data: XX/XX/XXXX</li>
-      <li>Workshop de Finalizações Avançadas - Data: XX/XX/XXXX</li>
-    </ul>
-  </section>
-  <section id="contato">
-    <h2>Contato</h2>
-    <p>Entre em contato conosco para mais informações sobre nossos programas, horários e inscrições:</p>
-    <p>Email: contato@vilhenajiu-jitsu.com</p>
-    <p>Telefone: (XX) XXXX-XXXX</p>
-  </section>
-  <footer>
-    <p>&copy; 2023 Associação Equipe Vilhena Jiu-Jitsu. Todos os direitos reservados.</p>
+
+  <main>
+    <!-- HOME -->
+    <section class="section" id="home">
+      <div class="container grid">
+        <div class="image">
+          <img src="img/vilhenamatriz.jpg" alt="equipe vilhena Matriz" />
+        </div>
+        <div class="text">
+          <h2 class="title">Força e Honra oss</h2>
+          <p>
+            Bem-vindo à Associação Equipe Vilhena Jiu-Jitsu, um lugar onde paixão,
+            comprometimento e aprendizado se unem para criar uma comunidade dedicada
+            ao crescimento pessoal e à excelência no Jiu-Jitsu. Nossa associação foi
+            fundada com o objetivo de proporcionar benefícios duradouros tanto para
+            nossos alunos quanto para nossos instrutores, criando um ambiente onde
+            todos podem prosperar e evoluir.
+          </p>
+          <!-- <a class="button" href="#">botão</a> -->
+        </div>
+      </div>
+    </section>
+
+    <div class="divider-1"></div>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="container grid">
+        <div class="image">
+          <img src="img/kids.jpg" alt="kids" />
+        </div>
+        <div class="text">
+          <h2 class="title">Sobre nós</h2>
+          <p>
+            Nossa visão é criar um espaço onde a prática do Jiu-Jitsu vá além das técnicas no
+            tatame. Queremos ser um catalisador para o desenvolvimento humano, capacitando nossos
+            alunos a enfrentarem desafios dentro e fora do tatame com confiança e determinação.
+            Na Associação Equipe Vilhena Jiu-Jitsu, estamos comprometidos em fazer uma diferença
+            positiva na vida de nossos alunos e instrutores. Seja você um iniciante curioso ou um
+            praticante experiente, convidamos você a se juntar a nós nesta jornada de autodescoberta,
+            superação de limites e realização pessoal.
+          </p>
+          <br />
+          <p>
+            Na Associação Equipe Vilhena Jiu-Jitsu, não somos apenas um local de treinamento;
+            somos uma família que celebra a jornada de crescimento, transformação e superação.
+            Junte-se a nós e embarque na aventura emocionante do Jiu-Jitsu, onde a excelência
+            é alcançada e a mudança é constante.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider-2"></div>
+
+    <!-- mission -->
+    <section class="section" id="mission">
+      <div class="container grid">
+        <header>
+          <h2 class="title">Missão</h2>
+          <p class="subtitle">
+            Nossa missão é inspirar e capacitar indivíduos a se tornarem versões
+            melhores de si mesmos, utilizando o Jiu-Jitsu como ferramenta de
+            transformação. Acreditamos que o Jiu-Jitsu não é apenas uma forma de
+            defesa pessoal, mas uma jornada interior que desenvolve disciplina,
+            autoconfiança e resiliência.
+          </p>
+        </header>
+        <div class="cards grid">
+          <div class="card">
+            <h3 class="title">Comunidade Unida:</h3>
+            <p>
+              Somos mais do que apenas uma escola de Jiu-Jitsu; somos uma família.
+              Nossa comunidade é construída sobre valores de respeito, colaboração e
+              apoio mútuo. Aqui, cada membro é valorizado e contribui para o nosso espírito acolhedor.
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="title">Instrutores Experientes:</h3>
+            <p>
+              Nossos instrutores são mestres dedicados que trazem anos de experiência
+              e conhecimento para nossas aulas. Eles estão comprometidos em orientar
+              cada aluno em sua jornada, adaptando o ensino para atender às necessidades individuais.
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="title">Transformação Pessoal:</h3>
+            <p>
+              Acreditamos no poder do Jiu-Jitsu para transformar vidas. Além de
+              aprender técnicas de luta, nossos alunos desenvolvem habilidades de
+              autocontrole, concentração e autoaceitação, moldando sua mentalidade para o sucesso.
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="title">Diversidade de Programas:</h3>
+            <p>
+              Oferecemos uma ampla variedade de programas para atender a diferentes
+              idades e níveis de habilidade. Desde aulas infantis até treinamento
+              avançado, nossa abordagem inclusiva garante que todos possam participar e crescer.
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="title">Crescer Além das Fronteiras:</h3>
+            <p>
+              O Jiu-Jitsu é uma plataforma para o crescimento integral. Além das habilidades
+              físicas, os alunos desenvolvem autoconfiança, autodisciplina e resiliência,
+              habilidades essenciais para a vida cotidiana.
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="title">Construir Relações Fortes:</h3>
+            <p>
+              A nossa associação é uma família. Aqui, os alunos encontram um ambiente acolhedor
+              onde podem se conectar com outros praticantes, compartilhar experiências e formar
+              amizades duradouras.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider-1"></div>
+
+    <section class="section" id="Instructors" id="about">
+      <div class="container grid">
+        <div class="image">
+          <img src="img/instrutores.jpg" alt="3 mulheres sorrindo" />
+        </div>
+        <div class="text">
+          <h2 class="title">instrutores</h2>
+          <h3>Guiando com Paixão e Experiência no Caminho do Jiu-Jitsu</h3>
+          <br />
+          <p>
+            <b>Excelência em Instrução: </b>
+            Nossos instrutores são mais do que apenas professores; eles são mentores
+            que dedicam seu tempo e esforço para guiar os alunos em suas jornadas de
+            aprendizado. Cada aula é cuidadosamente planejada para oferecer uma
+            experiência de aprendizado envolvente e progressiva, permitindo que os
+            alunos dominem as técnicas enquanto desenvolvem habilidades fundamentais.
+          </p>
+          <br />
+          <p>
+            <b>Impacto Transformador: </b>
+            Nossos instrutores não apenas compartilham técnicas; eles compartilham
+            valores, orientação e inspiração. Eles têm o privilégio de ver os alunos
+            crescerem não apenas como lutadores, mas como indivíduos mais confiantes,
+            disciplinados e resilientes. O impacto que nossos instrutores têm na vida
+            de nossos alunos é profundamente gratificante e reafirma sua dedicação à arte do Jiu-Jitsu.
+          </p>
+          <br />
+          <p>
+            <b>Comunidade de Mentores:</b>
+            A Associação Equipe Vilhena Jiu-Jitsu é uma comunidade de mentores.
+            Nossos instrutores não apenas trabalham individualmente, mas colaboram
+            uns com os outros para oferecer uma experiência completa e abrangente
+            aos nossos alunos. A atmosfera de apoio e camaradagem que nossa equipe
+            cria é um reflexo do próprio espírito do Jiu-Jitsu.
+            Na Associação Equipe Vilhena Jiu-Jitsu, nossos instrutores são mais do que simplesmente
+            líderes; eles são modelos, mentores e inspirações para todos os que embarcam nesta
+            jornada. Se você está procurando orientação, desafio e um ambiente de aprendizado
+            enriquecedor, nossa equipe de instrutores está aqui para ajudá-lo a atingir seus objetivos no Jiu-Jitsu e na
+            vida.
+          </p>
+        </div>
+      </div>
+    </section>
+    <div class="divider-2"></div>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container grid">
+        <div class="text">
+          <h2 class="title">Junte-se a Nós e Comece sua Jornada de Transformação!</h2>
+          <p>
+            Entre em contato com a Associação Vilhena Jiu-jitsu, queremos tirar suas dúvidas,
+            ouvir suas críticas e sugestões.
+          </p>
+          <a href="https://api.whatsapp.com/send?phone=+5594984486969&text=Oi! Gostaria de saber mais sobre a Associação Vilhena Jiu-jitsu"
+            class="button" target="_blank"><i class="icon-whatsapp"></i> Entrar em contato</a>
+        </div>
+
+        <div class="links">
+          <ul class="grid">
+            <li><i class="icon-phone"></i> 94 98448-6969</li>
+            <li><i class="icon-map-pin"></i> Endereço </li>
+            <li><i class="icon-mail"></i> jeffersonvilhena@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider-1"></div>
+  </main>
+
+  <footer class="section">
+    <div class="container grid">
+      <div class="brand">
+        <a class="logo logo-alt" href="#home">Associação<span> Equipe Vilhena </span>Jiu-Jitsu</a>
+        <p>&copy; 2023 Associação Equipe Vilhena Jiu-Jitsu Todos os direitos reservados</p>
+        <p></p>
+      </div>
+
+      <div class="social grid">
+        <a href="https://instagram.com" target="_blank">
+          <i class="icon-instagram"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank">
+          <i class="icon-facebook"></i></a>
+        <a href="https://youtube.com" target="_blank"><i class="icon-youtube"></i></a>
+      </div>
+    </div>
   </footer>
+
+  <a href="#home" class="back-to-top"><i class="icon-arrow-up"></i></a>
+
+  <!-- swiper -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <!-- scrollreveal -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <!-- main.js -->
+  <script src="main.js"></script>
 </body>
 
 </html>
