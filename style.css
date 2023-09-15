@@ -142,17 +142,33 @@ body {
 }
 
 /*====  LOGO ============================ */
+
+.logovilhena {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.logofooter {
+  width: 100px;
+  height: 100px;
+}
+
+
 .logo {
   font: 700 1.31rem var(--title-font);
   color: var(--title-color);
+  justify-content: center;
 }
 
 .logo span {
   color: var(--base-color);
+  justify-content: center;
 }
 
 .logo-alt span {
   color: var(--body-color);
+  justify-content: center;
 }
 
 /*====  NAVIGATION ============================ */
