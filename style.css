@@ -683,6 +683,22 @@ footer .social a:hover {
     text-align: left;
   }
 
+  #container1 .container {
+    grid-auto-flow: column;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+
+  #container1 .image {
+    order: 1;
+  }
+
+  #container1 .text {
+    order: 0;
+    max-width: 24rem;
+    text-align: left;
+  }
+
   /* about */
   #about .container {
     margin: 0 auto;
