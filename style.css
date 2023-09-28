@@ -321,6 +321,69 @@ nav.show div.icon-close {
   margin-bottom: 2rem;
 }
 
+.container1 {
+  overflow: hidden;
+}
+
+.container1 .container {
+  margin: 0;
+}
+
+.container1 .image {
+  position: relative;
+}
+
+.container1 .image::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  background: var(--base-color-second);
+  position: absolute;
+  top: -16.8%;
+  left: 16.7%;
+  z-index: 0;
+}
+
+.container1 .image img {
+  position: relative;
+  right: 2.93rem;
+}
+
+.container1 .image img,
+.container1 .image::before {
+  border-radius: 0.25rem;
+}
+
+.container1 .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  text-align: center;
+}
+
+.container1 .text h1 {
+  margin-bottom: 1rem;
+}
+
+.container1 .text p {
+  margin-bottom: 2rem;
+}
+
+.container1 .container {
+  grid-auto-flow: column;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.container1 .image {
+  order: 1;
+}
+
+.container1 .text {
+  order: 0;
+  max-width: 24rem;
+  text-align: left;
+}
+
 /*====  ABOUT ============================ */
 #about {
   background: white;
