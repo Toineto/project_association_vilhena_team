@@ -484,16 +484,17 @@ nav.show div.icon-close {
 
 #kids .image {
   position: relative;
+  margin-left: 40px;
 }
 
 #kids .image::before {
   content: '';
-  height: 80%;
+  height: 75%;
   width: 100%;
   background: var(--base-color-second);
   position: absolute;
-  top: -8.3%;
-  left: -33%;
+  top: -8.0%;
+  left: -10%;
   z-index: 0;
 }
 
@@ -741,11 +742,11 @@ footer .social a:hover {
     grid-auto-flow: column;
   }
 
-    /* about */
+    /* kids */
   #kids .container2 {
-    margin: 0 auto;
-    justify-content: space-between;
     grid-auto-flow: column;
+    justify-content: space-between;
+    margin: 0 auto;
   }
 
     /* founder */
