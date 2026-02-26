@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Página do professor da Associação Equipe Vilhena Jiu-Jitsu" />
+  <title>Professor - Equipe Vilhena</title>
+
+  <!-- Estilos principais do site -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Layout de página com sobre, treino, galeria e contato (reaproveitado de filiais) -->
+  <link rel="stylesheet" href="filiais.css" />
+</head>
+<body>
+  <header id="header">
+    <nav class="container">
+      <a href="index.html"><img class="logovilhena" src="img/logo300px.png" alt="logo vilhena Jiu-Jitsu" /></a>
+      <a class="logo" href="index.html">Associação<span> Equipe Vilhena </span>Jiu-jitsu</a>
+      <div class="menu">
+        <ul class="grid">
+          <li><a class="title" href="index.html">Início</a></li>
+          <li><a class="title" href="#sobre">Sobre o Professor</a></li>
+          <li><a class="title" href="#treino">Endereço / Treino</a></li>
+          <li><a class="title" href="#galeria">Galeria</a></li>
+          <li><a class="title" href="#contato">Contato</a></li>
+        </ul>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" type="button">Modo escuro</button>
+      <div class="toggle icon-menu"></div>
+      <div class="toggle icon-close"></div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sobre o professor -->
+    <section id="sobre">
+      <h1 id="professor-nome-titulo">Professor</h1>
+      <div class="info-professor">
+        <img id="professor-foto" src="" alt="Foto do professor" />
+        <h2 id="professor-nome"></h2>
+        <p id="professor-graduacao"></p>
+        <p id="professor-registro"></p>
+        <p id="professor-bio"></p>
+      </div>
+    </section>
+
+    <!-- Endereço / Treino -->
+    <section id="treino">
+      <h1>Endereço / Local de Treino</h1>
+      <div class="info-treino">
+        <p id="professor-endereco"></p>
+      </div>
+    </section>
+
+    <!-- Galeria de fotos -->
+    <section id="galeria">
+      <h1>Galeria de Fotos</h1>
+      <div class="galeria" id="galeria-fotos">
+        <!-- Imagens preenchidas via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato">
+      <h1>Contato</h1>
+      <p>Entre em contato pelo WhatsApp para falar diretamente com a equipe da Equipe Vilhena sobre este professor.</p>
+      <div class="info-contato">
+        <h2>WhatsApp:</h2>
+        <p id="professor-whatsapp-numero"></p>
+        <a id="professor-whatsapp-link" href="#" target="_blank">Chamar no WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <button class="botao-voltar" onclick="location.href='index.html'">Voltar à Página Inicial</button>
+
+  <footer>
+    <p>Equipe Vilhena &copy; 2023</p>
+  </footer>
+
+  <script src="theme.js"></script>
+  <script>
+    const professores = {
+      'jefferson-vilhena': {
+        nome: 'Jefferson Vilhena',
+        graduacao: 'Faixa preta IV Grau.',
+        registro: 'Registro CBJJ: 28972.',
+        bio: 'Preencha aqui o histórico do professor Jefferson Vilhena.',
+        foto: 'img/professores/jeffersonVilhena.png',
+        endereco: 'Preencha aqui o endereço da academia do professor Jefferson Vilhena.',
+        galeria: [
+          'img/professores/jeffersonVilhena.png',
+          'img/professores/jeffersonVilhena.png',
+          'img/professores/jeffersonVilhena.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'adriano-padua': {
+        nome: 'Adriano Pádua',
+        graduacao: 'Faixa preta III Grau.',
+        registro: 'Registro CBJJ: 49860.',
+        bio: 'Preencha aqui o histórico do professor Adriano Pádua.',
+        foto: 'img/professores/Adriano.jpeg.png',
+        endereco: 'Preencha aqui o endereço da academia do professor Adriano Pádua.',
+        galeria: [
+          'img/professores/Adriano.jpeg.png',
+          'img/professores/Adriano.jpeg.png',
+          'img/professores/Adriano.jpeg.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'manoel-jeferson': {
+        nome: 'Manoel Jeferson',
+        graduacao: 'Faixa preta III Grau.',
+        registro: 'Registro CBJJ: 248733.',
+        bio: 'Preencha aqui o histórico do professor Manoel Jeferson.',
+        foto: 'img/professores/manoel-jeferson.jpeg.png',
+        endereco: 'Preencha aqui o endereço da academia do professor Manoel Jeferson.',
+        galeria: [
+          'img/professores/manoel-jeferson.jpeg.png',
+          'img/professores/manoel-jeferson.jpeg.png',
+          'img/professores/manoel-jeferson.jpeg.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'wildbruno-costa': {
+        nome: 'Wildbruno Costa',
+        graduacao: 'Faixa preta III Grau.',
+        registro: 'Registro CBJJ: 74673.',
+        bio: 'Preencha aqui o histórico do professor Wildbruno Costa.',
+        foto: 'img/professores/wildbruno costa.png',
+        endereco: 'Preencha aqui o endereço da academia do professor Wildbruno Costa.',
+        galeria: [
+          'img/professores/wildbruno costa.png',
+          'img/professores/wildbruno costa.png',
+          'img/professores/wildbruno costa.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'jonas-santos': {
+        nome: 'Jonas Santos',
+        graduacao: 'Faixa preta III Grau.',
+        registro: 'Registro CBJJ: 74673.',
+        bio: 'Preencha aqui o histórico do professor Jonas Santos.',
+        foto: 'img/professores/mutante.png',
+        endereco: 'Preencha aqui o endereço da academia do professor Jonas Santos.',
+        galeria: [
+          'img/professores/mutante.png',
+          'img/professores/mutante.png',
+          'img/professores/mutante.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'cintia-suely': {
+        nome: 'Cintia Suely',
+        graduacao: 'Faixa preta II Grau.',
+        registro: 'Registro CBJJ: 49308.',
+        bio: 'Preencha aqui o histórico da professora Cintia Suely.',
+        foto: 'img/professores/cintia.png',
+        endereco: 'Preencha aqui o endereço da academia da professora Cintia Suely.',
+        galeria: [
+          'img/professores/cintia.png',
+          'img/professores/cintia.png',
+          'img/professores/cintia.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'lucio-de-paula': {
+        nome: 'Lucio de Paula',
+        graduacao: 'Faixa preta II Grau.',
+        registro: 'Registro CBJJ: 43779.',
+        bio: 'Preencha aqui o histórico do professor Lucio de Paula.',
+        foto: 'img/professores/Lucio de Paula.png',
+        endereco: 'Preencha aqui o endereço da academia do professor Lucio de Paula.',
+        galeria: [
+          'img/professores/Lucio de Paula.png',
+          'img/professores/Lucio de Paula.png',
+          'img/professores/Lucio de Paula.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'famir-salmen': {
+        nome: 'Famir Salmen',
+        graduacao: 'Faixa preta II Grau.',
+        registro: 'Registro CBJJ: 159621.',
+        bio: 'Preencha aqui o histórico do professor Famir Salmen.',
+        foto: 'img/professores/famir.jpeg.png',
+        endereco: 'Preencha aqui o endereço da academia do professor Famir Salmen.',
+        galeria: [
+          'img/professores/famir.jpeg.png',
+          'img/professores/famir.jpeg.png',
+          'img/professores/famir.jpeg.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'luiz-carlos': {
+        nome: 'Luiz Carlos',
+        graduacao: 'Faixa preta II Grau.',
+        registro: 'Registro CBJJ: 389805.',
+        bio: 'Preencha aqui o histórico do professor Luiz Carlos.',
+        foto: 'img/professores/Luiz-carlos.png',
+        endereco: 'Preencha aqui o endereço da academia do professor Luiz Carlos.',
+        galeria: [
+          'img/professores/Luiz-carlos.png',
+          'img/professores/Luiz-carlos.png',
+          'img/professores/Luiz-carlos.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'gerson-nascimento': {
+        nome: 'Gerson Nascimento',
+        graduacao: 'Faixa preta.',
+        registro: 'Registro CBJJ: 142716.',
+        bio: 'Preencha aqui o histórico do professor Gerson Nascimento.',
+        foto: 'img/professores/Gerson.png',
+        endereco: 'Preencha aqui o endereço da academia do professor Gerson Nascimento.',
+        galeria: [
+          'img/professores/Gerson.png',
+          'img/professores/Gerson.png',
+          'img/professores/Gerson.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'fernando-mota': {
+        nome: 'Fernando Mota',
+        graduacao: 'Faixa preta.',
+        registro: 'Registro CBJJ: 408011.',
+        bio: 'Preencha aqui o histórico do professor Fernando Mota.',
+        foto: 'img/professores/fernando.png',
+        endereco: 'Preencha aqui o endereço da academia do professor Fernando Mota.',
+        galeria: [
+          'img/professores/fernando.png',
+          'img/professores/fernando.png',
+          'img/professores/fernando.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'silas-silva': {
+        nome: 'Silas Silva',
+        graduacao: 'Faixa preta.',
+        registro: 'Registro CBJJ: 127941.',
+        bio: 'Preencha aqui o histórico do professor Silas Silva.',
+        foto: 'img/professores/Silas.png',
+        endereco: 'Preencha aqui o endereço da academia do professor Silas Silva.',
+        galeria: [
+          'img/professores/Silas.png',
+          'img/professores/Silas.png',
+          'img/professores/Silas.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      }
+    };
+
+    function preencherPagina(professor) {
+      const titulo = document.getElementById('professor-nome-titulo');
+      const foto = document.getElementById('professor-foto');
+      const nome = document.getElementById('professor-nome');
+      const graduacao = document.getElementById('professor-graduacao');
+      const registro = document.getElementById('professor-registro');
+      const bio = document.getElementById('professor-bio');
+      const endereco = document.getElementById('professor-endereco');
+      const galeria = document.getElementById('galeria-fotos');
+      const whatsappNumero = document.getElementById('professor-whatsapp-numero');
+      const whatsappLink = document.getElementById('professor-whatsapp-link');
+
+      if (!professor) {
+        titulo.textContent = 'Professor não encontrado';
+        bio.textContent = 'Não foi possível localizar as informações do professor. Volte à página inicial e tente novamente.';
+        return;
+      }
+
+      titulo.textContent = professor.nome;
+      if (foto) {
+        foto.src = professor.foto;
+        foto.alt = 'Foto do professor ' + professor.nome;
+      }
+      nome.textContent = professor.nome;
+      graduacao.textContent = professor.graduacao;
+      registro.textContent = professor.registro;
+      bio.textContent = professor.bio;
+      endereco.textContent = professor.endereco;
+
+      if (galeria) {
+        galeria.innerHTML = '';
+        professor.galeria.forEach(function (src) {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = 'Foto do professor ' + professor.nome;
+          galeria.appendChild(img);
+        });
+      }
+
+      whatsappNumero.textContent = professor.whatsappDisplay;
+      const mensagem = encodeURIComponent('Oi, gostaria de falar com o professor ' + professor.nome + '.');
+      whatsappLink.href = 'https://api.whatsapp.com/send?phone=' + professor.whatsapp + '&text=' + mensagem;
+      whatsappLink.textContent = 'Chamar no WhatsApp ' + professor.whatsappDisplay;
+
+      document.title = 'Professor ' + professor.nome + ' - Equipe Vilhena';
+    }
+
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      const professor = professores[id];
+      preencherPagina(professor || professores['jefferson-vilhena']);
+    })();
+  </script>
+</body>
+</html>

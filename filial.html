@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Filiais da Associação Equipe Vilhena Jiu-Jitsu" />
+  <title>Filial - Equipe Vilhena</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="filiais.css" />
+</head>
+<body>
+  <header id="header">
+    <nav class="container">
+      <a href="index.html"><img class="logovilhena" src="img/logo300px.png" alt="logo vilhena Jiu-Jitsu" /></a>
+      <a class="logo" href="index.html">Associação<span> Equipe Vilhena </span>Jiu-jitsu</a>
+      <div class="menu">
+        <ul class="grid">
+          <li><a class="title" href="index.html">Início</a></li>
+          <li><a class="title" href="#sobre">Sobre a Filial</a></li>
+          <li><a class="title" href="#treino">Treinos</a></li>
+          <li><a class="title" href="#galeria">Galeria</a></li>
+          <li><a class="title" href="#contato">Contato</a></li>
+        </ul>
+      </div>
+      <button id="theme-toggle" class="theme-toggle" type="button">Modo escuro</button>
+      <div class="toggle icon-menu"></div>
+      <div class="toggle icon-close"></div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sobre a filial -->
+    <section id="sobre">
+      <h1 id="filial-nome-titulo">Filial</h1>
+      <div class="info-professor" id="filial-info">
+        <div class="filial-textos">
+          <h2 id="filial-nome"></h2>
+          <p id="filial-descricao"></p>
+          <p id="filial-responsavel"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Treinos e Local -->
+    <section id="treino">
+      <h1>Treinos e Local</h1>
+      <div class="info-treino">
+        <h2>Horários de treino</h2>
+        <ul id="filial-horarios"></ul>
+
+        <h2 style="margin-top: 1.5rem;">Endereço</h2>
+        <p id="filial-endereco"></p>
+
+        <div class="mapa-wrapper" id="filial-mapa-wrapper">
+          <iframe
+            id="filial-mapa"
+            src=""
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galeria de fotos -->
+    <section id="galeria">
+      <h1>Galeria de Fotos</h1>
+      <div class="galeria" id="filial-galeria">
+        <!-- Imagens preenchidas via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato">
+      <h1>Contato</h1>
+      <p>Entre em contato pelo WhatsApp para falar diretamente com a equipe desta filial.</p>
+      <div class="info-contato">
+        <h2>WhatsApp:</h2>
+        <p id="filial-whatsapp-numero"></p>
+        <a id="filial-whatsapp-link" href="#" target="_blank">Chamar no WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <button class="botao-voltar" onclick="location.href='index.html'">Voltar à Página Inicial</button>
+
+  <footer>
+    <p>Equipe Vilhena &copy; 2023</p>
+  </footer>
+
+  <script src="theme.js"></script>
+  <script>
+    const filiais = {
+      'filial-1': {
+        nome: 'Filial 1',
+        descricao: 'Preencha aqui uma descrição resumida desta filial (história, público, características).',
+        responsavel: 'Responsável: informe aqui o nome do professor responsável.',
+        horarios: [
+          'Segunda e Quarta - 19h às 20h30 (Adulto)',
+          'Terça e Quinta - 18h às 19h (Kids)',
+          'Sábado - 9h às 11h (Treino livre)'
+        ],
+        endereco: 'Preencha aqui o endereço completo da filial 1.',
+        mapaEmbed: '',
+        galeria: [
+          'img/vilhenamatriz.png',
+          'img/kids.jpg'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'filial-2': {
+        nome: 'Filial 2',
+        descricao: 'Preencha aqui uma descrição resumida desta filial.',
+        responsavel: 'Responsável: informe aqui o nome do professor responsável.',
+        horarios: [
+          'Segunda, Quarta e Sexta - 18h às 19h30',
+          'Terça e Quinta - 19h às 20h30'
+        ],
+        endereco: 'Preencha aqui o endereço completo da filial 2.',
+        mapaEmbed: '',
+        galeria: [
+          'img/sobrenos.png',
+          'img/kids.jpg'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'filial-3': {
+        nome: 'Filial 3',
+        descricao: 'Preencha aqui uma descrição resumida desta filial.',
+        responsavel: 'Responsável: informe aqui o nome do professor responsável.',
+        horarios: [
+          'Segunda a Sexta - 20h às 21h30',
+          'Sábado - 8h às 10h'
+        ],
+        endereco: 'Preencha aqui o endereço completo da filial 3.',
+        mapaEmbed: '',
+        galeria: [
+          'img/fundador.jpg',
+          'img/kids.jpg'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      }
+    };
+
+    function preencherFilial(filial) {
+      const titulo = document.getElementById('filial-nome-titulo');
+      const nome = document.getElementById('filial-nome');
+      const descricao = document.getElementById('filial-descricao');
+      const responsavel = document.getElementById('filial-responsavel');
+      const horariosLista = document.getElementById('filial-horarios');
+      const endereco = document.getElementById('filial-endereco');
+      const mapa = document.getElementById('filial-mapa');
+      const mapaWrapper = document.getElementById('filial-mapa-wrapper');
+      const galeria = document.getElementById('filial-galeria');
+      const whatsappNumero = document.getElementById('filial-whatsapp-numero');
+      const whatsappLink = document.getElementById('filial-whatsapp-link');
+
+      if (!filial) {
+        titulo.textContent = 'Filial não encontrada';
+        descricao.textContent = 'Não foi possível localizar as informações da filial. Volte à página inicial e tente novamente.';
+        if (mapaWrapper) mapaWrapper.style.display = 'none';
+        return;
+      }
+
+      titulo.textContent = filial.nome;
+      nome.textContent = filial.nome;
+      descricao.textContent = filial.descricao;
+      responsavel.textContent = filial.responsavel;
+      endereco.textContent = filial.endereco;
+
+      horariosLista.innerHTML = '';
+      filial.horarios.forEach(function (h) {
+        const li = document.createElement('li');
+        li.textContent = h;
+        horariosLista.appendChild(li);
+      });
+
+      if (filial.mapaEmbed && mapa) {
+        mapa.src = filial.mapaEmbed;
+        mapaWrapper.style.display = 'block';
+      } else if (mapaWrapper) {
+        mapaWrapper.style.display = 'none';
+      }
+
+      if (galeria) {
+        galeria.innerHTML = '';
+        filial.galeria.forEach(function (src) {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = 'Foto da ' + filial.nome;
+          galeria.appendChild(img);
+        });
+      }
+
+      whatsappNumero.textContent = filial.whatsappDisplay;
+      const mensagem = encodeURIComponent('Oi, gostaria de saber mais sobre os treinos na ' + filial.nome + '.');
+      whatsappLink.href = 'https://api.whatsapp.com/send?phone=' + filial.whatsapp + '&text=' + mensagem;
+      whatsappLink.textContent = 'Chamar no WhatsApp ' + filial.whatsappDisplay;
+
+      document.title = 'Filial ' + filial.nome + ' - Equipe Vilhena';
+    }
+
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      const filial = filiais[id];
+      preencherFilial(filial || filiais['filial-1']);
+    })();
+  </script>
+</body>
+</html>
+
