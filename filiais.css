@@ -1,0 +1,310 @@
+/* ===== PÁGINA DE FILIAIS ===== */
+/* Usado em filial.html */
+
+body.filial-page {
+  font-family: var(--body-font);
+  line-height: 1.6;
+  background-color: #f5f5f5;
+}
+
+.filial-page main {
+  margin-top: var(--header-height);
+  padding: 2rem 1rem 4rem;
+}
+
+.filial-page section#sobre,
+.filial-page section#treino,
+.filial-page section#galeria,
+.filial-page section#contato {
+  max-width: 1120px;
+  margin: 0 auto 2.5rem;
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.filial-page section h1 {
+  font-family: var(--title-font);
+  font-size: 1.75rem;
+  color: var(--title-color);
+  padding: 1.5rem 1.5rem 0;
+  margin-bottom: 1rem;
+}
+
+/* --- Sobre a filial --- */
+.filial-page #sobre {
+  padding-bottom: 1.5rem;
+}
+
+.filial-page .filial-hero {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.filial-page #filial-info {
+  padding: 1.5rem;
+}
+
+.filial-page #filial-info h2 {
+  font-family: var(--title-font);
+  font-size: 1.5rem;
+  color: var(--base-color);
+  margin-bottom: 0.5rem;
+}
+
+.filial-page #filial-info p {
+  color: var(--text-color);
+  margin-bottom: 0.75rem;
+}
+
+.filial-page #filial-info p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Treinos e local --- */
+.filial-page #treino .info-treino {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.filial-page #treino h2 {
+  font-family: var(--title-font);
+  font-size: 1.15rem;
+  color: var(--title-color);
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.filial-page #filial-horarios {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.filial-page #filial-horarios li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: var(--text-color);
+  border-bottom: 1px solid #eee;
+}
+
+.filial-page #filial-horarios li:last-child {
+  border-bottom: none;
+}
+
+.filial-page #filial-horarios li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--base-color);
+  border-radius: 50%;
+}
+
+.filial-page #filial-endereco {
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.filial-page #filial-mapa-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--base-color);
+  font-weight: 600;
+}
+
+.filial-page #filial-mapa-link:hover {
+  text-decoration: underline;
+}
+
+/* Mapa incorporado */
+.filial-page .mapa-wrapper {
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: #e8e8e8;
+}
+
+.filial-page .mapa-wrapper iframe {
+  display: block;
+  width: 100%;
+  height: 350px;
+  border: 0;
+}
+
+/* --- Galeria --- */
+.filial-page #galeria {
+  padding-bottom: 1.5rem;
+}
+
+.filial-page #galeria h1 {
+  padding: 1.5rem 1.5rem 0;
+}
+
+.filial-page .galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.filial-page .galeria img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Contato --- */
+.filial-page #contato {
+  padding-bottom: 1.5rem;
+}
+
+.filial-page #contato > p {
+  padding: 0 1.5rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.filial-page .info-contato {
+  margin: 0 1.5rem 1.5rem;
+  padding: 1.25rem;
+  background: #fafafa;
+  border-radius: 0.5rem;
+  border: 1px solid #eee;
+}
+
+.filial-page .info-contato h2 {
+  font-family: var(--title-font);
+  font-size: 1rem;
+  color: var(--title-color);
+  margin-bottom: 0.5rem;
+}
+
+.filial-page #filial-whatsapp-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  background: #25d366;
+  color: #fff;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.filial-page #filial-whatsapp-link:hover {
+  background: #1ebe57;
+  transform: translateY(-2px);
+}
+
+/* Botão voltar */
+.filial-page .botao-voltar {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--base-color);
+  color: var(--text-color-light);
+  border: none;
+  border-radius: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 50;
+}
+
+.filial-page .botao-voltar:hover {
+  background: var(--base-color-alt);
+}
+
+/* Footer da página filial */
+.filial-page footer {
+  max-width: 1120px;
+  margin: 2rem auto 0;
+  padding: 1.5rem;
+  background: var(--base-color);
+  color: var(--text-color-light);
+  text-align: center;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+/* Nav no desktop (herdar do style.css quando em telas grandes) */
+@media (min-width: 1200px) {
+  .filial-page nav .menu {
+    opacity: 1;
+    visibility: visible;
+  }
+  .filial-page nav .menu ul {
+    display: flex;
+    gap: 2rem;
+  }
+  .filial-page nav .icon-menu {
+    display: none;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .filial-page .galeria {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .filial-page main {
+    padding: 1.25rem 0.75rem 3rem;
+  }
+
+  .filial-page section#sobre,
+  .filial-page section#treino,
+  .filial-page section#galeria,
+  .filial-page section#contato {
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .filial-page section h1 {
+    font-size: 1.4rem;
+    padding: 1.25rem 1rem 0;
+  }
+
+  .filial-page .filial-hero {
+    max-height: 220px;
+  }
+
+  .filial-page #filial-info,
+  .filial-page #treino .info-treino,
+  .filial-page .galeria,
+  .filial-page .info-contato {
+    padding: 1rem;
+  }
+
+  .filial-page .mapa-wrapper iframe {
+    height: 250px;
+  }
+
+  .filial-page .galeria {
+    grid-template-columns: 1fr;
+  }
+
+  .filial-page .galeria img {
+    height: 200px;
+  }
+
+  .filial-page .botao-voltar {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
+    bottom: 1rem;
+    right: 1rem;
+  }
+}

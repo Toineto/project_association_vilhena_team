@@ -6,10 +6,13 @@
   <meta name="description" content="Filiais da Associação Equipe Vilhena Jiu-Jitsu" />
   <title>Filial - Equipe Vilhena</title>
 
+  <link rel="stylesheet" href="assets/fonts/style.css" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="filiais.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
-<body>
+<body class="filial-page">
   <header id="header">
     <nav class="container">
       <a href="index.html"><img class="logovilhena" src="img/logo300px.png" alt="logo vilhena Jiu-Jitsu" /></a>
@@ -32,13 +35,12 @@
   <main>
     <!-- Sobre a filial -->
     <section id="sobre">
+      <img id="filial-hero" class="filial-hero" src="" alt="" />
       <h1 id="filial-nome-titulo">Filial</h1>
-      <div class="info-professor" id="filial-info">
-        <div class="filial-textos">
-          <h2 id="filial-nome"></h2>
-          <p id="filial-descricao"></p>
-          <p id="filial-responsavel"></p>
-        </div>
+      <div id="filial-info">
+        <h2 id="filial-nome"></h2>
+        <p id="filial-descricao"></p>
+        <p id="filial-responsavel"></p>
       </div>
     </section>
 
@@ -49,8 +51,9 @@
         <h2>Horários de treino</h2>
         <ul id="filial-horarios"></ul>
 
-        <h2 style="margin-top: 1.5rem;">Endereço</h2>
+        <h2>Endereço</h2>
         <p id="filial-endereco"></p>
+        <a id="filial-mapa-link" href="#" target="_blank" rel="noopener">Abrir no Google Maps</a>
 
         <div class="mapa-wrapper" id="filial-mapa-wrapper">
           <iframe
@@ -91,6 +94,7 @@
     <p>Equipe Vilhena &copy; 2023</p>
   </footer>
 
+  <script src="main.js"></script>
   <script src="theme.js"></script>
   <script>
     const filiais = {
@@ -153,8 +157,10 @@
       const nome = document.getElementById('filial-nome');
       const descricao = document.getElementById('filial-descricao');
       const responsavel = document.getElementById('filial-responsavel');
+      const hero = document.getElementById('filial-hero');
       const horariosLista = document.getElementById('filial-horarios');
-      const endereco = document.getElementById('filial-endereco');
+      const enderecoEl = document.getElementById('filial-endereco');
+      const mapaLink = document.getElementById('filial-mapa-link');
       const mapa = document.getElementById('filial-mapa');
       const mapaWrapper = document.getElementById('filial-mapa-wrapper');
       const galeria = document.getElementById('filial-galeria');
@@ -163,8 +169,9 @@
 
       if (!filial) {
         titulo.textContent = 'Filial não encontrada';
-        descricao.textContent = 'Não foi possível localizar as informações da filial. Volte à página inicial e tente novamente.';
+        if (descricao) descricao.textContent = 'Não foi possível localizar as informações da filial. Volte à página inicial e tente novamente.';
         if (mapaWrapper) mapaWrapper.style.display = 'none';
+        if (hero) hero.style.display = 'none';
         return;
       }
 
@@ -172,7 +179,15 @@
       nome.textContent = filial.nome;
       descricao.textContent = filial.descricao;
       responsavel.textContent = filial.responsavel;
-      endereco.textContent = filial.endereco;
+      enderecoEl.textContent = filial.endereco;
+
+      if (hero && filial.galeria && filial.galeria.length > 0) {
+        hero.src = filial.galeria[0];
+        hero.alt = 'Foto da ' + filial.nome;
+        hero.style.display = 'block';
+      } else if (hero) {
+        hero.style.display = 'none';
+      }
 
       horariosLista.innerHTML = '';
       filial.horarios.forEach(function (h) {
@@ -181,6 +196,13 @@
         horariosLista.appendChild(li);
       });
 
+      if (filial.endereco && mapaLink) {
+        mapaLink.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(filial.endereco);
+        mapaLink.style.display = 'inline-block';
+      } else if (mapaLink) {
+        mapaLink.style.display = 'none';
+      }
+
       if (filial.mapaEmbed && mapa) {
         mapa.src = filial.mapaEmbed;
         mapaWrapper.style.display = 'block';
@@ -188,7 +210,7 @@
         mapaWrapper.style.display = 'none';
       }
 
-      if (galeria) {
+      if (galeria && filial.galeria) {
         galeria.innerHTML = '';
         filial.galeria.forEach(function (src) {
           const img = document.createElement('img');
@@ -201,9 +223,9 @@
       whatsappNumero.textContent = filial.whatsappDisplay;
       const mensagem = encodeURIComponent('Oi, gostaria de saber mais sobre os treinos na ' + filial.nome + '.');
       whatsappLink.href = 'https://api.whatsapp.com/send?phone=' + filial.whatsapp + '&text=' + mensagem;
-      whatsappLink.textContent = 'Chamar no WhatsApp ' + filial.whatsappDisplay;
+      whatsappLink.textContent = 'Chamar no WhatsApp';
 
-      document.title = 'Filial ' + filial.nome + ' - Equipe Vilhena';
+      document.title = filial.nome + ' - Equipe Vilhena';
     }
 
     (function () {
