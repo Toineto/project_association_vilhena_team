@@ -646,6 +646,70 @@ footer .social a:hover {
   transform: translateY(0);
 }
 
+/*====  DARK MODE ============================ */
+body.dark-mode {
+  --title-color: hsl(var(--hue) 41% 90%);
+  --text-color: hsl(0 0% 70%);
+  --text-color-light: hsl(0 0% 98%);
+  --body-color: hsl(0 0% 12%);
+}
+
+body.dark-mode #header {
+  background-color: hsl(0 0% 15%);
+  border-bottom: 1px solid hsl(0 0% 25%);
+}
+
+body.dark-mode #about,
+body.dark-mode #kids {
+  background: hsl(0 0% 15%);
+}
+
+body.dark-mode .card {
+  background-color: hsl(0 0% 18%);
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode nav.show .menu {
+  background: hsl(0 0% 15%);
+}
+
+body.dark-mode .divider-1,
+body.dark-mode .divider-2 {
+  background: hsl(var(--hue), 36%, 40%);
+}
+
+body.dark-mode .theme-toggle {
+  background-color: var(--base-color);
+  color: var(--text-color-light);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 0.875rem;
+  margin-right: 1rem;
+}
+
+body.dark-mode .theme-toggle:hover {
+  background-color: var(--base-color-alt);
+}
+
+.theme-toggle {
+  background-color: var(--base-color);
+  color: var(--text-color-light);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 0.875rem;
+  margin-right: 1rem;
+}
+
+.theme-toggle:hover {
+  background-color: var(--base-color-alt);
+}
+
 /*========= MEDIA QUERIES =========*/
 /* extra large devices: 1200 > */
 @media (min-width: 1200px) {
