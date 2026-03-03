@@ -24,13 +24,17 @@
 
 .professores__conteudo {
   display: flex;
-  margin-top:1rem;
-  margin-bottom:1rem;
+  flex: 1 1 300px;
+  max-width: 320px;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
   padding: 1rem;
   background-color: #f9f9f9;
   border-radius: 0.5rem;
   transition: transform 0.3s, box-shadow 0.3s;
 }
+
 
 .professores__conteudo:hover {
   transform: translateY(-5px);
@@ -39,7 +43,10 @@
 
 .professores_img{ 
   width: 150px;
-  border-radius:50%;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .professores__nome--graducao {
@@ -78,28 +85,47 @@
       flex-direction: column;
       flex-wrap: wrap;
       justify-content:center;
+      align-items: center;
+  }
+
+  .professores__conteudo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    /* garantir altura uniforme */
+    box-sizing: border-box;
+  }
+
+  .professores_img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1rem;
   }
 
   .professores__nome--graducao {
-      margin-top:1rem;
-      margin-left: .6rem;
+      margin-top:0.5rem;
+      margin-left: 0;
   }
 
   .professor__none {
       color: var(--azul-claro);
       font-weight: bold;
-      font-size: 1.4rem;;
+      font-size: 1.2rem;
   }
 }
 
 /* Dark Mode Styles */
 body.dark-mode .professores__conteudo {
   background-color: hsl(0 0% 18%);
+  /* manter as mesmas dimensões e espaçamentos do tema claro */
   padding: 1rem;
   border-radius: 0.5rem;
-  margin: 0.5rem;
+  margin: 1rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
+
 
 body.dark-mode .professores__conteudo:hover {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);

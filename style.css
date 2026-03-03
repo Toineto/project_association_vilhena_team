@@ -93,6 +93,9 @@ body {
   );
 }
 
+
+/*====  DARK/LIGHT THEMES ============================ */
+
 /*====  LAYOUT ============================ */
 .container {
   margin-left: 1.5rem;
@@ -125,21 +128,28 @@ body {
 }
 
 #header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: saturate(180%) blur(10px);
   margin-bottom: 2rem;
   display: flex;
-
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
-  background-color: var(--body-color);
+  background: linear-gradient(135deg, var(--body-color) 0%, rgba(0, 0, 0, 0.02) 100%);
   width: 100%;
+  height: var(--header-height);
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
+  flex-wrap: wrap;
 }
 
 #header.scroll {
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
+
 
 /*====  LOGO ============================ */
 
@@ -156,37 +166,52 @@ body {
 
 
 .logo {
-  font: 700 1.31rem var(--title-font);
+  font: 700 1.1rem var(--title-font);
   color: var(--title-color);
-  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  transition: color 0.3s;
 }
 
 .logo span {
   color: var(--base-color);
-  justify-content: center;
 }
 
 .logo-alt span {
   color: var(--body-color);
-  justify-content: center;
 }
 
 /*====  NAVIGATION ============================ */
 nav {
   height: var(--header-height);
-  display: flex;
+  display:flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
+  padding: 0 1rem;
+  gap: 1rem;
+  margin: 0 !important;
+}
+
+nav.container {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 nav ul li {
   text-align: center;
+  padding: 0 0.75rem;
 }
 
 nav ul li a {
   transition: color 0.2s;
   position: relative;
+  color: var(--text-color);
+  font-weight: 500;
+  display: block;
+  white-space: nowrap;
 }
 
 nav ul li a:hover,
@@ -199,11 +224,9 @@ nav ul li a::after {
   width: 0%;
   height: 2px;
   background: var(--base-color);
-
   position: absolute;
   left: 0;
-  bottom: -1.5rem;
-
+  bottom: -8px;
   transition: width 0.2s;
 }
 
@@ -216,7 +239,7 @@ nav .menu {
   opacity: 0;
   visibility: hidden;
   top: -20rem;
-  transition: 0.2s;
+  transition: all 0.3s ease;
 }
 
 nav .menu ul {
@@ -227,26 +250,24 @@ nav .menu ul {
 nav.show .menu {
   opacity: 1;
   visibility: visible;
-
   background: var(--body-color);
-
   height: 100vh;
   width: 100vw;
-
   position: fixed;
   top: 0;
   left: 0;
-
   display: grid;
   place-content: center;
+  padding-top: var(--header-height);
 }
 
 nav.show .menu ul {
   display: grid;
+  gap: 2rem;
 }
 
 nav.show ul.grid {
-  gap: 4rem;
+  gap: 2rem;
 }
 
 /* toggle menu */
@@ -254,17 +275,26 @@ nav.show ul.grid {
   color: var(--base-color);
   font-size: 1.5rem;
   cursor: pointer;
+  background: none;
+  border: none;
+  transition: transform 0.2s;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle:active {
+  transform: scale(0.9);
 }
 
 nav .icon-close {
   visibility: hidden;
   opacity: 0;
-
   position: absolute;
-  top: -1.5rem;
+  top: 1.5rem;
   right: 1.5rem;
-
-  transition: 0.2s;
+  transition: all 0.3s;
 }
 
 nav.show div.icon-close {
@@ -657,8 +687,13 @@ body.dark-mode {
 }
 
 body.dark-mode #header {
-  background-color: hsl(0 0% 15%);
-  border-bottom: 1px solid hsl(0 0% 25%);
+  background: linear-gradient(135deg, hsl(0 0% 15%) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode #header.scroll {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 body.dark-mode #about,
@@ -750,6 +785,11 @@ body.dark-mode .logo span {
   color: var(--base-color);
 }
 
+/* footer alternate logo span deve ser legível em dark-mode */
+body.dark-mode .logo.logo-alt span {
+  color: var(--text-color-light);
+}
+
 body.dark-mode #contact ul li {
   color: var(--text-color);
 }
@@ -778,32 +818,50 @@ body.dark-mode .theme-toggle {
   background-color: var(--base-color);
   color: var(--text-color-light);
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
   font-size: 0.875rem;
   margin-right: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
 }
 
 body.dark-mode .theme-toggle:hover {
   background-color: var(--base-color-alt);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .theme-toggle:active {
+  transform: translateY(0);
 }
 
 .theme-toggle {
   background-color: var(--base-color);
   color: var(--text-color-light);
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
   font-size: 0.875rem;
   margin-right: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
 }
 
 .theme-toggle:hover {
   background-color: var(--base-color-alt);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
 }
 
 /*========= MEDIA QUERIES =========*/
@@ -986,4 +1044,178 @@ body.dark-mode .theme-toggle:hover {
     --subtitle-font-size: 1.125rem;
   }
 }
+
 /* medium devices: 767 > */
+
+/* Small devices: smartphones */
+@media (max-width: 768px) {
+  /* Header e Navbar */
+  #header {
+    padding: 0 0.5rem;
+  }
+
+  nav {
+    padding: 0 0.5rem;
+    gap: 0.75rem;
+    justify-content: space-between;
+  }
+
+  .logovilhena {
+    width: 45px;
+    height: 45px;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .logo {
+    font: 700 0.9rem var(--title-font);
+    gap: 0.25rem;
+    flex: 0 0 auto;
+    min-width: 120px;
+    display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: ellipsis;
+  }
+
+  /* botao de tema sempre acima de tudo */
+  .theme-toggle {
+    flex-shrink: 0;
+    z-index: 102;
+  }
+
+  .toggle {
+    z-index: 101;
+  }
+
+  nav ul {
+    display: none;
+  }
+
+  nav ul li {
+    padding: 0 0.5rem;
+  }
+
+  nav ul li a {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  nav.show .menu {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .theme-toggle {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .toggle {
+    font-size: 1.3rem;
+  }
+
+  nav.show .menu ul {
+    gap: 1.5rem;
+  }
+
+  nav.show .menu ul li a {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    transition: color 0.2s;
+  }
+
+  nav.show .menu ul li a:hover {
+    color: var(--base-color);
+  }
+
+  nav .icon-close {
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 101;
+  }
+
+  nav.show .icon-close {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  nav .icon-menu {
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  nav.show .icon-menu {
+    display: none;
+  }
+
+  /* Botão de tema */
+  .theme-toggle {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+  }
+
+  /* Cards em mobile */
+  .card {
+    padding: 1.5rem 1rem;
+  }
+
+  .card i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  nav {
+    gap: 0.35rem;
+    padding: 0 0.35rem;
+  }
+
+  .logovilhena {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.35rem;
+  }
+
+  .logo {
+    font: 700 0.75rem var(--title-font);
+    gap: 0.15rem;
+    display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    min-width: 100px;
+    flex-shrink: 0;
+  }
+
+  nav ul li {
+    padding: 0 0.35rem;
+  }
+
+  .theme-toggle {
+    flex-shrink: 0;
+    z-index: 102;
+  }
+
+  .toggle {
+    z-index: 101;
+  }
+  nav ul li a {
+    font-size: 0.85rem;
+  }
+
+  .theme-toggle {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.7rem;
+    margin-right: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .toggle {
+    font-size: 1.2rem;
+  }
+}

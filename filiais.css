@@ -24,7 +24,6 @@ body.filial-page {
   overflow: hidden;
   color: var(--text-color);
 }
-}
 
 .filial-page section h1 {
   font-family: var(--title-font);
@@ -183,7 +182,7 @@ body.filial-page {
   border-radius: 0.5rem;
   border: 1px solid #eee;
 }
-}
+
 
 .filial-page .info-contato h2 {
   font-family: var(--title-font);
@@ -405,7 +404,6 @@ body.professor-page {
   overflow: hidden;
   color: var(--text-color);
 }
-}
 
 .professor-page section h1 {
   font-family: var(--title-font);
@@ -507,7 +505,6 @@ body.professor-page {
   background: hsl(0, 0%, 98%);
   border-radius: 0.5rem;
   border: 1px solid #eee;
-}
 }
 
 .professor-page .info-contato h2 {
@@ -640,7 +637,13 @@ body.professor-page {
 
 /* Dark Mode - Professor */
 body.dark-mode .professor-page main {
-  background-color: hsl(0 0% 12%);
+  background-color: hsl(0 0% 12%) !important;
+}
+
+/* garantir também que a section de contato herde fundo escuro */
+body.dark-mode .professor-page #contato,
+body.dark-mode .professor-page #contato .info-contato {
+  background: hsl(0 0% 18%) !important;
 }
 
 body.dark-mode .professor-page section#sobre,
@@ -650,6 +653,16 @@ body.dark-mode .professor-page section#contato {
   background: hsl(0 0% 18%) !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   color: var(--text-color);
+}
+
+/* garantir contraste do parágrafo introdutório */
+body.dark-mode .professor-page #contato > p {
+  color: var(--text-color-light) !important;
+}
+
+/* remover qualquer background branco de elementos filhos */
+body.dark-mode .professor-page #contato * {
+  background: none !important;
 }
 
 body.dark-mode .professor-page section h1 {
@@ -689,7 +702,25 @@ body.dark-mode .professor-page .info-contato {
   background: hsl(0 0% 20%) !important;
   border-color: hsl(0 0% 30%);
   color: var(--text-color);
+  /* forçar padding e borda também */
+  border: 1px solid hsl(0 0% 30%) !important;
 }
+
+/* garantir que todos os links dentro do contato tenham cor clara */
+body.dark-mode .professor-page .info-contato a {
+  color: var(--text-color-light);
+}
+
+/* tornar o botão whatsapp ainda mais vibrante em dark mode */
+body.dark-mode .professor-page #professor-whatsapp-link {
+  background: #2eca78;
+  color: #010101;
+}
+
+body.dark-mode .professor-page #professor-whatsapp-link:hover {
+  background: #28b36c;
+}
+
 
 body.dark-mode .professor-page .info-contato h2 {
   color: var(--text-color-light);

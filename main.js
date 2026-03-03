@@ -64,24 +64,41 @@ function backToTop() {
 /* Menu ativo conforme a seção visível na página */
 const sections = document.querySelectorAll('main section[id]')
 function activateMenuAtCurrentSection() {
-  const checkpoint = window.pageYOffset + (window.innerHeight / 8) * 4
+  const scrollPosition = window.scrollY + 200
+
+  // Remove active de todos os links
+  document.querySelectorAll('nav ul li a').forEach(link => {
+    link.classList.remove('active')
+  })
+
+  let currentSection = null
 
   for (const section of sections) {
     const sectionTop = section.offsetTop
     const sectionHeight = section.offsetHeight
     const sectionId = section.getAttribute('id')
+    const sectionBottom = sectionTop + sectionHeight
 
-    const checkpointStart = checkpoint >= sectionTop
-    const checkpointEnd = checkpoint <= sectionTop + sectionHeight
+    // Verifica se o scroll está dentro da seção
+    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+      currentSection = sectionId
+      break
+    }
+  }
 
-    if (checkpointStart && checkpointEnd) {
-      document
-        .querySelector('nav ul li a[href*=' + sectionId + ']')
-        .classList.add('active')
-    } else {
-      document
-        .querySelector('nav ul li a[href*=' + sectionId + ']')
-        .classList.remove('active')
+  // Se não encontrou seção, marca a última seção se estiver no fim da página
+  if (!currentSection && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 500) {
+    const lastSection = sections[sections.length - 1]
+    if (lastSection) {
+      currentSection = lastSection.getAttribute('id')
+    }
+  }
+
+  // Adiciona active ao link correspondente
+  if (currentSection) {
+    const activeLink = document.querySelector('nav ul li a[href="#' + currentSection + '"]')
+    if (activeLink) {
+      activeLink.classList.add('active')
     }
   }
 }
