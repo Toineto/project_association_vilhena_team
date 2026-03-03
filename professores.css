@@ -26,6 +26,15 @@
   display: flex;
   margin-top:1rem;
   margin-bottom:1rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 0.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.professores__conteudo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .professores_img{ 
@@ -36,6 +45,13 @@
 .professores__nome--graducao {
   margin-top:2rem;
   margin-left: .5rem;
+}
+
+.professores__nome--graducao .button {
+  margin-top: 1rem;
+  display: inline-block;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
 }
 
 .professor__none {
@@ -74,6 +90,31 @@
       font-weight: bold;
       font-size: 1.4rem;;
   }
+}
+
+/* Dark Mode Styles */
+body.dark-mode .professores__conteudo {
+  background-color: hsl(0 0% 18%);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .professores__conteudo:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .professores__nome--graducao {
+  color: var(--text-color-light);
+}
+
+body.dark-mode .professor__none {
+  color: var(--base-color);
+}
+
+body.dark-mode .professor__graduacao--registro {
+  color: var(--text-color);
 }
 
 

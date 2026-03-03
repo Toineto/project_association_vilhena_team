@@ -4,7 +4,7 @@
 body.filial-page {
   font-family: var(--body-font);
   line-height: 1.6;
-  background-color: #f5f5f5;
+  background-color: var(--body-color);
 }
 
 .filial-page main {
@@ -18,10 +18,12 @@ body.filial-page {
 .filial-page section#contato {
   max-width: 1120px;
   margin: 0 auto 2.5rem;
-  background: #fff;
+  background: var(--body-color);
   border-radius: 0.75rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   overflow: hidden;
+  color: var(--text-color);
+}
 }
 
 .filial-page section h1 {
@@ -177,9 +179,10 @@ body.filial-page {
 .filial-page .info-contato {
   margin: 0 1.5rem 1.5rem;
   padding: 1.25rem;
-  background: #fafafa;
+  background: hsl(0, 0%, 98%);
   border-radius: 0.5rem;
   border: 1px solid #eee;
+}
 }
 
 .filial-page .info-contato h2 {
@@ -308,3 +311,392 @@ body.filial-page {
     right: 1rem;
   }
 }
+
+/* Dark Mode */
+body.dark-mode .filial-page main {
+  background-color: hsl(0 0% 12%);
+}
+
+body.dark-mode .filial-page section#sobre,
+body.dark-mode .filial-page section#treino,
+body.dark-mode .filial-page section#galeria,
+body.dark-mode .filial-page section#contato {
+  background: hsl(0 0% 18%) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  color: var(--text-color);
+}
+
+body.dark-mode .filial-page section h1 {
+  color: var(--text-color-light);
+}
+
+body.dark-mode .filial-page #filial-info h2 {
+  color: var(--base-color);
+}
+
+body.dark-mode .filial-page #filial-info p {
+  color: var(--text-color);
+}
+
+body.dark-mode .filial-page .info-treino {
+  color: var(--text-color);
+}
+
+body.dark-mode .filial-page #treino h2 {
+  color: var(--text-color-light);
+}
+
+body.dark-mode .filial-page #filial-horarios li {
+  color: var(--text-color);
+  border-bottom-color: hsl(0 0% 25%);
+}
+
+body.dark-mode .filial-page .info-contato {
+  background: hsl(0 0% 20%) !important;
+  border-color: hsl(0 0% 30%);
+  color: var(--text-color);
+}
+
+body.dark-mode .filial-page .info-contato h2 {
+  color: var(--text-color-light);
+}
+
+body.dark-mode .filial-page #filial-endereco {
+  color: var(--text-color);
+}
+
+body.dark-mode .filial-page #filial-mapa-link {
+  color: var(--base-color);
+}
+
+body.dark-mode .filial-page .mapa-wrapper {
+  background: hsl(0 0% 20%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .filial-page footer {
+  background: var(--base-color);
+  color: var(--text-color-light);
+}
+
+/* ===== PÁGINA DE PROFESSOR ===== */
+/* Usado em professor.html */
+
+body.professor-page {
+  font-family: var(--body-font);
+  line-height: 1.6;
+  background-color: var(--body-color);
+}
+
+.professor-page main {
+  margin-top: var(--header-height);
+  padding: 2rem 1rem 4rem;
+}
+
+.professor-page section#sobre,
+.professor-page section#treino,
+.professor-page section#galeria,
+.professor-page section#contato {
+  max-width: 1120px;
+  margin: 0 auto 2.5rem;
+  background: var(--body-color);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  color: var(--text-color);
+}
+}
+
+.professor-page section h1 {
+  font-family: var(--title-font);
+  font-size: 1.75rem;
+  color: var(--title-color);
+  padding: 1.5rem 1.5rem 0;
+  margin-bottom: 1rem;
+}
+
+/* --- Sobre o professor --- */
+.professor-page #sobre {
+  padding-bottom: 1.5rem;
+}
+
+.professor-page .info-professor {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.professor-page .info-professor img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 4px solid var(--base-color);
+}
+
+.professor-page .info-professor h2 {
+  font-family: var(--title-font);
+  font-size: 1.75rem;
+  color: var(--base-color);
+  margin-bottom: 0.5rem;
+}
+
+.professor-page .info-professor p {
+  color: var(--text-color);
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+/* --- Treinos e local --- */
+.professor-page #treino .info-treino {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.professor-page #treino .info-treino p {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+/* --- Galeria --- */
+.professor-page #galeria {
+  padding-bottom: 1.5rem;
+}
+
+.professor-page #galeria h1 {
+  padding: 1.5rem 1.5rem 0;
+}
+
+.professor-page .galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.professor-page .galeria img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s;
+}
+
+.professor-page .galeria img:hover {
+  transform: scale(1.05);
+}
+
+/* --- Contato --- */
+.professor-page #contato {
+  padding-bottom: 1.5rem;
+}
+
+.professor-page #contato > p {
+  padding: 0 1.5rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.professor-page .info-contato {
+  margin: 0 1.5rem 1.5rem;
+  padding: 1.25rem;
+  background: hsl(0, 0%, 98%);
+  border-radius: 0.5rem;
+  border: 1px solid #eee;
+}
+}
+
+.professor-page .info-contato h2 {
+  font-family: var(--title-font);
+  font-size: 1rem;
+  color: var(--title-color);
+  margin-bottom: 0.5rem;
+}
+
+.professor-page #professor-whatsapp-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  background: #25d366;
+  color: #fff;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.professor-page #professor-whatsapp-link:hover {
+  background: #1ebe57;
+  transform: translateY(-2px);
+}
+
+/* Botão voltar */
+.professor-page .botao-voltar {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--base-color);
+  color: var(--text-color-light);
+  border: none;
+  border-radius: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 50;
+  transition: background 0.3s;
+}
+
+.professor-page .botao-voltar:hover {
+  background: var(--base-color-alt);
+}
+
+/* Footer da página professor */
+.professor-page footer {
+  max-width: 1120px;
+  margin: 2rem auto 0;
+  padding: 1.5rem;
+  background: var(--base-color);
+  color: var(--text-color-light);
+  text-align: center;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+/* Nav no desktop */
+@media (min-width: 1200px) {
+  .professor-page nav .menu {
+    opacity: 1;
+    visibility: visible;
+  }
+  .professor-page nav .menu ul {
+    display: flex;
+    gap: 2rem;
+  }
+  .professor-page nav .icon-menu {
+    display: none;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .professor-page .galeria {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .professor-page main {
+    padding: 1.25rem 0.75rem 3rem;
+  }
+
+  .professor-page section#sobre,
+  .professor-page section#treino,
+  .professor-page section#galeria,
+  .professor-page section#contato {
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .professor-page section h1 {
+    font-size: 1.4rem;
+    padding: 1.25rem 1rem 0;
+  }
+
+  .professor-page .info-professor {
+    padding: 1rem;
+  }
+
+  .professor-page .info-professor img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .professor-page #treino .info-treino,
+  .professor-page .galeria,
+  .professor-page .info-contato {
+    padding: 1rem;
+  }
+
+  .professor-page .galeria {
+    grid-template-columns: 1fr;
+  }
+
+  .professor-page .galeria img {
+    height: 200px;
+  }
+
+  .professor-page .botao-voltar {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Dark Mode - Professor */
+body.dark-mode .professor-page main {
+  background-color: hsl(0 0% 12%);
+}
+
+body.dark-mode .professor-page section#sobre,
+body.dark-mode .professor-page section#treino,
+body.dark-mode .professor-page section#galeria,
+body.dark-mode .professor-page section#contato {
+  background: hsl(0 0% 18%) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  color: var(--text-color);
+}
+
+body.dark-mode .professor-page section h1 {
+  color: var(--text-color-light);
+}
+
+body.dark-mode .professor-page .info-professor h2 {
+  color: var(--base-color);
+}
+
+body.dark-mode .professor-page .info-professor {
+  color: var(--text-color);
+}
+
+body.dark-mode .professor-page .info-professor p {
+  color: var(--text-color);
+}
+
+body.dark-mode .professor-page .info-professor img {
+  border-color: var(--base-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .professor-page #treino h2 {
+  color: var(--text-color-light);
+}
+
+body.dark-mode .professor-page #treino .info-treino p {
+  color: var(--text-color);
+}
+
+body.dark-mode .professor-page #contato > p {
+  color: var(--text-color);
+}
+
+body.dark-mode .professor-page .info-contato {
+  background: hsl(0 0% 20%) !important;
+  border-color: hsl(0 0% 30%);
+  color: var(--text-color);
+}
+
+body.dark-mode .professor-page .info-contato h2 {
+  color: var(--text-color-light);
+}
+
+body.dark-mode .professor-page footer {
+  background: var(--base-color);
+  color: var(--text-color-light);
+}
+

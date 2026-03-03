@@ -125,7 +125,7 @@ body {
 }
 
 #header {
-  border-bottom: 1px solid #e4e4e4;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
   display: flex;
 
@@ -436,7 +436,8 @@ nav.show div.icon-close {
 
 /*====  ABOUT ============================ */
 #about {
-  background: white;
+  background: var(--body-color);
+  color: var(--text-color);
 }
 
 #about .container {
@@ -475,7 +476,8 @@ nav.show div.icon-close {
 /*====  KIDS ============================ */
 
 #kids {
-  background: white;
+  background: var(--body-color);
+  color: var(--text-color);
 }
 
 #kids .container2 {
@@ -660,13 +662,15 @@ body.dark-mode #header {
 }
 
 body.dark-mode #about,
-body.dark-mode #kids {
+body.dark-mode #kids,
+body.dark-mode #founder {
   background: hsl(0 0% 15%);
 }
 
 body.dark-mode .card {
   background-color: hsl(0 0% 18%);
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+  color: var(--text-color);
 }
 
 body.dark-mode nav.show .menu {
@@ -675,7 +679,99 @@ body.dark-mode nav.show .menu {
 
 body.dark-mode .divider-1,
 body.dark-mode .divider-2 {
-  background: hsl(var(--hue), 36%, 40%);
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 36%, 40%, 1),
+    hsla(var(--hue), 36%, 20%, 0.34)
+  );
+}
+
+body.dark-mode .swiper-slide {
+  background: hsl(0 0% 18%);
+}
+
+body.dark-mode footer {
+  background: var(--base-color);
+}
+
+body.dark-mode footer .brand p {
+  color: var(--text-color-light);
+}
+
+body.dark-mode footer i {
+  color: var(--text-color-light);
+}
+
+body.dark-mode #home .image::before,
+body.dark-mode #about .image::before,
+body.dark-mode #kids .image::before,
+body.dark-mode #founder .image::before,
+body.dark-mode .container1 .image::before {
+  background: var(--base-color-alt);
+  opacity: 0.3;
+}
+
+body.dark-mode .back-to-top {
+  background: var(--base-color);
+  color: var(--text-color-light);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .back-to-top:hover {
+  background: var(--base-color-alt);
+}
+
+body.dark-mode .button {
+  color: var(--text-color-light);
+}
+
+body.dark-mode a {
+  color: var(--base-color);
+}
+
+body.dark-mode nav ul li a {
+  color: var(--text-color);
+}
+
+body.dark-mode nav ul li a:hover,
+body.dark-mode nav ul li a.active {
+  color: var(--base-color);
+}
+
+body.dark-mode .toggle {
+  color: var(--base-color);
+}
+
+body.dark-mode .logo {
+  color: var(--text-color-light);
+}
+
+body.dark-mode .logo span {
+  color: var(--base-color);
+}
+
+body.dark-mode #contact ul li {
+  color: var(--text-color);
+}
+
+body.dark-mode #contact ul li i {
+  color: var(--base-color);
+}
+
+body.dark-mode #header {
+  border-bottom-color: hsl(0 0% 25%);
+}
+
+body.dark-mode #about,
+body.dark-mode #kids {
+  background: hsl(0 0% 15%) !important;
+}
+
+body.dark-mode #about .image::before,
+body.dark-mode #kids .image::before,
+body.dark-mode #founder .image::before,
+body.dark-mode .container1 .image::before {
+  opacity: 0.3;
 }
 
 body.dark-mode .theme-toggle {
