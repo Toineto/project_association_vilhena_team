@@ -1,0 +1,8 @@
+{
+  "name": "Associação Equipe Vilhena Jiu-Jitsu",
+  "description": "Site oficial da Associação Equipe Vilhena Jiu-Jitsu com informações sobre a história, instrutores, filiais, aulas e contato.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

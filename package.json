@@ -4,6 +4,10 @@
   "description": "Bem-vindo ao repositório do site da Associação Equipe Vilhena Jiu-Jitsu! Este projeto consiste em um site informativo para uma associação dedicada à prática e ensino do Jiu-Jitsu. O site oferece informações sobre a associação, aulas, instrutores, eventos e contato.",
   "main": "main.js",
   "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "echo 'Static site ready'",
+    "lint": "node -c server.js main.js theme.js",
     "login": "firebase login",
     "serve": "firebase serve --only hosting",
     "deploy": "firebase deploy --only hosting"
@@ -22,5 +26,8 @@
   "homepage": "https://github.com/Toineto/project_association_vilhena_team#readme",
   "devDependencies": {
     "firebase-tools": "^15.30.2"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }

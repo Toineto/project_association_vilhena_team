@@ -1,32 +1,43 @@
 (function () {
+  const root = document.documentElement;
   const body = document.body;
   const toggle = document.getElementById('theme-toggle');
-
-  if (!toggle) return;
 
   function applyTheme(theme) {
     const isDark = theme === 'dark';
 
     if (isDark) {
-      body.classList.add('dark-mode');
+      root.classList.add('dark-mode');
+      if (body) body.classList.add('dark-mode');
     } else {
-      body.classList.remove('dark-mode');
+      root.classList.remove('dark-mode');
+      if (body) body.classList.remove('dark-mode');
     }
 
-    localStorage.setItem('theme', theme);
-    toggle.textContent = isDark ? 'Modo claro' : 'Modo escuro';
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (e) {}
+
+    if (toggle) {
+      toggle.setAttribute('aria-label', isDark ? 'Alternar para modo claro' : 'Alternar para modo escuro');
+      toggle.innerHTML = isDark
+        ? '<span class="theme-icon" aria-hidden="true">☀️</span><span class="theme-text">Modo claro</span>'
+        : '<span class="theme-icon" aria-hidden="true">🌙</span><span class="theme-text">Modo escuro</span>';
+    }
   }
 
-  const stored = localStorage.getItem('theme');
-  if (stored === 'dark' || stored === 'light') {
-    applyTheme(stored);
-  } else {
-    applyTheme('light');
-  }
+  let stored = 'light';
+  try {
+    stored = localStorage.getItem('theme') || 'light';
+  } catch (e) {}
 
-  toggle.addEventListener('click', function () {
-    const isDark = body.classList.contains('dark-mode');
-    applyTheme(isDark ? 'light' : 'dark');
-  });
+  applyTheme(stored === 'dark' ? 'dark' : 'light');
+
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      const isDark = root.classList.contains('dark-mode') || (body && body.classList.contains('dark-mode'));
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+  }
 })();
 

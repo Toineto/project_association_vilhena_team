@@ -312,10 +312,34 @@ body.filial-page {
 }
 
 /* Dark Mode */
-body.dark-mode .filial-page main {
+html.dark-mode,
+body.dark-mode {
+  color-scheme: dark;
+  --title-color: hsl(var(--hue) 41% 90%);
+  --text-color: hsl(0 0% 70%);
+  --text-color-light: hsl(0 0% 98%);
+  --body-color: hsl(0 0% 12%);
   background-color: hsl(0 0% 12%);
 }
 
+html.dark-mode body.filial-page,
+html.dark-mode body.professor-page,
+html.dark-mode main,
+body.dark-mode.filial-page main,
+body.dark-mode .filial-page main,
+body.dark-mode.professor-page main,
+body.dark-mode .professor-page main {
+  background-color: hsl(0 0% 12%) !important;
+}
+
+html.dark-mode section#sobre,
+html.dark-mode section#treino,
+html.dark-mode section#galeria,
+html.dark-mode section#contato,
+body.dark-mode.filial-page section#sobre,
+body.dark-mode.filial-page section#treino,
+body.dark-mode.filial-page section#galeria,
+body.dark-mode.filial-page section#contato,
 body.dark-mode .filial-page section#sobre,
 body.dark-mode .filial-page section#treino,
 body.dark-mode .filial-page section#galeria,
@@ -325,54 +349,95 @@ body.dark-mode .filial-page section#contato {
   color: var(--text-color);
 }
 
+body.dark-mode.filial-page section h1,
 body.dark-mode .filial-page section h1 {
   color: var(--text-color-light);
 }
 
+body.dark-mode.filial-page #filial-info h2,
 body.dark-mode .filial-page #filial-info h2 {
   color: var(--base-color);
 }
 
+body.dark-mode.filial-page #filial-info p,
 body.dark-mode .filial-page #filial-info p {
   color: var(--text-color);
 }
 
+body.dark-mode.filial-page .info-treino,
 body.dark-mode .filial-page .info-treino {
   color: var(--text-color);
 }
 
+body.dark-mode.filial-page #treino h2,
 body.dark-mode .filial-page #treino h2 {
   color: var(--text-color-light);
 }
 
+body.dark-mode.filial-page #filial-horarios li,
 body.dark-mode .filial-page #filial-horarios li {
   color: var(--text-color);
   border-bottom-color: hsl(0 0% 25%);
 }
 
-body.dark-mode .filial-page .info-contato {
-  background: hsl(0 0% 20%) !important;
-  border-color: hsl(0 0% 30%);
+body.dark-mode.filial-page #contato > p,
+body.dark-mode .filial-page #contato > p {
+  color: var(--text-color-light);
+}
+
+body.dark-mode.filial-page .info-contato,
+body.dark-mode .filial-page .info-contato,
+body.dark-mode.filial-page section#contato .info-contato,
+body.dark-mode .filial-page section#contato .info-contato {
+  background: hsl(0 0% 22%) !important;
+  border: 1px solid hsl(0 0% 30%) !important;
   color: var(--text-color);
 }
 
+body.dark-mode.filial-page .info-contato h2,
 body.dark-mode .filial-page .info-contato h2 {
   color: var(--text-color-light);
 }
 
+body.dark-mode.filial-page .info-contato p,
+body.dark-mode.filial-page #filial-whatsapp-numero,
+body.dark-mode .filial-page .info-contato p,
+body.dark-mode .filial-page #filial-whatsapp-numero {
+  color: var(--text-color);
+}
+
+body.dark-mode.filial-page .info-contato a#filial-whatsapp-link,
+body.dark-mode .filial-page .info-contato a#filial-whatsapp-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #25d366 !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+body.dark-mode.filial-page .info-contato a#filial-whatsapp-link:hover,
+body.dark-mode .filial-page .info-contato a#filial-whatsapp-link:hover {
+  background: #1ebe57 !important;
+}
+
+body.dark-mode.filial-page #filial-endereco,
 body.dark-mode .filial-page #filial-endereco {
   color: var(--text-color);
 }
 
+body.dark-mode.filial-page #filial-mapa-link,
 body.dark-mode .filial-page #filial-mapa-link {
   color: var(--base-color);
 }
 
+body.dark-mode.filial-page .mapa-wrapper,
 body.dark-mode .filial-page .mapa-wrapper {
   background: hsl(0 0% 20%);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
+body.dark-mode.filial-page footer,
 body.dark-mode .filial-page footer {
   background: var(--base-color);
   color: var(--text-color-light);
@@ -636,16 +701,21 @@ body.professor-page {
 }
 
 /* Dark Mode - Professor */
+html.dark-mode body.professor-page main,
+html.dark-mode .professor-page main,
+body.dark-mode.professor-page main,
 body.dark-mode .professor-page main {
   background-color: hsl(0 0% 12%) !important;
 }
 
-/* garantir também que a section de contato herde fundo escuro */
-body.dark-mode .professor-page #contato,
-body.dark-mode .professor-page #contato .info-contato {
-  background: hsl(0 0% 18%) !important;
-}
-
+html.dark-mode .professor-page section#sobre,
+html.dark-mode .professor-page section#treino,
+html.dark-mode .professor-page section#galeria,
+html.dark-mode .professor-page section#contato,
+body.dark-mode.professor-page section#sobre,
+body.dark-mode.professor-page section#treino,
+body.dark-mode.professor-page section#galeria,
+body.dark-mode.professor-page section#contato,
 body.dark-mode .professor-page section#sobre,
 body.dark-mode .professor-page section#treino,
 body.dark-mode .professor-page section#galeria,
@@ -655,79 +725,118 @@ body.dark-mode .professor-page section#contato {
   color: var(--text-color);
 }
 
-/* garantir contraste do parágrafo introdutório */
-body.dark-mode .professor-page #contato > p {
-  color: var(--text-color-light) !important;
-}
-
-/* remover qualquer background branco de elementos filhos */
-body.dark-mode .professor-page #contato * {
-  background: none !important;
-}
-
+body.dark-mode.professor-page section h1,
 body.dark-mode .professor-page section h1 {
   color: var(--text-color-light);
 }
 
+body.dark-mode.professor-page .info-professor h2,
 body.dark-mode .professor-page .info-professor h2 {
   color: var(--base-color);
 }
 
+body.dark-mode.professor-page .info-professor,
 body.dark-mode .professor-page .info-professor {
   color: var(--text-color);
 }
 
+body.dark-mode.professor-page .info-professor p,
 body.dark-mode .professor-page .info-professor p {
   color: var(--text-color);
 }
 
+body.dark-mode.professor-page .info-professor img,
 body.dark-mode .professor-page .info-professor img {
   border-color: var(--base-color);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
+body.dark-mode.professor-page #treino h2,
 body.dark-mode .professor-page #treino h2 {
   color: var(--text-color-light);
 }
 
+body.dark-mode.professor-page #treino .info-treino p,
 body.dark-mode .professor-page #treino .info-treino p {
   color: var(--text-color);
 }
 
+body.dark-mode.professor-page #contato > p,
 body.dark-mode .professor-page #contato > p {
-  color: var(--text-color);
-}
-
-body.dark-mode .professor-page .info-contato {
-  background: hsl(0 0% 20%) !important;
-  border-color: hsl(0 0% 30%);
-  color: var(--text-color);
-  /* forçar padding e borda também */
-  border: 1px solid hsl(0 0% 30%) !important;
-}
-
-/* garantir que todos os links dentro do contato tenham cor clara */
-body.dark-mode .professor-page .info-contato a {
   color: var(--text-color-light);
 }
 
-/* tornar o botão whatsapp ainda mais vibrante em dark mode */
-body.dark-mode .professor-page #professor-whatsapp-link {
-  background: #2eca78;
-  color: #010101;
+body.dark-mode.professor-page .info-contato,
+body.dark-mode .professor-page .info-contato,
+body.dark-mode.professor-page section#contato .info-contato,
+body.dark-mode .professor-page section#contato .info-contato {
+  background: hsl(0 0% 22%) !important;
+  border: 1px solid hsl(0 0% 30%) !important;
+  color: var(--text-color);
 }
 
-body.dark-mode .professor-page #professor-whatsapp-link:hover {
-  background: #28b36c;
-}
-
-
+body.dark-mode.professor-page .info-contato h2,
 body.dark-mode .professor-page .info-contato h2 {
   color: var(--text-color-light);
 }
 
+body.dark-mode.professor-page .info-contato p,
+body.dark-mode.professor-page #professor-whatsapp-numero,
+body.dark-mode .professor-page .info-contato p,
+body.dark-mode .professor-page #professor-whatsapp-numero {
+  color: var(--text-color);
+}
+
+body.dark-mode.professor-page .info-contato a#professor-whatsapp-link,
+body.dark-mode .professor-page .info-contato a#professor-whatsapp-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #25d366 !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+body.dark-mode.professor-page .info-contato a#professor-whatsapp-link:hover,
+body.dark-mode .professor-page .info-contato a#professor-whatsapp-link:hover {
+  background: #1ebe57 !important;
+}
+
+body.dark-mode.professor-page footer,
 body.dark-mode .professor-page footer {
   background: var(--base-color);
   color: var(--text-color-light);
 }
+
+/* Regras globais de garantia de modo escuro para a seção e bloco de contato */
+body.dark-mode main > section#contato,
+body.dark-mode section#contato,
+body.dark-mode #contato {
+  background: hsl(0 0% 18%) !important;
+  color: var(--text-color) !important;
+}
+
+body.dark-mode section#contato > p,
+body.dark-mode #contato > p {
+  color: var(--text-color-light) !important;
+}
+
+body.dark-mode section#contato .info-contato,
+body.dark-mode #contato .info-contato,
+body.dark-mode .info-contato {
+  background: hsl(0 0% 22%) !important;
+  border: 1px solid hsl(0 0% 30%) !important;
+  color: var(--text-color) !important;
+}
+
+body.dark-mode section#contato .info-contato h2,
+body.dark-mode .info-contato h2 {
+  color: var(--text-color-light) !important;
+}
+
+body.dark-mode section#contato .info-contato p,
+body.dark-mode .info-contato p {
+  color: var(--text-color) !important;
+}
+
 

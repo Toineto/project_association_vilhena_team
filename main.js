@@ -19,9 +19,10 @@ for (const link of links) {
 
 /* mudar o header da página quando der scroll */
 const header = document.querySelector('#header')
-const navHeight = header.offsetHeight
+const navHeight = header ? header.offsetHeight : 72
 
 function changeHeaderWhenScroll() {
+  if (!header) return
   if (window.scrollY >= navHeight) {
     // scroll é maior que a altura do header
     header.classList.add('scroll')
@@ -32,28 +33,34 @@ function changeHeaderWhenScroll() {
 }
 
 /* ScrollReveal: Mostrar elementos quando der scroll na página */
-const scrollReveal = ScrollReveal({
-  origin: 'top',
-  distance: '30px',
-  duration: 700,
-  reset: true
-})
+if (typeof ScrollReveal !== 'undefined') {
+  const scrollReveal = ScrollReveal({
+    origin: 'top',
+    distance: '30px',
+    duration: 700,
+    reset: true
+  })
 
-scrollReveal.reveal(
-  `#home .image, #home .text,
-  #about .image, #about .text,
-  #services header, #services .card,
-  #testimonials header, #testimonials .testimonials
-  #contact .text, #contact .links,
-  footer .brand, footer .social
-  `,
-  { interval: 100 }
-)
+  scrollReveal.reveal(
+    `#home .image, #home .text,
+    #about .image, #about .text,
+    #founder .image, #founder .text,
+    #kids .image, #kids .text,
+    #mission header, #mission .card,
+    #Instructors header, #Instructors .professores__conteudo,
+    #filiais header, #filiais .card,
+    #contact .text, #contact .links,
+    footer .brand, footer .social
+    `,
+    { interval: 100 }
+  )
+}
 
 /* Botão voltar para o topo */
 const backToTopButton = document.querySelector('.back-to-top')
 
 function backToTop() {
+  if (!backToTopButton) return
   if (window.scrollY >= 560) {
     backToTopButton.classList.add('show')
   } else {
@@ -62,45 +69,90 @@ function backToTop() {
 }
 
 /* Menu ativo conforme a seção visível na página */
-const sections = document.querySelectorAll('main section[id]')
+const sectionNavMapping = {
+  home: 'home',
+  about: 'about',
+  founder: 'about',
+  kids: 'about',
+  mission: 'mission',
+  Instructors: 'Instructors',
+  instructors: 'Instructors',
+  filiais: 'filiais',
+  contact: 'contact'
+}
+
+function findNavLink(targetId) {
+  if (!targetId) return null
+  const exact = document.querySelector(`nav ul li a[href="#${targetId}"]`)
+  if (exact) return exact
+
+  // Busca insensível a maiúsculas/minúsculas
+  const allLinks = document.querySelectorAll('nav ul li a')
+  for (const link of allLinks) {
+    const href = link.getAttribute('href') || ''
+    if (href.startsWith('#') && href.substring(1).toLowerCase() === targetId.toLowerCase()) {
+      return link
+    }
+  }
+  return null
+}
+
 function activateMenuAtCurrentSection() {
-  const scrollPosition = window.scrollY + 200
+  const sections = Array.from(document.querySelectorAll('main section[id]'))
+  if (!sections.length) return
 
-  // Remove active de todos os links
-  document.querySelectorAll('nav ul li a').forEach(link => {
-    link.classList.remove('active')
-  })
+  const navLinks = document.querySelectorAll('nav ul li a')
+  const scrollY = window.scrollY || window.pageYOffset || 0
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+  const documentHeight = Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight
+  )
 
-  let currentSection = null
+  let activeNavId = null
 
-  for (const section of sections) {
-    const sectionTop = section.offsetTop
-    const sectionHeight = section.offsetHeight
-    const sectionId = section.getAttribute('id')
-    const sectionBottom = sectionTop + sectionHeight
+  // 1. Se estiver no topo da página
+  if (scrollY < 80) {
+    activeNavId = 'home'
+  }
+  // 2. Se estiver no final da página (rodapé / contatos)
+  else if (scrollY + viewportHeight >= documentHeight - 80) {
+    activeNavId = 'contact'
+  }
+  // 3. Verifica em qual seção o ponto de foco da tela está
+  else {
+    const checkpoint = scrollY + (header ? header.offsetHeight : 72) + 120
 
-    // Verifica se o scroll está dentro da seção
-    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-      currentSection = sectionId
-      break
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = sections[i]
+      const sectionTop = section.getBoundingClientRect().top + scrollY
+      if (checkpoint >= sectionTop) {
+        const sectionId = section.getAttribute('id')
+        activeNavId = sectionNavMapping[sectionId] || sectionId
+        break
+      }
+    }
+
+    if (!activeNavId) {
+      activeNavId = 'home'
     }
   }
 
-  // Se não encontrou seção, marca a última seção se estiver no fim da página
-  if (!currentSection && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 500) {
-    const lastSection = sections[sections.length - 1]
-    if (lastSection) {
-      currentSection = lastSection.getAttribute('id')
-    }
-  }
+  // Atualiza classes ativas nos links do menu
+  navLinks.forEach(link => link.classList.remove('active'))
 
-  // Adiciona active ao link correspondente
-  if (currentSection) {
-    const activeLink = document.querySelector('nav ul li a[href="#' + currentSection + '"]')
-    if (activeLink) {
-      activeLink.classList.add('active')
-    }
+  const currentLink = findNavLink(activeNavId)
+  if (currentLink) {
+    currentLink.classList.add('active')
   }
+}
+
+function initScrollState() {
+  changeHeaderWhenScroll()
+  backToTop()
+  activateMenuAtCurrentSection()
 }
 
 /* When Scroll */
@@ -109,3 +161,11 @@ window.addEventListener('scroll', function () {
   backToTop()
   activateMenuAtCurrentSection()
 })
+
+/* Executar na inicialização da página */
+window.addEventListener('load', initScrollState)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initScrollState)
+} else {
+  initScrollState()
+}

@@ -2,6 +2,16 @@
 <html lang="pt_BR">
 
 <head>
+  <!-- Anti-flash script de tema para evitar tela branca durante transição -->
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('theme') === 'dark') {
+          document.documentElement.classList.add('dark-mode');
+        }
+      } catch (e) {}
+    })();
+  </script>
   <!-- PAGE INFO -->
   <meta charset="UTF-8" />
   <link rel="icon" href="img/favicon.ico" />
@@ -26,10 +36,27 @@
 </head>
 
 <body>
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('theme') === 'dark') {
+          document.body.classList.add('dark-mode');
+        }
+      } catch (e) {}
+    })();
+  </script>
   <header id="header">
     <nav class="container">
-      <a href="#"><img class="logovilhena" src="img/logo300px.png" alt="logo vilhena Jiu-Jitsu"> </a>
-      <a class="logo" href="#">Associação <span> Equipe Vilhena </span> Jiu-Jitsu</a>
+      <div class="nav-brand">
+        <a href="#home" class="brand-logo-link">
+          <img class="logovilhena" src="img/logo300px.png" alt="logo vilhena Jiu-Jitsu">
+        </a>
+        <a class="logo" href="#home">
+          <span class="logo-sub">Associação</span>
+          <span class="logo-title"><span>Equipe Vilhena</span> Jiu-Jitsu</span>
+        </a>
+      </div>
+
       <!-- menu -->
       <div class="menu">
         <ul class="grid">
@@ -43,9 +70,13 @@
       </div>
       <!-- /menu -->
 
-      <button id="theme-toggle" class="theme-toggle" type="button">Modo escuro</button>
-      <div class="toggle icon-menu"></div>
-      <div class="toggle icon-close"></div>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Alternar modo de cor">
+          <span class="theme-icon" aria-hidden="true">🌙</span><span class="theme-text">Modo escuro</span>
+        </button>
+        <div class="toggle icon-menu" role="button" tabindex="0" aria-label="Abrir menu de navegação"></div>
+        <div class="toggle icon-close" role="button" tabindex="0" aria-label="Fechar menu de navegação"></div>
+      </div>
     </nav>
   </header>
 
@@ -254,177 +285,182 @@
         <div class="image">
           <section class="professores_main">
             <div class="professores">
-              <div class="professores__conteudo">
-                <img src="/img/professores/jeffersonVilhena.png" alt="" class="professores_img">
+              <div class="professores__conteudo" id="card-prof-jefferson">
+                <img src="/img/professores/jeffersonVilhena.png" alt="Professor Jefferson Vilhena" class="professores_img">
                 <div class="professores__nome--graducao">
                   <h3 class="professor__none">Jefferson Vilhena</h3>
-                  <p class="professor__graduacao--registro">Faixa preta IV Grau.</p>
-                  <p>Registro CBJJ: 28972.</p>
+                  <p class="professor__graduacao--registro">Faixa preta IV Grau</p>
+                  <p>Registro CBJJ: 28972</p>
                   <a href="professor.html?id=jefferson-vilhena" class="button">Saiba Mais</a>
                 </div>
               </div>
-              <div class="professores__conteudo">
-                <img src="/img/professores/Adriano.jpeg.png" alt="" class="professores_img">
+              <div class="professores__conteudo" id="card-prof-adriano">
+                <img src="/img/professores/Adriano.jpeg.png" alt="Professor Adriano Pádua" class="professores_img">
                 <div class="professores__nome--graducao">
                   <h3 class="professor__none">Adriano Pádua</h3>
-                  <p class="professor__graduacao--registro">Faixa preta III Grau.</p>
-                  <p>Registro CBJJ: 49860.</p>
+                  <p class="professor__graduacao--registro">Faixa preta III Grau</p>
+                  <p>Registro CBJJ: 49860</p>
                   <a href="professor.html?id=adriano-padua" class="button">Saiba Mais</a>
                 </div>
               </div>
 
-              <div class="professores__conteudo">
-                <img src="/img/professores/manoel-jeferson.jpeg.png" alt="" class="professores_img">
+              <div class="professores__conteudo" id="card-prof-manoel">
+                <img src="/img/professores/manoel-jeferson.jpeg.png" alt="Professor Manoel Jeferson" class="professores_img">
                 <div class="professores__nome--graducao">
                   <h3 class="professor__none">Manoel Jeferson</h3>
-                  <p class="professor__graduacao--registro">Faixa preta III Grau.</p>
-                  <p>Registro CBJJ: 248733.</p>
+                  <p class="professor__graduacao--registro">Faixa preta III Grau</p>
+                  <p>Registro CBJJ: 248733</p>
                   <a href="professor.html?id=manoel-jeferson" class="button">Saiba Mais</a>
                 </div>
               </div>
 
-              <div class="professores__conteudo">
-                <img src="/img/professores/wildbruno costa.png" alt="" class="professores_img">
+              <div class="professores__conteudo" id="card-prof-wildbruno">
+                <img src="/img/professores/wildbruno costa.png" alt="Professor Wildbruno Costa" class="professores_img">
                 <div class="professores__nome--graducao">
                   <h3 class="professor__none">Wildbruno Costa</h3>
-                  <p class="professor__graduacao--registro">Faixa preta III Grau.</p>
-                  <p>Registro CBJJ: 74673.</p>
+                  <p class="professor__graduacao--registro">Faixa preta III Grau</p>
+                  <p>Registro CBJJ: 74673</p>
                   <a href="professor.html?id=wildbruno-costa" class="button">Saiba Mais</a>
                 </div>
               </div>
 
-              <div class="professores__conteudo">
-                <img src="/img/professores/mutante.png" alt="" class="professores_img">
+              <div class="professores__conteudo" id="card-prof-jonas">
+                <img src="/img/professores/mutante.png" alt="Professor Jonas Santos" class="professores_img">
                 <div class="professores__nome--graducao">
                   <h3 class="professor__none">Jonas Santos</h3>
-                  <p class="professor__graduacao--registro">Faixa preta III Grau.</p>
-                  <p>Registro CBJJ: 74673.</p>
+                  <p class="professor__graduacao--registro">Faixa preta III Grau</p>
+                  <p>Registro CBJJ: 74673</p>
                   <a href="professor.html?id=jonas-santos" class="button">Saiba Mais</a>
                 </div>
               </div>
 
-              <div class="professores__conteudo">
-                <img src="/img/professores/cintia.png" alt="" class="professores_img">
+              <div class="professores__conteudo" id="card-prof-cintia">
+                <img src="/img/professores/cintia.png" alt="Professora Cintia Suely" class="professores_img">
                 <div class="professores__nome--graducao">
                   <h3 class="professor__none">Cintia Suely</h3>
-                  <p class="professor__graduacao--registro">Faixa preta II Grau.</p>
-                  <p>Registro CBJJ: 49308.</p>
+                  <p class="professor__graduacao--registro">Faixa preta II Grau</p>
+                  <p>Registro CBJJ: 49308</p>
                   <a href="professor.html?id=cintia-suely" class="button">Saiba Mais</a>
                 </div>
               </div>
 
-              <div class="professores__conteudo">
-                <img src="/img/professores/Lucio de Paula.png" alt="" class="professores_img">
+              <div class="professores__conteudo" id="card-prof-lucio">
+                <img src="/img/professores/Lucio de Paula.png" alt="Professor Lucio de Paula" class="professores_img">
                 <div class="professores__nome--graducao">
                   <h3 class="professor__none">Lucio de Paula</h3>
-                  <p class="professor__graduacao--registro">Faixa preta II Grau.</p>
-                  <p>Registro CBJJ: 43779.</p>
+                  <p class="professor__graduacao--registro">Faixa preta II Grau</p>
+                  <p>Registro CBJJ: 43779</p>
                   <a href="professor.html?id=lucio-de-paula" class="button">Saiba Mais</a>
                 </div>
               </div>
-              <div class="professores__conteudo">
-                <img src="/img/professores/famir.jpeg.png" alt="" class="professores_img">
+              <div class="professores__conteudo" id="card-prof-famir">
+                <img src="/img/professores/famir.jpeg.png" alt="Professor Famir Salmen" class="professores_img">
                 <div class="professores__nome--graducao">
                   <h3 class="professor__none">Famir Salmen</h3>
-                  <p class="professor__graduacao--registro">Faixa preta II Grau.</p>
-                  <p>Registro CBJJ: 159621.</p>
+                  <p class="professor__graduacao--registro">Faixa preta II Grau</p>
+                  <p>Registro CBJJ: 159621</p>
                   <a href="professor.html?id=famir-salmen" class="button">Saiba Mais</a>
                 </div>
               </div>
 
-              <div class="professores__conteudo">
-                <img src="/img/professores/Luiz-carlos.png" alt="" class="professores_img">
+              <div class="professores__conteudo" id="card-prof-luiz">
+                <img src="/img/professores/Luiz-carlos.png" alt="Professor Luiz Carlos" class="professores_img">
                 <div class="professores__nome--graducao">
                   <h3 class="professor__none">Luiz Carlos</h3>
-                  <p class="professor__graduacao--registro">Faixa preta II Grau.</p>
-                  <p>Registro CBJJ: 389805.</p>
+                  <p class="professor__graduacao--registro">Faixa preta II Grau</p>
+                  <p>Registro CBJJ: 389805</p>
                   <a href="professor.html?id=luiz-carlos" class="button">Saiba Mais</a>
                 </div>
               </div>
 
-              <div class="professores__conteudo">
-                <img src="/img/professores/Gerson.png" alt="" class="professores_img">
+              <div class="professores__conteudo" id="card-prof-gerson">
+                <img src="/img/professores/Gerson.png" alt="Professor Gerson Nascimento" class="professores_img">
                 <div class="professores__nome--graducao">
                   <h3 class="professor__none">Gerson Nascimento</h3>
-                  <p class="professor__graduacao--registro">Faixa preta.</p>
-                  <p>Registro CBJJ: 142716.</p>
+                  <p class="professor__graduacao--registro">Faixa preta</p>
+                  <p>Registro CBJJ: 142716</p>
                   <a href="professor.html?id=gerson-nascimento" class="button">Saiba Mais</a>
                 </div>
               </div>
 
-              <div class="professores__conteudo">
-                <img src="/img/professores/fernando.png" alt="" class="professores_img">
+              <div class="professores__conteudo" id="card-prof-fernando">
+                <img src="/img/professores/fernando.png" alt="Professor Fernando Mota" class="professores_img">
                 <div class="professores__nome--graducao">
                   <h3 class="professor__none">Fernando Mota</h3>
-                  <p class="professor__graduacao--registro">Faixa preta.</p>
-                  <p>Registro CBJJ: 408011.</p>
+                  <p class="professor__graduacao--registro">Faixa preta</p>
+                  <p>Registro CBJJ: 408011</p>
                   <a href="professor.html?id=fernando-mota" class="button">Saiba Mais</a>
                 </div>
               </div>
 
-              <div class="professores__conteudo">
-                <img src="/img/professores/Silas.png" alt="" class="professores_img">
+              <div class="professores__conteudo" id="card-prof-silas">
+                <img src="/img/professores/Silas.png" alt="Professor Silas Silva" class="professores_img">
                 <div class="professores__nome--graducao">
                   <h3 class="professor__none">Silas Silva</h3>
-                  <p class="professor__graduacao--registro">Faixa preta.</p>
-                  <p>Registro CBJJ: 127941.</p>
+                  <p class="professor__graduacao--registro">Faixa preta</p>
+                  <p>Registro CBJJ: 127941</p>
                   <a href="professor.html?id=silas-silva" class="button">Saiba Mais</a>
                 </div>
               </div>
             </div>
           </section>
+        </div>
+      </section>
+    </section>
 
-          <div class="divider-2"></div>
+    <div class="divider-2"></div>
 
-          <!-- Adicionado seção de filiais -->
-          <section class="section" id="filiais">
-            <div class="container grid">
-              <header>
-                <h2 class="title">Nossas Filiais</h2>
-                <p>Encontre uma filial perto de você</p>
-              </header>
-              <div class="cards grid">
-                <div class="card">
-                  <h3 class="title">Filial 1</h3>
-                  <p>Veja horários, local no mapa, galeria de fotos e contato.</p>
-                  <a href="filial.html?id=filial-1" class="button">Saiba Mais</a>
-                </div>
-                <div class="card">
-                  <h3 class="title">Filial 2</h3>
-                  <p>Veja horários, local no mapa, galeria de fotos e contato.</p>
-                  <a href="filial.html?id=filial-2" class="button">Saiba Mais</a>
-                </div>
-                <div class="card">
-                  <h3 class="title">Filial 3</h3>
-                  <p>Veja horários, local no mapa, galeria de fotos e contato.</p>
-                  <a href="filial.html?id=filial-3" class="button">Saiba Mais</a>
-                </div>
-              </div>
-            </div>
-          </section>
+    <!-- Adicionado seção de filiais -->
+    <section class="section" id="filiais">
+      <div class="container grid">
+        <header>
+          <h2 class="title">Nossas Filiais</h2>
+          <p>Encontre uma filial perto de você</p>
+        </header>
+        <div class="cards grid">
+          <div class="card">
+            <h3 class="title">Filial 1</h3>
+            <p>Veja horários, local no mapa, galeria de fotos e contato.</p>
+            <a href="filial.html?id=filial-1" class="button">Saiba Mais</a>
+          </div>
+          <div class="card">
+            <h3 class="title">Filial 2</h3>
+            <p>Veja horários, local no mapa, galeria de fotos e contato.</p>
+            <a href="filial.html?id=filial-2" class="button">Saiba Mais</a>
+          </div>
+          <div class="card">
+            <h3 class="title">Filial 3</h3>
+            <p>Veja horários, local no mapa, galeria de fotos e contato.</p>
+            <a href="filial.html?id=filial-3" class="button">Saiba Mais</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- CONTACT -->
-          <section class="section" id="contact">
-            <div class="container grid">
-              <div class="text">
-                <h2 class="title">Junte-se a Nós e Comece sua Jornada de Transformação!</h2>
-                <p>
-                  Entre em contato com a Associação Vilhena Jiu-jitsu, queremos tirar suas dúvidas,
-                  ouvir suas críticas e sugestões.
-                </p>
-                <a href="https://api.whatsapp.com/send?phone=+5594984486969&text=Oi! Gostaria de saber mais sobre a Associação Vilhena Jiu-jitsu"
-                  class="button" target="_blank"><i class="icon-whatsapp"></i> Entrar em contato</a>
-              </div>
+    <div class="divider-1"></div>
 
-              <div class="links">
-                <ul class="grid">
-                  <li><i class="icon-phone"></i> 94 98448-6969</li>
-                  <li><i class="icon-map-pin"></i> Endereço </li>
-                  <li><i class="icon-mail"></i> jeffersonvilhena@gmail.com</li>
-                </ul>
-              </div>
-            </div>
-          </section>
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container grid">
+        <div class="text">
+          <h2 class="title">Junte-se a Nós e Comece sua Jornada de Transformação!</h2>
+          <p>
+            Entre em contato com a Associação Vilhena Jiu-jitsu, queremos tirar suas dúvidas,
+            ouvir suas críticas e sugestões.
+          </p>
+          <a href="https://api.whatsapp.com/send?phone=+5594984486969&text=Oi! Gostaria de saber mais sobre a Associação Vilhena Jiu-jitsu"
+            class="button" target="_blank"><i class="icon-whatsapp"></i> Entrar em contato</a>
+        </div>
+
+        <div class="links">
+          <ul class="grid">
+            <li><i class="icon-phone"></i> 94 98448-6969</li>
+            <li><i class="icon-map-pin"></i> Endereço </li>
+            <li><i class="icon-mail"></i> jeffersonvilhena@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="section">
