@@ -114,14 +114,24 @@ body.filial-page {
 }
 
 .filial-page #filial-mapa-link {
-  display: inline-block;
-  margin-bottom: 1rem;
-  color: var(--base-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--base-color);
+  color: var(--text-color-light) !important;
+  border-radius: 0.35rem;
   font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .filial-page #filial-mapa-link:hover {
-  text-decoration: underline;
+  background: var(--base-color-alt);
+  transform: translateY(-2px);
+  text-decoration: none;
 }
 
 /* Mapa incorporado */
@@ -427,8 +437,17 @@ body.dark-mode .filial-page #filial-endereco {
 }
 
 body.dark-mode.filial-page #filial-mapa-link,
-body.dark-mode .filial-page #filial-mapa-link {
-  color: var(--base-color);
+body.dark-mode .filial-page #filial-mapa-link,
+html.dark-mode .filial-page #filial-mapa-link {
+  background: var(--base-color) !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode.filial-page #filial-mapa-link:hover,
+body.dark-mode .filial-page #filial-mapa-link:hover,
+html.dark-mode .filial-page #filial-mapa-link:hover {
+  background: var(--base-color-alt) !important;
+  color: #ffffff !important;
 }
 
 body.dark-mode.filial-page .mapa-wrapper,
@@ -839,8 +858,9 @@ body.dark-mode .info-contato p {
   color: var(--text-color) !important;
 }
 
-/* --- Cartão de Filial na Página do Professor --- */
-.professor-filial-card {
+/* --- Cartão de Filial na Página do Professor e Cartão de Professor na Filial --- */
+.professor-filial-card,
+.filial-professor-card {
   margin-top: 1.5rem;
   padding: 1.5rem;
   background: hsl(0 0% 98%);
@@ -852,6 +872,12 @@ body.dark-mode .info-contato p {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+
+.filial-responsavel-destaque {
+  font-weight: 600;
+  color: var(--title-color);
+  margin-bottom: 0.5rem;
 }
 
 .filial-box-text h3 {
@@ -867,6 +893,7 @@ body.dark-mode .info-contato p {
 }
 
 .professor-filial-card .button,
+.filial-professor-card .button,
 .filial-professor-link-wrapper .button {
   background: var(--base-color);
   color: var(--text-color-light);
@@ -883,14 +910,14 @@ body.dark-mode .info-contato p {
 }
 
 .professor-filial-card .button:hover,
+.filial-professor-card .button:hover,
 .filial-professor-link-wrapper .button:hover {
   background: var(--base-color-alt);
   transform: translateY(-2px);
 }
 
-/* --- Cartão de Professor na Página da Filial --- */
 .filial-professor-link-wrapper {
-  margin-top: 1.25rem;
+  margin-top: 0;
 }
 
 /* --- Grade de Filiais na Página Inicial --- */
@@ -980,15 +1007,24 @@ body.dark-mode .info-contato p {
 
 /* Modo escuro para novos componentes */
 body.dark-mode .professor-filial-card,
-html.dark-mode .professor-filial-card {
-  background: hsl(0 0% 22%);
-  border: 1px solid hsl(0 0% 30%);
-  border-left: 4px solid var(--base-color);
+html.dark-mode .professor-filial-card,
+body.dark-mode .filial-professor-card,
+html.dark-mode .filial-professor-card {
+  background: hsl(0 0% 22%) !important;
+  border: 1px solid hsl(0 0% 30%) !important;
+  border-left: 4px solid var(--base-color) !important;
 }
 
 body.dark-mode .filial-box-text h3,
 html.dark-mode .filial-box-text h3 {
-  color: var(--text-color-light);
+  color: var(--text-color-light) !important;
+}
+
+body.dark-mode .filial-box-text p,
+html.dark-mode .filial-box-text p,
+body.dark-mode .filial-responsavel-destaque,
+html.dark-mode .filial-responsavel-destaque {
+  color: hsl(0 0% 85%) !important;
 }
 
 body.dark-mode #filiais .card,

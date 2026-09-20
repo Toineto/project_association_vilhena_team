@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+  <!-- Anti-flash script de tema para evitar tela branca e erro visual durante transição -->
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('theme');
+        if (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          theme = 'dark';
+        }
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark-mode');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <script src="theme.js"></script>
   <!-- Page Info -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,7 +42,7 @@
   <script>
     (function () {
       try {
-        if (localStorage.getItem('theme') === 'dark') {
+        if (document.documentElement.classList.contains('dark-mode') || localStorage.getItem('theme') === 'dark') {
           document.body.classList.add('dark-mode');
         }
       } catch (e) {}
@@ -57,7 +72,10 @@
       </div>
       <div class="nav-actions">
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Alternar modo de cor">
-          <span class="theme-icon" aria-hidden="true">🌙</span><span class="theme-text">Modo escuro</span>
+          <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+          <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+          <span class="theme-text theme-text-dark">Modo escuro</span>
+          <span class="theme-text theme-text-light">Modo claro</span>
         </button>
         <div class="toggle icon-menu" role="button" tabindex="0" aria-label="Abrir menu de navegação"></div>
         <div class="toggle icon-close" role="button" tabindex="0" aria-label="Fechar menu de navegação"></div>
@@ -73,9 +91,15 @@
       <div id="filial-info">
         <h2 id="filial-nome"></h2>
         <p id="filial-descricao"></p>
-        <p id="filial-responsavel" class="filial-responsavel-destaque"></p>
-        <div class="filial-professor-link-wrapper">
-          <a id="filial-professor-link" class="button" href="professor.html">Ver Perfil do Professor</a>
+        <!-- Cartão destacando o professor responsável pela filial -->
+        <div class="filial-professor-card" id="filial-professor-card">
+          <div class="filial-box-text">
+            <h3>Professor Responsável</h3>
+            <p id="filial-responsavel" class="filial-responsavel-destaque"></p>
+          </div>
+          <div class="filial-professor-link-wrapper">
+            <a id="filial-professor-link" class="button" href="professor.html">Ver Perfil do Professor</a>
+          </div>
         </div>
       </div>
     </section>
@@ -132,7 +156,6 @@
   </footer>
 
   <script src="main.js"></script>
-  <script src="theme.js"></script>
   <script>
     const filiais = {
       'jefferson-vilhena': {
@@ -454,7 +477,9 @@
       }
 
       if (professorLink && filial.professorId) {
-        professorLink.href = 'professor.html?id=' + encodeURIComponent(filial.professorId);
+        const isCleanUrl = !window.location.pathname.endsWith('.html');
+        const professorBase = isCleanUrl ? 'professor' : 'professor.html';
+        professorLink.href = professorBase + '?id=' + encodeURIComponent(filial.professorId);
         professorLink.textContent = 'Conhecer o Professor ' + (filial.professorNome || '');
       }
 

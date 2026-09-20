@@ -946,17 +946,20 @@ body.dark-mode .container1 .image::before {
   opacity: 0.3;
 }
 
+html.dark-mode .theme-toggle,
 body.dark-mode .theme-toggle {
   background-color: var(--base-color);
   color: var(--text-color-light);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
+html.dark-mode .theme-toggle:hover,
 body.dark-mode .theme-toggle:hover {
   background-color: var(--base-color-alt);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
 }
 
+html.dark-mode .theme-toggle:active,
 body.dark-mode .theme-toggle:active {
   transform: translateY(0);
 }
@@ -985,6 +988,31 @@ body.dark-mode .theme-toggle:active {
 .theme-toggle .theme-icon {
   font-size: 0.8rem;
   line-height: 1;
+}
+
+/* Transição e controle instantâneo de ícones e textos via CSS para evitar flash visual ao trocar de página */
+.theme-toggle .theme-icon-sun,
+.theme-toggle .theme-text-light {
+  display: none !important;
+}
+
+.theme-toggle .theme-icon-moon,
+.theme-toggle .theme-text-dark {
+  display: inline !important;
+}
+
+html.dark-mode .theme-toggle .theme-icon-moon,
+body.dark-mode .theme-toggle .theme-icon-moon,
+html.dark-mode .theme-toggle .theme-text-dark,
+body.dark-mode .theme-toggle .theme-text-dark {
+  display: none !important;
+}
+
+html.dark-mode .theme-toggle .theme-icon-sun,
+body.dark-mode .theme-toggle .theme-icon-sun,
+html.dark-mode .theme-toggle .theme-text-light,
+body.dark-mode .theme-toggle .theme-text-light {
+  display: inline !important;
 }
 
 .theme-toggle:hover {
@@ -1334,8 +1362,10 @@ body.dark-mode .theme-toggle:active {
 }
 
 @media (max-width: 360px) {
-  .theme-toggle .theme-text {
-    display: none;
+  .theme-toggle .theme-text,
+  .theme-toggle .theme-text-dark,
+  .theme-toggle .theme-text-light {
+    display: none !important;
   }
   .theme-toggle {
     padding: 0.25rem;

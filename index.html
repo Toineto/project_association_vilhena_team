@@ -6,12 +6,17 @@
   <script>
     (function () {
       try {
-        if (localStorage.getItem('theme') === 'dark') {
+        var theme = localStorage.getItem('theme');
+        if (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          theme = 'dark';
+        }
+        if (theme === 'dark') {
           document.documentElement.classList.add('dark-mode');
         }
       } catch (e) {}
     })();
   </script>
+  <script src="theme.js"></script>
   <!-- PAGE INFO -->
   <meta charset="UTF-8" />
   <link rel="icon" href="img/favicon.ico" />
@@ -37,7 +42,7 @@
   <script>
     (function () {
       try {
-        if (localStorage.getItem('theme') === 'dark') {
+        if (document.documentElement.classList.contains('dark-mode') || localStorage.getItem('theme') === 'dark') {
           document.body.classList.add('dark-mode');
         }
       } catch (e) {}
@@ -70,7 +75,10 @@
 
       <div class="nav-actions">
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Alternar modo de cor">
-          <span class="theme-icon" aria-hidden="true">🌙</span><span class="theme-text">Modo escuro</span>
+          <span class="theme-icon theme-icon-moon" aria-hidden="true">🌙</span>
+          <span class="theme-icon theme-icon-sun" aria-hidden="true">☀️</span>
+          <span class="theme-text theme-text-dark">Modo escuro</span>
+          <span class="theme-text theme-text-light">Modo claro</span>
         </button>
         <div class="toggle icon-menu" role="button" tabindex="0" aria-label="Abrir menu de navegação"></div>
         <div class="toggle icon-close" role="button" tabindex="0" aria-label="Fechar menu de navegação"></div>
@@ -619,9 +627,6 @@
 
   <!-- main.js -->
   <script src="main.js"></script>
-
-  <!-- theme.js -->
-  <script src="theme.js"></script>
 </body>
 
 </html>
