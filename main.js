@@ -1,20 +1,27 @@
 /*  abre e fecha o menu quando clicar no icone: hamburguer e x */
 const nav = document.querySelector('#header nav')
 const toggle = document.querySelectorAll('nav .toggle')
-
-for (const element of toggle) {
-  element.addEventListener('click', function () {
-    nav.classList.toggle('show')
-  })
-}
-
-/* quando clicar em um item do menu, esconder o menu */
 const links = document.querySelectorAll('nav ul li a')
 
-for (const link of links) {
-  link.addEventListener('click', function () {
-    nav.classList.remove('show')
-  })
+if (nav) {
+  for (const element of toggle) {
+    element.addEventListener('click', function () {
+      nav.classList.toggle('show')
+    })
+    element.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        nav.classList.toggle('show')
+      }
+    })
+  }
+
+  /* quando clicar em um item do menu, esconder o menu */
+  for (const link of links) {
+    link.addEventListener('click', function () {
+      nav.classList.remove('show')
+    })
+  }
 }
 
 /* mudar o header da página quando der scroll */

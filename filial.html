@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <!-- Anti-flash script de tema para evitar tela branca durante transição -->
-  <script>
-    (function () {
-      try {
-        if (localStorage.getItem('theme') === 'dark') {
-          document.documentElement.classList.add('dark-mode');
-        }
-      } catch (e) {}
-    })();
-  </script>
+  <!-- Page Info -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Filiais da Associação Equipe Vilhena Jiu-Jitsu" />
-  <title>Filial - Equipe Vilhena</title>
+  <title>Filial - Associação Equipe Vilhena Jiu-Jitsu</title>
+  <meta name="description" content="Conheça as filiais da Associação Equipe Vilhena Jiu-Jitsu, com professores responsáveis, horários de treino e localização." />
+  <link rel="icon" href="img/favicon.ico" />
 
+  <!-- Icons -->
   <link rel="stylesheet" href="assets/fonts/style.css" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="filiais.css" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
 </head>
 <body class="filial-page">
   <script>
@@ -32,6 +33,8 @@
       } catch (e) {}
     })();
   </script>
+
+  <!-- Header -->
   <header id="header">
     <nav class="container">
       <div class="nav-brand">
@@ -40,7 +43,7 @@
         </a>
         <a class="logo" href="index.html">
           <span class="logo-sub">Associação</span>
-          <span class="logo-title"><span>Equipe Vilhena</span> Jiu-jitsu</span>
+          <span class="logo-title"><span>Equipe Vilhena</span> Jiu-Jitsu</span>
         </a>
       </div>
       <div class="menu">
@@ -65,12 +68,15 @@
   <main>
     <!-- Sobre a filial -->
     <section id="sobre">
-      <img id="filial-hero" class="filial-hero" src="" alt="" />
+      <img id="filial-hero" class="filial-hero" src="img/vilhenamatriz.png" alt="Tatame da Filial Vilhena" />
       <h1 id="filial-nome-titulo">Filial</h1>
       <div id="filial-info">
         <h2 id="filial-nome"></h2>
         <p id="filial-descricao"></p>
-        <p id="filial-responsavel"></p>
+        <p id="filial-responsavel" class="filial-responsavel-destaque"></p>
+        <div class="filial-professor-link-wrapper">
+          <a id="filial-professor-link" class="button" href="professor.html">Ver Perfil do Professor</a>
+        </div>
       </div>
     </section>
 
@@ -83,7 +89,7 @@
 
         <h2>Endereço</h2>
         <p id="filial-endereco"></p>
-        <a id="filial-mapa-link" href="#" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        <a id="filial-mapa-link" class="button button-secondary" href="#" target="_blank" rel="noopener">Abrir no Google Maps</a>
 
         <div class="mapa-wrapper" id="filial-mapa-wrapper">
           <iframe
@@ -92,7 +98,8 @@
             style="border:0;"
             allowfullscreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Localização da Filial">
           </iframe>
         </div>
       </div>
@@ -109,7 +116,7 @@
     <!-- Contato -->
     <section id="contato">
       <h1>Contato</h1>
-      <p>Entre em contato pelo WhatsApp para falar diretamente com a equipe desta filial.</p>
+      <p>Entre em contato pelo WhatsApp para falar diretamente com a equipe e agendar sua aula experimental nesta filial.</p>
       <div class="info-contato">
         <h2>WhatsApp:</h2>
         <p id="filial-whatsapp-numero"></p>
@@ -128,80 +135,311 @@
   <script src="theme.js"></script>
   <script>
     const filiais = {
-      'filial-1': {
-        nome: 'Filial 1',
-        descricao: 'Preencha aqui uma descrição resumida desta filial (história, público, características).',
-        responsavel: 'Responsável: informe aqui o nome do professor responsável.',
+      'jefferson-vilhena': {
+        nome: 'Filial Matriz - Redenção (Prof. Jefferson Vilhena)',
+        professorId: 'jefferson-vilhena',
+        professorNome: 'Jefferson Vilhena',
+        hero: 'img/vilhenamatriz.png',
+        descricao: 'A sede oficial da Associação Equipe Vilhena Jiu-Jitsu. Estrutura de ponta com tatame amplo, vestiários completos e ambiente projetado para atletas de alto rendimento, famílias e iniciantes. O centro de graduações e encontros gerais de toda a nossa associação.',
+        responsavel: 'Professor Responsável: Jefferson Vilhena (Faixa Preta IV Grau - CBJJ 28972)',
         horarios: [
-          'Segunda e Quarta - 19h às 20h30 (Adulto)',
-          'Terça e Quinta - 18h às 19h (Kids)',
-          'Sábado - 9h às 11h (Treino livre)'
+          'Segunda a Sexta: 07h00 - 08h30 (Jiu-Jitsu Matinal)',
+          'Segunda, Quarta e Sexta: 18h00 - 19h00 (Kids - 5 a 12 anos)',
+          'Segunda a Sexta: 19h30 - 21h00 (Adulto Geral & Competição)',
+          'Terça e Quinta: 20h00 - 21h30 (No-Gi / Luta sem Kimono)',
+          'Sábado: 09h00 - 11h30 (Treino Livre Geral & Open Mat)'
         ],
-        endereco: 'Preencha aqui o endereço completo da filial 1.',
-        mapaEmbed: '',
+        endereco: 'Av. Brasil, 1420 - Centro, Redenção - PA, CEP 68550-000',
         galeria: [
           'img/vilhenamatriz.png',
-          'img/kids.jpg'
+          'img/professores/jeffersonVilhena.png',
+          'img/sobrenos.png'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
       },
-      'filial-2': {
-        nome: 'Filial 2',
-        descricao: 'Preencha aqui uma descrição resumida desta filial.',
-        responsavel: 'Responsável: informe aqui o nome do professor responsável.',
+      'adriano-padua': {
+        nome: 'Filial Alto Paraná (Prof. Adriano Pádua)',
+        professorId: 'adriano-padua',
+        professorNome: 'Adriano Pádua',
+        hero: 'img/instrutores.jpg',
+        descricao: 'Localizada no bairro Alto Paraná, esta filial destaca-se pelo ambiente acolhedor, disciplina técnica e turmas formatadas para quem busca saúde, condicionamento físico e defesa pessoal com máxima segurança.',
+        responsavel: 'Professor Responsável: Adriano Pádua (Faixa Preta III Grau - CBJJ 49860)',
         horarios: [
-          'Segunda, Quarta e Sexta - 18h às 19h30',
-          'Terça e Quinta - 19h às 20h30'
+          'Segunda, Quarta e Sexta: 06h30 - 07h45 (Adulto Todos os Níveis)',
+          'Terça e Quinta: 17h30 - 18h30 (Kids & Juvenil)',
+          'Segunda a Quinta: 19h00 - 20h30 (Adulto Avançado)',
+          'Sábado: 08h30 - 10h30 (Aulão Geral da Filial)'
         ],
-        endereco: 'Preencha aqui o endereço completo da filial 2.',
-        mapaEmbed: '',
+        endereco: 'Rua Santa Tereza, 450 - Bairro Alto Paraná, Redenção - PA',
         galeria: [
-          'img/sobrenos.png',
-          'img/kids.jpg'
+          'img/professores/Adriano.jpeg.png',
+          'img/vilhenamatriz.png',
+          'img/instrutores.jpg'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
       },
-      'filial-3': {
-        nome: 'Filial 3',
-        descricao: 'Preencha aqui uma descrição resumida desta filial.',
-        responsavel: 'Responsável: informe aqui o nome do professor responsável.',
+      'manoel-jeferson': {
+        nome: 'Filial Primavera (Prof. Manoel Jeferson)',
+        professorId: 'manoel-jeferson',
+        professorNome: 'Manoel Jeferson',
+        hero: 'img/sobrenos.png',
+        descricao: 'Unidade com forte foco no Jiu-Jitsu moderno, passagens de guarda dinâmicas e metodologia progressiva para novos praticantes. Oferece inclusive turmas especiais no horário de almoço.',
+        responsavel: 'Professor Responsável: Manoel Jeferson (Faixa Preta III Grau - CBJJ 248733)',
         horarios: [
-          'Segunda a Sexta - 20h às 21h30',
-          'Sábado - 8h às 10h'
+          'Segunda, Quarta e Sexta: 12h00 - 13h15 (Treino do Almoço)',
+          'Segunda a Sexta: 18h30 - 19h45 (Fundamentos & Iniciantes)',
+          'Segunda a Sexta: 20h00 - 21h30 (Adulto & Sparring)',
+          'Sábado: 10h00 - 12h00 (Open Mat)'
         ],
-        endereco: 'Preencha aqui o endereço completo da filial 3.',
-        mapaEmbed: '',
+        endereco: 'Av. Alacid Nunes, 820 - Jardim Primavera, Redenção - PA',
         galeria: [
-          'img/fundador.jpg',
-          'img/kids.jpg'
+          'img/professores/manoel-jeferson.jpeg.png',
+          'img/vilhenamatriz.png',
+          'img/sobrenos.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'wildbruno-costa': {
+        nome: 'Filial Santos Dumont (Prof. Wildbruno Costa)',
+        professorId: 'wildbruno-costa',
+        professorNome: 'Wildbruno Costa',
+        hero: 'img/instrutores.jpg',
+        descricao: 'Espaço dedicado à formação de competidores e ao desenvolvimento de jovens talentos. Com metodologia dinâmica e acompanhamento constante, a filial prepara atletas com espírito esportivo exemplar.',
+        responsavel: 'Professor Responsável: Wildbruno Costa (Faixa Preta III Grau - CBJJ 74673)',
+        horarios: [
+          'Segunda, Quarta e Sexta: 07h00 - 08h15 (Matinal)',
+          'Terça e Quinta: 18h00 - 19h15 (Kids & Jovens)',
+          'Segunda a Sexta: 19h45 - 21h15 (Adulto Geral)',
+          'Sábado: 09h00 - 11h00 (Sparring & Competição)'
+        ],
+        endereco: 'Rua 13 de Maio, 310 - Setor Santos Dumont, Redenção - PA',
+        galeria: [
+          'img/professores/wildbruno costa.png',
+          'img/vilhenamatriz.png',
+          'img/instrutores.jpg'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'jonas-santos': {
+        nome: 'Filial Bela Vista (Prof. Jonas Santos - Mutante)',
+        professorId: 'jonas-santos',
+        professorNome: 'Jonas Santos (Mutante)',
+        hero: 'img/vilhenamatriz.png',
+        descricao: 'Ambiente com energia contagiante, treinos de alta intensidade e ênfase no fortalecimento muscular, condicionamento e Jiu-Jitsu sem kimono (No-Gi). Ideal para quem busca superar desafios diários.',
+        responsavel: 'Professor Responsável: Jonas Santos - Mutante (Faixa Preta III Grau - CBJJ 74673)',
+        horarios: [
+          'Segunda a Sexta: 06h00 - 07h30 (Treino da Alvorada)',
+          'Terça e Quinta: 18h30 - 19h45 (No-Gi / Submission)',
+          'Segunda, Quarta e Sexta: 20h00 - 21h45 (Adulto Pesado Competição)',
+          'Sábado: 08h00 - 10h00 (Aulão Integrado)'
+        ],
+        endereco: 'Av. Araguaia, 1150 - Setor Bela Vista, Redenção - PA',
+        galeria: [
+          'img/professores/mutante.png',
+          'img/vilhenamatriz.png',
+          'img/sobrenos.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'cintia-suely': {
+        nome: 'Filial Central / Vilhena Mulher & Kids (Profa. Cintia Suely)',
+        professorId: 'cintia-suely',
+        professorNome: 'Cintia Suely',
+        hero: 'img/kids.jpg',
+        descricao: 'Unidade referência em acolhimento familiar, turmas exclusivas de Jiu-Jitsu Feminino e programas infantis especializados (Baby e Júnior). Um ambiente seguro, educativo e inspirador para mães, pais e filhos.',
+        responsavel: 'Professora Responsável: Cintia Suely (Faixa Preta II Grau - CBJJ 49308)',
+        horarios: [
+          'Segunda, Quarta e Sexta: 08h00 - 09h15 (Feminino Exclusivo)',
+          'Terça e Quinta: 16h30 - 17h30 (Kids Baby - 4 a 7 anos)',
+          'Terça e Quinta: 17h45 - 18h45 (Kids Júnior - 8 a 13 anos)',
+          'Segunda, Quarta e Sexta: 19h00 - 20h30 (Misto Adulto)',
+          'Sábado: 09h30 - 11h00 (Workshop de Defesa Pessoal Feminina)'
+        ],
+        endereco: 'Rua Marechal Rondon, 560 - Centro, Redenção - PA',
+        galeria: [
+          'img/kids.jpg',
+          'img/professores/cintia.png',
+          'img/vilhenamatriz.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'lucio-de-paula': {
+        nome: 'Filial Planalto (Prof. Lucio de Paula)',
+        professorId: 'lucio-de-paula',
+        professorNome: 'Lucio de Paula',
+        hero: 'img/sobrenos.png',
+        descricao: 'Com uma filosofia baseada na precisão e na tradição marcial, a Filial Planalto proporciona aulas onde a biomecânica e o respeito ao ritmo de cada praticante são as maiores prioridades.',
+        responsavel: 'Professor Responsável: Lucio de Paula (Faixa Preta II Grau - CBJJ 43779)',
+        horarios: [
+          'Segunda, Quarta e Sexta: 06h30 - 07h45 (Manhã)',
+          'Terça e Quinta: 18h00 - 19h15 (Fundamentos & Defesa Pessoal)',
+          'Segunda a Quinta: 19h30 - 21h00 (Adulto Avançado)',
+          'Sábado: 09h00 - 11h00 (Aulão Técnico)'
+        ],
+        endereco: 'Av. Central, 780 - Setor Planalto, Redenção - PA',
+        galeria: [
+          'img/professores/Lucio de Paula.png',
+          'img/vilhenamatriz.png',
+          'img/instrutores.jpg'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'famir-salmen': {
+        nome: 'Filial Serrinha (Prof. Famir Salmen)',
+        professorId: 'famir-salmen',
+        professorNome: 'Famir Salmen',
+        hero: 'img/vilhenamatriz.png',
+        descricao: 'Unidade reconhecida pela união dos atletas e pelo treinamento cardiovascular intenso. Espaço perfeito para quem quer queimar calorias, dominar a arte da autodefesa e conquistar a faixa preta.',
+        responsavel: 'Professor Responsável: Famir Salmen (Faixa Preta II Grau - CBJJ 159621)',
+        horarios: [
+          'Segunda, Quarta e Sexta: 17h00 - 18h00 (Kids)',
+          'Segunda a Sexta: 18h30 - 19h45 (Iniciantes)',
+          'Segunda a Sexta: 20h00 - 21h30 (Adulto & Master)',
+          'Sábado: 10h00 - 12h00 (Treino Livre de Randori)'
+        ],
+        endereco: 'Rua Frei Gil, 290 - Bairro Serrinha, Redenção - PA',
+        galeria: [
+          'img/professores/famir.jpeg.png',
+          'img/vilhenamatriz.png',
+          'img/sobrenos.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'luiz-carlos': {
+        nome: 'Filial Morada da Paz (Prof. Luiz Carlos)',
+        professorId: 'luiz-carlos',
+        professorNome: 'Luiz Carlos',
+        hero: 'img/instrutores.jpg',
+        descricao: 'Ambiente calmo e estruturado onde prevalece a aprendizagem meticulosa dos conceitos fundamentais de controle posicional, respiração e alavancas mecânicas.',
+        responsavel: 'Professor Responsável: Luiz Carlos (Faixa Preta II Grau - CBJJ 389805)',
+        horarios: [
+          'Segunda, Quarta e Sexta: 07h00 - 08h15 (Adulto)',
+          'Terça e Quinta: 17h45 - 18h45 (Juvenil)',
+          'Segunda a Sexta: 19h15 - 20h45 (Geral & Competição)',
+          'Sábado: 09h00 - 11h00 (Treino Aberto)'
+        ],
+        endereco: 'Av. Independência, 940 - Morada da Paz, Redenção - PA',
+        galeria: [
+          'img/professores/Luiz-carlos.png',
+          'img/vilhenamatriz.png',
+          'img/instrutores.jpg'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'gerson-nascimento': {
+        nome: 'Filial Vila Paulista (Prof. Gerson Nascimento)',
+        professorId: 'gerson-nascimento',
+        professorNome: 'Gerson Nascimento',
+        hero: 'img/vilhenamatriz.png',
+        descricao: 'Unidade moderna focada na rapidez de raciocínio no tatame, quedas adaptadas do Judô e passagens de guarda agressivas. Ideal para quem busca um ritmo dinâmico.',
+        responsavel: 'Professor Responsável: Gerson Nascimento (Faixa Preta - CBJJ 142716)',
+        horarios: [
+          'Segunda, Quarta e Sexta: 18h00 - 19h15 (Iniciantes)',
+          'Segunda, Quarta e Sexta: 19h30 - 21h00 (Adulto & Competição)',
+          'Terça e Quinta: 20h00 - 21h30 (No-Gi / Luta sem Kimono)',
+          'Sábado: 10h00 - 12h00 (Drills & Sparring)'
+        ],
+        endereco: 'Rua Rio Vermelho, 110 - Setor Vila Paulista, Redenção - PA',
+        galeria: [
+          'img/professores/Gerson.png',
+          'img/vilhenamatriz.png',
+          'img/sobrenos.png'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'fernando-mota': {
+        nome: 'Filial Setor Oeste (Prof. Fernando Mota)',
+        professorId: 'fernando-mota',
+        professorNome: 'Fernando Mota',
+        hero: 'img/sobrenos.png',
+        descricao: 'Voltada ao bem-estar integral e à transformação pessoal pelo esporte. Treinos planejados para aumentar a vitalidade física, autoconfiança e capacidade de defesa pessoal.',
+        responsavel: 'Professor Responsável: Fernando Mota (Faixa Preta - CBJJ 408011)',
+        horarios: [
+          'Segunda a Quinta: 18h30 - 19h45 (Turma Geral)',
+          'Segunda a Quinta: 20h00 - 21h30 (Avançados & Graduados)',
+          'Terça e Quinta: 06h30 - 07h45 (Manhã)',
+          'Sábado: 09h00 - 11h00 (Treino de Troca de Experiências)'
+        ],
+        endereco: 'Av. Brasil Sul, 320 - Setor Oeste, Redenção - PA',
+        galeria: [
+          'img/professores/fernando.png',
+          'img/vilhenamatriz.png',
+          'img/instrutores.jpg'
+        ],
+        whatsapp: '+5594984486969',
+        whatsappDisplay: '(94) 98448-6969'
+      },
+      'silas-silva': {
+        nome: 'Filial Novo Horizonte (Prof. Silas Silva)',
+        professorId: 'silas-silva',
+        professorNome: 'Silas Silva',
+        hero: 'img/instrutores.jpg',
+        descricao: 'Localizada no Setor Novo Horizonte, esta filial promove um tatame de respeito mútuo, técnica apurada e forte camaradagem entre os praticantes veteranos e iniciantes.',
+        responsavel: 'Professor Responsável: Silas Silva (Faixa Preta - CBJJ 127941)',
+        horarios: [
+          'Segunda, Quarta e Sexta: 07h00 - 08h15 (Manhã)',
+          'Terça e Quinta: 18h00 - 19h00 (Kids & Iniciação)',
+          'Segunda a Sexta: 19h30 - 21h00 (Adulto Geral)',
+          'Sábado: 08h30 - 10h30 (Aulão Integrado)'
+        ],
+        endereco: 'Rua Castelo Branco, 510 - Setor Novo Horizonte, Redenção - PA',
+        galeria: [
+          'img/professores/Silas.png',
+          'img/vilhenamatriz.png',
+          'img/sobrenos.png'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
       }
     };
 
-    function preencherFilial(filial) {
+    // Mapeamento de aliases antigos
+    const filialAliases = {
+      'filial-1': 'jefferson-vilhena',
+      'filial-2': 'adriano-padua',
+      'filial-3': 'manoel-jeferson',
+      'filial-jefferson-vilhena': 'jefferson-vilhena',
+      'filial-adriano-padua': 'adriano-padua',
+      'filial-manoel-jeferson': 'manoel-jeferson',
+      'filial-wildbruno-costa': 'wildbruno-costa',
+      'filial-jonas-santos': 'jonas-santos',
+      'filial-cintia-suely': 'cintia-suely',
+      'filial-lucio-de-paula': 'lucio-de-paula',
+      'filial-famir-salmen': 'famir-salmen',
+      'filial-luiz-carlos': 'luiz-carlos',
+      'filial-gerson-nascimento': 'gerson-nascimento',
+      'filial-fernando-mota': 'fernando-mota',
+      'filial-silas-silva': 'silas-silva'
+    };
+
+    function preencherPagina(filial) {
+      const hero = document.getElementById('filial-hero');
       const titulo = document.getElementById('filial-nome-titulo');
       const nome = document.getElementById('filial-nome');
       const descricao = document.getElementById('filial-descricao');
       const responsavel = document.getElementById('filial-responsavel');
-      const hero = document.getElementById('filial-hero');
-      const horariosLista = document.getElementById('filial-horarios');
-      const enderecoEl = document.getElementById('filial-endereco');
+      const horarios = document.getElementById('filial-horarios');
+      const endereco = document.getElementById('filial-endereco');
       const mapaLink = document.getElementById('filial-mapa-link');
       const mapa = document.getElementById('filial-mapa');
-      const mapaWrapper = document.getElementById('filial-mapa-wrapper');
       const galeria = document.getElementById('filial-galeria');
       const whatsappNumero = document.getElementById('filial-whatsapp-numero');
       const whatsappLink = document.getElementById('filial-whatsapp-link');
+      const professorLink = document.getElementById('filial-professor-link');
 
       if (!filial) {
         titulo.textContent = 'Filial não encontrada';
-        if (descricao) descricao.textContent = 'Não foi possível localizar as informações da filial. Volte à página inicial e tente novamente.';
-        if (mapaWrapper) mapaWrapper.style.display = 'none';
-        if (hero) hero.style.display = 'none';
+        descricao.textContent = 'Não foi possível localizar as informações desta filial. Volte à página inicial e selecione uma filial válida.';
         return;
       }
 
@@ -209,38 +447,40 @@
       nome.textContent = filial.nome;
       descricao.textContent = filial.descricao;
       responsavel.textContent = filial.responsavel;
-      enderecoEl.textContent = filial.endereco;
 
-      if (hero && filial.galeria && filial.galeria.length > 0) {
-        hero.src = filial.galeria[0];
-        hero.alt = 'Foto da ' + filial.nome;
-        hero.style.display = 'block';
-      } else if (hero) {
-        hero.style.display = 'none';
+      if (hero && filial.hero) {
+        hero.src = filial.hero;
+        hero.alt = 'Imagem da ' + filial.nome;
       }
 
-      horariosLista.innerHTML = '';
-      filial.horarios.forEach(function (h) {
-        const li = document.createElement('li');
-        li.textContent = h;
-        horariosLista.appendChild(li);
-      });
+      if (professorLink && filial.professorId) {
+        professorLink.href = 'professor.html?id=' + encodeURIComponent(filial.professorId);
+        professorLink.textContent = 'Conhecer o Professor ' + (filial.professorNome || '');
+      }
 
-      if (filial.endereco && mapaLink) {
+      if (horarios && Array.isArray(filial.horarios)) {
+        horarios.innerHTML = '';
+        filial.horarios.forEach(function (h) {
+          const li = document.createElement('li');
+          li.textContent = h;
+          horarios.appendChild(li);
+        });
+      }
+
+      if (endereco) {
+        endereco.textContent = filial.endereco;
+      }
+
+      if (mapaLink) {
         mapaLink.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(filial.endereco);
-        mapaLink.style.display = 'inline-block';
-      } else if (mapaLink) {
-        mapaLink.style.display = 'none';
+        mapaLink.textContent = 'Abrir no Google Maps (' + filial.endereco.split('-')[0].trim() + ')';
       }
 
-      if (filial.mapaEmbed && mapa) {
-        mapa.src = filial.mapaEmbed;
-        mapaWrapper.style.display = 'block';
-      } else if (mapaWrapper) {
-        mapaWrapper.style.display = 'none';
+      if (mapa) {
+        mapa.src = 'https://maps.google.com/maps?q=' + encodeURIComponent(filial.endereco) + '&t=&z=15&ie=UTF8&iwloc=&output=embed';
       }
 
-      if (galeria && filial.galeria) {
+      if (galeria && Array.isArray(filial.galeria)) {
         galeria.innerHTML = '';
         filial.galeria.forEach(function (src) {
           const img = document.createElement('img');
@@ -250,21 +490,27 @@
         });
       }
 
-      whatsappNumero.textContent = filial.whatsappDisplay;
-      const mensagem = encodeURIComponent('Oi, gostaria de saber mais sobre os treinos na ' + filial.nome + '.');
-      whatsappLink.href = 'https://api.whatsapp.com/send?phone=' + filial.whatsapp + '&text=' + mensagem;
-      whatsappLink.textContent = 'Chamar no WhatsApp';
+      if (whatsappNumero) {
+        whatsappNumero.textContent = filial.whatsappDisplay;
+      }
+      if (whatsappLink) {
+        const mensagem = encodeURIComponent('Oi! Gostaria de saber mais sobre os treinos na ' + filial.nome + ' da Equipe Vilhena.');
+        whatsappLink.href = 'https://api.whatsapp.com/send?phone=' + filial.whatsapp + '&text=' + mensagem;
+        whatsappLink.textContent = 'Chamar no WhatsApp ' + filial.whatsappDisplay;
+      }
 
-      document.title = filial.nome + ' - Equipe Vilhena';
+      document.title = filial.nome + ' - Associação Equipe Vilhena Jiu-Jitsu';
     }
 
     (function () {
       const params = new URLSearchParams(window.location.search);
-      const id = params.get('id');
+      let id = params.get('id') || 'jefferson-vilhena';
+      if (filialAliases[id]) {
+        id = filialAliases[id];
+      }
       const filial = filiais[id];
-      preencherFilial(filial || filiais['filial-1']);
+      preencherPagina(filial || filiais['jefferson-vilhena']);
     })();
   </script>
 </body>
 </html>
-

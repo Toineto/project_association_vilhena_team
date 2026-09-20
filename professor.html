@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <!-- Anti-flash script de tema para evitar tela branca durante transição -->
-  <script>
-    (function () {
-      try {
-        if (localStorage.getItem('theme') === 'dark') {
-          document.documentElement.classList.add('dark-mode');
-        }
-      } catch (e) {}
-    })();
-  </script>
+  <!-- Page Info -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Página do professor da Associação Equipe Vilhena Jiu-Jitsu" />
-  <title>Professor - Equipe Vilhena</title>
+  <title>Professor - Associação Equipe Vilhena Jiu-Jitsu</title>
+  <meta name="description" content="Conheça nossos professores graduados e experientes na Associação Equipe Vilhena Jiu-Jitsu." />
+  <link rel="icon" href="img/favicon.ico" />
 
-  <!-- Estilos principais do site -->
+  <!-- Icons -->
+  <link rel="stylesheet" href="assets/fonts/style.css" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
-  <!-- Layout de página com sobre, treino, galeria e contato (reaproveitado de filiais) -->
+  <link rel="stylesheet" href="professores.css" />
   <link rel="stylesheet" href="filiais.css" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
 </head>
 <body class="professor-page">
   <script>
@@ -31,6 +34,8 @@
       } catch (e) {}
     })();
   </script>
+
+  <!-- Header -->
   <header id="header">
     <nav class="container">
       <div class="nav-brand">
@@ -39,7 +44,7 @@
         </a>
         <a class="logo" href="index.html">
           <span class="logo-sub">Associação</span>
-          <span class="logo-title"><span>Equipe Vilhena</span> Jiu-jitsu</span>
+          <span class="logo-title"><span>Equipe Vilhena</span> Jiu-Jitsu</span>
         </a>
       </div>
       <div class="menu">
@@ -79,6 +84,15 @@
       <h1>Endereço / Local de Treino</h1>
       <div class="info-treino">
         <p id="professor-endereco"></p>
+
+        <!-- Cartão destacando a filial sob responsabilidade do professor -->
+        <div class="professor-filial-card" id="professor-filial-card">
+          <div class="filial-box-text">
+            <h3>Filial Sob Responsabilidade</h3>
+            <p id="professor-filial-nome">Filial Matriz Redenção</p>
+          </div>
+          <a id="professor-filial-link" href="filial.html" class="button">Ver Filial e Horários</a>
+        </div>
       </div>
     </section>
 
@@ -116,13 +130,15 @@
         nome: 'Jefferson Vilhena',
         graduacao: 'Faixa preta IV Grau.',
         registro: 'Registro CBJJ: 28972.',
-        bio: 'Preencha aqui o histórico do professor Jefferson Vilhena.',
+        bio: 'Fundador e líder da Associação Equipe Vilhena Jiu-Jitsu. Com mais de duas décadas dedicadas ao tatame, formou dezenas de faixas pretas e campeões estaduais e nacionais. É referência em técnica refinada, filosofia marcial e desenvolvimento comunitário no Pará.',
         foto: 'img/professores/jeffersonVilhena.png',
-        endereco: 'Preencha aqui o endereço da academia do professor Jefferson Vilhena.',
+        endereco: 'Av. Brasil, 1420 - Centro, Redenção - PA, CEP 68550-000',
+        filialId: 'jefferson-vilhena',
+        filialNome: 'Filial Matriz - Redenção (Prof. Jefferson Vilhena)',
         galeria: [
           'img/professores/jeffersonVilhena.png',
-          'img/professores/jeffersonVilhena.png',
-          'img/professores/jeffersonVilhena.png'
+          'img/vilhenamatriz.png',
+          'img/sobrenos.png'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
@@ -131,13 +147,15 @@
         nome: 'Adriano Pádua',
         graduacao: 'Faixa preta III Grau.',
         registro: 'Registro CBJJ: 49860.',
-        bio: 'Preencha aqui o histórico do professor Adriano Pádua.',
+        bio: 'Professor com sólida trajetória competitiva e pedagógica no Jiu-Jitsu. Dedica-se com excelência ao refinamento das técnicas fundamentais, transições dinâmicas e preparação física e mental de praticantes de todas as idades.',
         foto: 'img/professores/Adriano.jpeg.png',
-        endereco: 'Preencha aqui o endereço da academia do professor Adriano Pádua.',
+        endereco: 'Rua Santa Tereza, 450 - Bairro Alto Paraná, Redenção - PA',
+        filialId: 'adriano-padua',
+        filialNome: 'Filial Alto Paraná (Prof. Adriano Pádua)',
         galeria: [
           'img/professores/Adriano.jpeg.png',
-          'img/professores/Adriano.jpeg.png',
-          'img/professores/Adriano.jpeg.png'
+          'img/vilhenamatriz.png',
+          'img/instrutores.jpg'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
@@ -146,13 +164,15 @@
         nome: 'Manoel Jeferson',
         graduacao: 'Faixa preta III Grau.',
         registro: 'Registro CBJJ: 248733.',
-        bio: 'Preencha aqui o histórico do professor Manoel Jeferson.',
+        bio: 'Referência em metodologia didática e Jiu-Jitsu moderno. Especialista no jogo dinâmico de guarda, passagens de pressão e treinamento personalizado para quem busca saúde, disciplina ou alta performance nos tatames.',
         foto: 'img/professores/manoel-jeferson.jpeg.png',
-        endereco: 'Preencha aqui o endereço da academia do professor Manoel Jeferson.',
+        endereco: 'Av. Alacid Nunes, 820 - Jardim Primavera, Redenção - PA',
+        filialId: 'manoel-jeferson',
+        filialNome: 'Filial Primavera (Prof. Manoel Jeferson)',
         galeria: [
           'img/professores/manoel-jeferson.jpeg.png',
-          'img/professores/manoel-jeferson.jpeg.png',
-          'img/professores/manoel-jeferson.jpeg.png'
+          'img/sobrenos.png',
+          'img/vilhenamatriz.png'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
@@ -161,28 +181,32 @@
         nome: 'Wildbruno Costa',
         graduacao: 'Faixa preta III Grau.',
         registro: 'Registro CBJJ: 74673.',
-        bio: 'Preencha aqui o histórico do professor Wildbruno Costa.',
+        bio: 'Campeão regional com vasta experiência em torneios oficiais e formação de equipes competitivas. Seu trabalho se destaca pela disciplina tática, espírito de equipe e motivação constante aos novos alunos.',
         foto: 'img/professores/wildbruno costa.png',
-        endereco: 'Preencha aqui o endereço da academia do professor Wildbruno Costa.',
+        endereco: 'Rua 13 de Maio, 310 - Setor Santos Dumont, Redenção - PA',
+        filialId: 'wildbruno-costa',
+        filialNome: 'Filial Santos Dumont (Prof. Wildbruno Costa)',
         galeria: [
           'img/professores/wildbruno costa.png',
-          'img/professores/wildbruno costa.png',
-          'img/professores/wildbruno costa.png'
+          'img/instrutores.jpg',
+          'img/vilhenamatriz.png'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
       },
       'jonas-santos': {
-        nome: 'Jonas Santos',
+        nome: 'Jonas Santos (Mutante)',
         graduacao: 'Faixa preta III Grau.',
         registro: 'Registro CBJJ: 74673.',
-        bio: 'Preencha aqui o histórico do professor Jonas Santos.',
+        bio: 'Conhecido amplamente nos tatames pelo apelido "Mutante". Reconhecido por sua força, excelente preparo físico e domínio técnico de finalizações rápidas, além de ministrar treinos intensos com total foco em segurança.',
         foto: 'img/professores/mutante.png',
-        endereco: 'Preencha aqui o endereço da academia do professor Jonas Santos.',
+        endereco: 'Av. Araguaia, 1150 - Setor Bela Vista, Redenção - PA',
+        filialId: 'jonas-santos',
+        filialNome: 'Filial Bela Vista (Prof. Jonas Santos - Mutante)',
         galeria: [
           'img/professores/mutante.png',
-          'img/professores/mutante.png',
-          'img/professores/mutante.png'
+          'img/vilhenamatriz.png',
+          'img/sobrenos.png'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
@@ -191,13 +215,15 @@
         nome: 'Cintia Suely',
         graduacao: 'Faixa preta II Grau.',
         registro: 'Registro CBJJ: 49308.',
-        bio: 'Preencha aqui o histórico da professora Cintia Suely.',
+        bio: 'Pioneira do Jiu-Jitsu feminino na região e coordenadora dos programas infanto-juvenis da Equipe Vilhena. Especialista em pedagogia desportiva, defesa pessoal para mulheres e formação de valores em crianças e jovens.',
         foto: 'img/professores/cintia.png',
-        endereco: 'Preencha aqui o endereço da academia da professora Cintia Suely.',
+        endereco: 'Rua Marechal Rondon, 560 - Centro, Redenção - PA',
+        filialId: 'cintia-suely',
+        filialNome: 'Filial Central / Vilhena Mulher & Kids (Profa. Cintia Suely)',
         galeria: [
           'img/professores/cintia.png',
-          'img/professores/cintia.png',
-          'img/professores/cintia.png'
+          'img/kids.jpg',
+          'img/vilhenamatriz.png'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
@@ -206,13 +232,15 @@
         nome: 'Lucio de Paula',
         graduacao: 'Faixa preta II Grau.',
         registro: 'Registro CBJJ: 43779.',
-        bio: 'Preencha aqui o histórico do professor Lucio de Paula.',
+        bio: 'Professor focado nas raízes do Jiu-Jitsu tradicional e na correta biomecânica corporal de cada movimento. Sua pedagogia paciente acolhe alunos iniciantes, promovendo evolução técnica com consistência e longevidade.',
         foto: 'img/professores/Lucio de Paula.png',
-        endereco: 'Preencha aqui o endereço da academia do professor Lucio de Paula.',
+        endereco: 'Av. Central, 780 - Setor Planalto, Redenção - PA',
+        filialId: 'lucio-de-paula',
+        filialNome: 'Filial Planalto (Prof. Lucio de Paula)',
         galeria: [
           'img/professores/Lucio de Paula.png',
-          'img/professores/Lucio de Paula.png',
-          'img/professores/Lucio de Paula.png'
+          'img/vilhenamatriz.png',
+          'img/instrutores.jpg'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
@@ -221,13 +249,15 @@
         nome: 'Famir Salmen',
         graduacao: 'Faixa preta II Grau.',
         registro: 'Registro CBJJ: 159621.',
-        bio: 'Preencha aqui o histórico do professor Famir Salmen.',
+        bio: 'Com mais de 15 anos dedicados à arte suave, o professor Famir combina experiência tática de combate com atenção aos princípios éticos do esporte, formando atletas vitoriosos e cidadãos conscientes.',
         foto: 'img/professores/famir.jpeg.png',
-        endereco: 'Preencha aqui o endereço da academia do professor Famir Salmen.',
+        endereco: 'Rua Frei Gil, 290 - Bairro Serrinha, Redenção - PA',
+        filialId: 'famir-salmen',
+        filialNome: 'Filial Serrinha (Prof. Famir Salmen)',
         galeria: [
           'img/professores/famir.jpeg.png',
-          'img/professores/famir.jpeg.png',
-          'img/professores/famir.jpeg.png'
+          'img/vilhenamatriz.png',
+          'img/sobrenos.png'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
@@ -236,13 +266,15 @@
         nome: 'Luiz Carlos',
         graduacao: 'Faixa preta II Grau.',
         registro: 'Registro CBJJ: 389805.',
-        bio: 'Preencha aqui o histórico do professor Luiz Carlos.',
+        bio: 'Especialista em fundamentos clássicos de chão, raspagens eficientes e controle postural. Possui grande dedicação no suporte diário a novos atletas e praticantes da categoria Master.',
         foto: 'img/professores/Luiz-carlos.png',
-        endereco: 'Preencha aqui o endereço da academia do professor Luiz Carlos.',
+        endereco: 'Av. Independência, 940 - Morada da Paz, Redenção - PA',
+        filialId: 'luiz-carlos',
+        filialNome: 'Filial Morada da Paz (Prof. Luiz Carlos)',
         galeria: [
           'img/professores/Luiz-carlos.png',
-          'img/professores/Luiz-carlos.png',
-          'img/professores/Luiz-carlos.png'
+          'img/vilhenamatriz.png',
+          'img/instrutores.jpg'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
@@ -251,13 +283,15 @@
         nome: 'Gerson Nascimento',
         graduacao: 'Faixa preta.',
         registro: 'Registro CBJJ: 142716.',
-        bio: 'Preencha aqui o histórico do professor Gerson Nascimento.',
+        bio: 'Atleta dinâmico e professor dedicado ao aperfeiçoamento da velocidade, quedas e transições rápidas. Comanda turmas com energia vibrante, estimulando alunos a superarem seus próprios limites em cada treino.',
         foto: 'img/professores/Gerson.png',
-        endereco: 'Preencha aqui o endereço da academia do professor Gerson Nascimento.',
+        endereco: 'Rua Rio Vermelho, 110 - Setor Vila Paulista, Redenção - PA',
+        filialId: 'gerson-nascimento',
+        filialNome: 'Filial Vila Paulista (Prof. Gerson Nascimento)',
         galeria: [
           'img/professores/Gerson.png',
-          'img/professores/Gerson.png',
-          'img/professores/Gerson.png'
+          'img/vilhenamatriz.png',
+          'img/sobrenos.png'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
@@ -266,13 +300,15 @@
         nome: 'Fernando Mota',
         graduacao: 'Faixa preta.',
         registro: 'Registro CBJJ: 408011.',
-        bio: 'Preencha aqui o histórico do professor Fernando Mota.',
+        bio: 'Instrutor apaixonado pelo poder transformador do Jiu-Jitsu. Foca na construção da resiliência mental, no alívio do estresse do cotidiano e na autoconfiança de cada praticante que sobe no tatame.',
         foto: 'img/professores/fernando.png',
-        endereco: 'Preencha aqui o endereço da academia do professor Fernando Mota.',
+        endereco: 'Av. Brasil Sul, 320 - Setor Oeste, Redenção - PA',
+        filialId: 'fernando-mota',
+        filialNome: 'Filial Setor Oeste (Prof. Fernando Mota)',
         galeria: [
           'img/professores/fernando.png',
-          'img/professores/fernando.png',
-          'img/professores/fernando.png'
+          'img/vilhenamatriz.png',
+          'img/instrutores.jpg'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
@@ -281,20 +317,22 @@
         nome: 'Silas Silva',
         graduacao: 'Faixa preta.',
         registro: 'Registro CBJJ: 127941.',
-        bio: 'Preencha aqui o histórico do professor Silas Silva.',
+        bio: 'Professor de conduta exemplar, com foco na tradição, respeito mútuo e técnica minuciosa. Conduz aulas estruturadas que ensinam tanto a defesa pessoal prática quanto a filosofia do estilo de vida BJJ.',
         foto: 'img/professores/Silas.png',
-        endereco: 'Preencha aqui o endereço da academia do professor Silas Silva.',
+        endereco: 'Rua Castelo Branco, 510 - Setor Novo Horizonte, Redenção - PA',
+        filialId: 'silas-silva',
+        filialNome: 'Filial Novo Horizonte (Prof. Silas Silva)',
         galeria: [
           'img/professores/Silas.png',
-          'img/professores/Silas.png',
-          'img/professores/Silas.png'
+          'img/vilhenamatriz.png',
+          'img/sobrenos.png'
         ],
         whatsapp: '+5594984486969',
         whatsappDisplay: '(94) 98448-6969'
       }
     };
 
-    function preencherPagina(professor) {
+    function preencherPagina(professor, id) {
       const titulo = document.getElementById('professor-nome-titulo');
       const foto = document.getElementById('professor-foto');
       const nome = document.getElementById('professor-nome');
@@ -305,6 +343,8 @@
       const galeria = document.getElementById('galeria-fotos');
       const whatsappNumero = document.getElementById('professor-whatsapp-numero');
       const whatsappLink = document.getElementById('professor-whatsapp-link');
+      const filialNome = document.getElementById('professor-filial-nome');
+      const filialLink = document.getElementById('professor-filial-link');
 
       if (!professor) {
         titulo.textContent = 'Professor não encontrado';
@@ -323,29 +363,39 @@
       bio.textContent = professor.bio;
       endereco.textContent = professor.endereco;
 
-      if (galeria) {
+      if (filialNome && filialLink && professor.filialId) {
+        filialNome.textContent = professor.filialNome || ('Filial Prof. ' + professor.nome);
+        filialLink.href = 'filial.html?id=' + encodeURIComponent(professor.filialId);
+        filialLink.textContent = 'Conhecer ' + (professor.filialNome || 'Filial');
+      }
+
+      if (galeria && Array.isArray(professor.galeria)) {
         galeria.innerHTML = '';
         professor.galeria.forEach(function (src) {
           const img = document.createElement('img');
           img.src = src;
-          img.alt = 'Foto do professor ' + professor.nome;
+          img.alt = 'Foto da equipe e do professor ' + professor.nome;
           galeria.appendChild(img);
         });
       }
 
-      whatsappNumero.textContent = professor.whatsappDisplay;
-      const mensagem = encodeURIComponent('Oi, gostaria de falar com o professor ' + professor.nome + '.');
-      whatsappLink.href = 'https://api.whatsapp.com/send?phone=' + professor.whatsapp + '&text=' + mensagem;
-      whatsappLink.textContent = 'Chamar no WhatsApp ' + professor.whatsappDisplay;
+      if (whatsappNumero) {
+        whatsappNumero.textContent = professor.whatsappDisplay;
+      }
+      if (whatsappLink) {
+        const mensagem = encodeURIComponent('Oi, gostaria de mais informações com o professor ' + professor.nome + ' da Equipe Vilhena.');
+        whatsappLink.href = 'https://api.whatsapp.com/send?phone=' + professor.whatsapp + '&text=' + mensagem;
+        whatsappLink.textContent = 'Chamar no WhatsApp ' + professor.whatsappDisplay;
+      }
 
-      document.title = 'Professor ' + professor.nome + ' - Equipe Vilhena';
+      document.title = 'Professor ' + professor.nome + ' - Associação Equipe Vilhena Jiu-Jitsu';
     }
 
     (function () {
       const params = new URLSearchParams(window.location.search);
-      const id = params.get('id');
+      const id = params.get('id') || 'jefferson-vilhena';
       const professor = professores[id];
-      preencherPagina(professor || professores['jefferson-vilhena']);
+      preencherPagina(professor || professores['jefferson-vilhena'], id);
     })();
   </script>
 </body>

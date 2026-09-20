@@ -839,4 +839,182 @@ body.dark-mode .info-contato p {
   color: var(--text-color) !important;
 }
 
+/* --- Cartão de Filial na Página do Professor --- */
+.professor-filial-card {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: hsl(0 0% 98%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-left: 4px solid var(--base-color);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.filial-box-text h3 {
+  font-family: var(--title-font);
+  font-size: 1.15rem;
+  color: var(--title-color);
+  margin-bottom: 0.25rem;
+}
+
+.filial-box-text p {
+  margin-bottom: 0 !important;
+  color: var(--text-color);
+}
+
+.professor-filial-card .button,
+.filial-professor-link-wrapper .button {
+  background: var(--base-color);
+  color: var(--text-color-light);
+  padding: 0.75rem 1.5rem;
+  height: auto;
+  border-radius: 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.professor-filial-card .button:hover,
+.filial-professor-link-wrapper .button:hover {
+  background: var(--base-color-alt);
+  transform: translateY(-2px);
+}
+
+/* --- Cartão de Professor na Página da Filial --- */
+.filial-professor-link-wrapper {
+  margin-top: 1.25rem;
+}
+
+/* --- Grade de Filiais na Página Inicial --- */
+#filiais .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+#filiais .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.25rem 1.75rem;
+  text-align: left;
+  border-radius: 0.75rem;
+  border-bottom: 4px solid var(--base-color);
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#filiais .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+#filiais .card .filial-card-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--base-color);
+  background: rgba(220, 38, 38, 0.1);
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+}
+
+#filiais .card h3.title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--title-color);
+}
+
+#filiais .card .filial-prof-name {
+  font-weight: 600;
+  color: var(--title-color);
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+#filiais .card p.filial-address {
+  font-size: 0.875rem;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+#filiais .card .filial-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+#filiais .card .filial-card-actions .button {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  justify-content: center;
+}
+
+#filiais .card .filial-card-actions .btn-secondary {
+  background: transparent;
+  color: var(--base-color);
+  border: 1px solid var(--base-color);
+}
+
+#filiais .card .filial-card-actions .btn-secondary:hover {
+  background: rgba(220, 38, 38, 0.08);
+}
+
+/* Modo escuro para novos componentes */
+body.dark-mode .professor-filial-card,
+html.dark-mode .professor-filial-card {
+  background: hsl(0 0% 22%);
+  border: 1px solid hsl(0 0% 30%);
+  border-left: 4px solid var(--base-color);
+}
+
+body.dark-mode .filial-box-text h3,
+html.dark-mode .filial-box-text h3 {
+  color: var(--text-color-light);
+}
+
+body.dark-mode #filiais .card,
+html.dark-mode #filiais .card {
+  background: hsl(0 0% 18%);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  border-bottom: 4px solid var(--base-color);
+}
+
+body.dark-mode #filiais .card h3.title,
+html.dark-mode #filiais .card h3.title,
+body.dark-mode #filiais .card .filial-prof-name,
+html.dark-mode #filiais .card .filial-prof-name {
+  color: var(--text-color-light);
+}
+
+body.dark-mode #filiais .card .filial-card-actions .btn-secondary,
+html.dark-mode #filiais .card .filial-card-actions .btn-secondary {
+  color: var(--text-color-light);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+body.dark-mode #filiais .card .filial-card-actions .btn-secondary:hover,
+html.dark-mode #filiais .card .filial-card-actions .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+
 
