@@ -2,7 +2,7 @@
   "name": "project_association_vilhena_team",
   "version": "1.0.0",
   "description": "Bem-vindo ao repositório do site da Associação Equipe Vilhena Jiu-Jitsu! Este projeto consiste em um site informativo para uma associação dedicada à prática e ensino do Jiu-Jitsu. O site oferece informações sobre a associação, aulas, instrutores, eventos e contato.",
-  "main": "main.js",
+  "main": "server.js",
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
