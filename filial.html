@@ -152,7 +152,7 @@
   <button class="botao-voltar" onclick="location.href='index.html'">Voltar à Página Inicial</button>
 
   <footer>
-    <p>Equipe Vilhena &copy; 2023</p>
+    <p>Equipe Vilhena &copy; 2026</p>
   </footer>
 
   <script src="main.js"></script>
@@ -477,9 +477,7 @@
       }
 
       if (professorLink && filial.professorId) {
-        const isCleanUrl = !window.location.pathname.endsWith('.html');
-        const professorBase = isCleanUrl ? 'professor' : 'professor.html';
-        professorLink.href = professorBase + '?id=' + encodeURIComponent(filial.professorId);
+        professorLink.href = 'professor.html?id=' + encodeURIComponent(filial.professorId);
         professorLink.textContent = 'Conhecer o Professor ' + (filial.professorNome || '');
       }
 

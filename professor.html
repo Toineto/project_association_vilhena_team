@@ -137,7 +137,7 @@
   <button class="botao-voltar" onclick="location.href='index.html'">Voltar à Página Inicial</button>
 
   <footer>
-    <p>Equipe Vilhena &copy; 2023</p>
+    <p>Equipe Vilhena &copy; 2026</p>
   </footer>
 
   <script src="main.js"></script>
@@ -382,9 +382,7 @@
 
       if (filialNome && filialLink && professor.filialId) {
         filialNome.textContent = professor.filialNome || ('Filial Prof. ' + professor.nome);
-        const isCleanUrl = !window.location.pathname.endsWith('.html');
-        const filialBase = isCleanUrl ? 'filial' : 'filial.html';
-        filialLink.href = filialBase + '?id=' + encodeURIComponent(professor.filialId);
+        filialLink.href = 'filial.html?id=' + encodeURIComponent(professor.filialId);
         filialLink.textContent = 'Conhecer ' + (professor.filialNome || 'Filial');
       }
 

@@ -1,8 +1,0 @@
-# Ignore server files so Vercel deploys purely as a fast static site via Edge CDN
-server.js
-.firebaserc
-firebase.json
-app.yaml
-notas
-README.md
-.vscode
