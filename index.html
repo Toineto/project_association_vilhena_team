@@ -69,6 +69,7 @@
           <li><a class="title" href="#Instructors">Instrutores</a></li>
           <li><a class="title" href="#filiais">Filiais</a></li>
           <li><a class="title" href="#contact">Contatos</a></li>
+          <li><a class="title" href="painel.html" style="color: var(--base-color); font-weight: 700;">Área do Professor</a></li>
         </ul>
       </div>
       <!-- /menu -->
@@ -429,7 +430,7 @@
             <span class="filial-card-tag">Sede Matriz</span>
             <h3 class="title">Matriz Marabá</h3>
             <p class="filial-prof-name">Prof. Jefferson Vilhena (IV Grau)</p>
-            <p class="filial-address">Av. Brasil, 1420 - Centro, Redenção - PA</p>
+            <p class="filial-address">Folha 32, Quadra Especial, Lote 03 - Nova Marabá, Marabá - PA</p>
             <div class="filial-card-actions">
               <a href="filial.html?id=jefferson-vilhena" class="button">Ver Horários e Local</a>
               <a href="professor.html?id=jefferson-vilhena" class="button btn-secondary">Perfil do Professor</a>
@@ -589,7 +590,7 @@
         <div class="links">
           <ul class="grid">
             <li><i class="icon-phone"></i> 94 98448-6969</li>
-            <li><i class="icon-map-pin"></i> Endereço </li>
+            <li><i class="icon-map-pin"></i> Folha 32, Qd. Especial, Lt. 03 - Nova Marabá, Marabá - PA</li>
             <li><i class="icon-mail"></i> jeffersonvilhena@gmail.com</li>
           </ul>
         </div>
@@ -606,7 +607,7 @@
         <a class="logo logo-alt" href="#home">Associação<span> Equipe Vilhena </span>Jiu-Jitsu</a>
         <p>Jiu-Jitsu na luta pela qualidade de vida - <span>Professor Islander Souza.</span></p>
         <p>&copy; 2026 Associação Equipe Vilhena Jiu-Jitsu Todos os direitos reservados</p>
-        <p></p>
+        <p style="margin-top: 0.75rem;"><a href="painel.html" style="color: var(--base-color); font-weight: 600; text-decoration: underline;">Área do Professor - Fazer Login e Gerenciar Filial</a></p>
       </div>
 
       <div class="social grid">
@@ -625,8 +626,42 @@
   <!-- scrollreveal -->
   <script src="https://unpkg.com/scrollreveal"></script>
 
-  <!-- main.js -->
+  <!-- data-store.js & main.js -->
+  <script src="data-store.js"></script>
   <script src="main.js"></script>
+  <script>
+    // Sincroniza fotos e nomes customizados pelos professores no painel
+    (function () {
+      if (typeof VilhenaStore === 'undefined') return;
+      const mapping = [
+        { id: 'jefferson-vilhena', cardId: 'card-prof-jefferson' },
+        { id: 'adriano-padua', cardId: 'card-prof-adriano' },
+        { id: 'manoel-jeferson', cardId: 'card-prof-manoel' },
+        { id: 'wildbruno-costa', cardId: 'card-prof-wildbruno' },
+        { id: 'italo-fernandes', cardId: 'card-prof-italo' },
+        { id: 'luciano-duarte', cardId: 'card-prof-luciano' },
+        { id: 'marcelo-cardoso', cardId: 'card-prof-marcelo' },
+        { id: 'rodrigo-carvalho', cardId: 'card-prof-rodrigo' },
+        { id: 'ronieri-pina', cardId: 'card-prof-ronieri' },
+        { id: 'tiago-santos', cardId: 'card-prof-tiago' },
+        { id: 'marcos-alves', cardId: 'card-prof-marcos' },
+        { id: 'marcos-roberto', cardId: 'card-prof-marcos-roberto' }
+      ];
+
+      mapping.forEach(function (m) {
+        const prof = VilhenaStore.getProfessor(m.id);
+        const card = document.getElementById(m.cardId);
+        if (prof && card) {
+          const img = card.querySelector('img.professores_img');
+          const nameEl = card.querySelector('.professor__nome');
+          const gradEl = card.querySelector('.professor__graduacao--registro');
+          if (img && prof.foto) img.src = prof.foto;
+          if (nameEl && prof.nome) nameEl.textContent = prof.nome;
+          if (gradEl && prof.graduacao) gradEl.textContent = prof.graduacao;
+        }
+      });
+    })();
+  </script>
 </body>
 
 </html>

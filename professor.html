@@ -69,6 +69,7 @@
           <li><a class="title" href="#treino">Endereço / Treino</a></li>
           <li><a class="title" href="#galeria">Galeria</a></li>
           <li><a class="title" href="#contato">Contato</a></li>
+          <li><a class="title" href="painel.html" style="color: var(--base-color); font-weight: 700;">Área do Professor</a></li>
         </ul>
       </div>
       <div class="nav-actions">
@@ -141,6 +142,7 @@
   </footer>
 
   <script src="main.js"></script>
+  <script src="data-store.js"></script>
   <script>
     const professores = {
       'jefferson-vilhena': {
@@ -149,7 +151,7 @@
         registro: 'Registro CBJJ: 28972.',
         bio: 'Fundador e líder da Associação Equipe Vilhena Jiu-Jitsu. Com mais de duas décadas dedicadas ao tatame, formou dezenas de faixas pretas e campeões estaduais e nacionais. É referência em técnica refinada, filosofia marcial e desenvolvimento comunitário no Pará.',
         foto: 'img/professores/jeffersonVilhena.png',
-        endereco: 'Av. Brasil, 1420 - Centro, Redenção - PA, CEP 68550-000',
+        endereco: 'Folha 32, Quadra Especial, Lote 03 - Nova Marabá, Marabá - PA, CEP 68507-765',
         filialId: 'jefferson-vilhena',
         filialNome: 'Matriz Marabá (Prof. Jefferson Vilhena)',
         galeria: [
@@ -411,8 +413,8 @@
     (function () {
       const params = new URLSearchParams(window.location.search);
       const id = params.get('id') || 'jefferson-vilhena';
-      const professor = professores[id];
-      preencherPagina(professor || professores['jefferson-vilhena'], id);
+      const professor = (typeof VilhenaStore !== 'undefined' && VilhenaStore.getProfessor(id)) || professores[id] || professores['jefferson-vilhena'];
+      preencherPagina(professor, id);
     })();
   </script>
 </body>

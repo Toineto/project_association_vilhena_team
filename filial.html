@@ -68,6 +68,7 @@
           <li><a class="title" href="#treino">Treinos</a></li>
           <li><a class="title" href="#galeria">Galeria</a></li>
           <li><a class="title" href="#contato">Contato</a></li>
+          <li><a class="title" href="painel.html" style="color: var(--base-color); font-weight: 700;">Área do Professor</a></li>
         </ul>
       </div>
       <div class="nav-actions">
@@ -156,6 +157,7 @@
   </footer>
 
   <script src="main.js"></script>
+  <script src="data-store.js"></script>
   <script>
     const filiais = {
       'jefferson-vilhena': {
@@ -172,7 +174,7 @@
           'Terça e Quinta: 20h00 - 21h30 (No-Gi / Luta sem Kimono)',
           'Sábado: 09h00 - 11h30 (Treino Livre Geral & Open Mat)'
         ],
-        endereco: 'Av. Brasil, 1420 - Centro, Redenção - PA, CEP 68550-000',
+        endereco: 'Folha 32, Quadra Especial, Lote 03 - Nova Marabá, Marabá - PA, CEP 68507-765',
         galeria: [
           'img/vilhenamatriz.png',
           'img/professores/jeffersonVilhena.png',
@@ -531,8 +533,8 @@
       if (filialAliases[id]) {
         id = filialAliases[id];
       }
-      const filial = filiais[id];
-      preencherPagina(filial || filiais['jefferson-vilhena']);
+      const filial = (typeof VilhenaStore !== 'undefined' && VilhenaStore.getFilial(id)) || filiais[id] || filiais['jefferson-vilhena'];
+      preencherPagina(filial);
     })();
   </script>
 </body>

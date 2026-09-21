@@ -5,6 +5,21 @@ const app = express();
 const PORT = 3000;
 const HOST = '0.0.0.0';
 
+// Global Security Headers Middleware
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+
+  // Prevent caching of administrative panel to prevent credential or state leakage on shared browsers
+  if (req.path === '/painel' || req.path === '/painel.html') {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    res.setHeader('Pragma', 'no-cache');
+  }
+
+  next();
+});
+
 // Serve static files from root directory with clean HTML URLs support
 app.use(express.static(__dirname, {
   extensions: ['html'],
