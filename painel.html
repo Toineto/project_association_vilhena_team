@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <script src="theme.js"></script>
+  <!-- Informações da Página -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Área do Professor - Associação Equipe Vilhena Jiu-Jitsu</title>
   <meta name="description" content="Espaço exclusivo dos professores para gerenciamento de perfil, filial, fotos, horários e contatos." />
+  <meta property="og:title" content="Área do Professor - Associação Equipe Vilhena Jiu-Jitsu" />
+  <meta property="og:description" content="Espaço exclusivo dos professores para gerenciamento de perfil, filial, fotos, horários e contatos." />
+  <meta property="og:image" content="img/logo300px.png" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="img/logo300px.png" />
@@ -24,16 +29,6 @@
   />
 </head>
 <body class="painel-page">
-  <script>
-    (function () {
-      try {
-        if (document.documentElement.classList.contains('dark-mode') || localStorage.getItem('theme') === 'dark') {
-          document.body.classList.add('dark-mode');
-        }
-      } catch (e) {}
-    })();
-  </script>
-
   <!-- Header Superior Comum -->
   <header id="header">
     <nav class="container">
@@ -550,7 +545,6 @@
   <div id="toast-notice" class="toast-notice"></div>
 
   <!-- Scripts -->
-  <script src="theme.js"></script>
   <script src="data-store.js"></script>
   <script>
     // Estado local da página do painel
@@ -562,7 +556,6 @@
 
     // Inicialização ao carregar a página
     document.addEventListener('DOMContentLoaded', function () {
-      initTheme();
       checkAuthAndRender();
 
       const btnLogout = document.getElementById('btn-logout');

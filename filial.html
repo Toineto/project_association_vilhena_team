@@ -1,36 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <!-- Anti-flash script de tema para evitar tela branca e erro visual durante transição -->
-  <script>
-    (function () {
-      try {
-        var theme = localStorage.getItem('theme');
-        if (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          theme = 'dark';
-        }
-        if (theme === 'dark') {
-          document.documentElement.classList.add('dark-mode');
-        }
-      } catch (e) {}
-    })();
-  </script>
   <script src="theme.js"></script>
-  <!-- Page Info -->
+  <!-- Informações da Página -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Filial - Associação Equipe Vilhena Jiu-Jitsu</title>
   <meta name="description" content="Conheça as filiais da Associação Equipe Vilhena Jiu-Jitsu, com professores responsáveis, horários de treino e localização." />
+  <meta property="og:title" content="Filiais - Associação Equipe Vilhena Jiu-Jitsu" />
+  <meta property="og:description" content="Conheça as filiais da Associação Equipe Vilhena Jiu-Jitsu, com professores responsáveis, horários de treino e localização." />
+  <meta property="og:image" content="img/logo300px.png" />
   <link rel="icon" href="img/favicon.ico" />
 
-  <!-- Icons -->
+  <!-- Ícones -->
   <link rel="stylesheet" href="assets/fonts/style.css" />
 
-  <!-- Styles -->
+  <!-- Estilos -->
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="filiais.css" />
 
-  <!-- Fonts -->
+  <!-- Fontes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -39,16 +28,6 @@
   />
 </head>
 <body class="filial-page">
-  <script>
-    (function () {
-      try {
-        if (document.documentElement.classList.contains('dark-mode') || localStorage.getItem('theme') === 'dark') {
-          document.body.classList.add('dark-mode');
-        }
-      } catch (e) {}
-    })();
-  </script>
-
   <!-- Header -->
   <header id="header">
     <nav class="container">
