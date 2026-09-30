@@ -270,6 +270,7 @@
         <h3>Guiando com Paixão e Experiência no Caminho do Jiu-Jitsu</h3>
         <br />
       </header>
+
       <section class="proffessores__icone-titulo">
         <div class="image">
           <section class="professores_main">
@@ -406,7 +407,7 @@
           <h2 class="title">Nossas Filiais</h2>
           <p>Conheça as filiais oficiais da Associação Equipe Vilhena Jiu-Jitsu e encontre o tatame mais perto de você.</p>
         </header>
-        <div class="cards grid">
+        <div class="cards grid" id="grid-filiais">
           <!-- Filial 1 - Jefferson Vilhena -->
           <div class="card">
             <span class="filial-card-tag">Sede Matriz</span>
@@ -612,36 +613,155 @@
   <script src="data-store.js"></script>
   <script src="main.js"></script>
   <script>
-    // Sincroniza fotos e nomes customizados pelos professores no painel
+    // Sincroniza fotos e dados dos professores e renderiza novos cadastros
     (function () {
-      if (typeof VilhenaStore === 'undefined') return;
-      const mapping = [
-        { id: 'jefferson-vilhena', cardId: 'card-prof-jefferson' },
-        { id: 'adriano-padua', cardId: 'card-prof-adriano' },
-        { id: 'manoel-jeferson', cardId: 'card-prof-manoel' },
-        { id: 'wildbruno-costa', cardId: 'card-prof-wildbruno' },
-        { id: 'jonas-santos', cardId: 'card-prof-jonas' },
-        { id: 'cintia-suely', cardId: 'card-prof-cintia' },
-        { id: 'lucio-depaula', cardId: 'card-prof-lucio' },
-        { id: 'famir-salmen', cardId: 'card-prof-famir' },
-        { id: 'luiz-carlos', cardId: 'card-prof-luiz' },
-        { id: 'gerson-nascimento', cardId: 'card-prof-gerson' },
-        { id: 'fernando-mota', cardId: 'card-prof-fernando' },
-        { id: 'silas-silva', cardId: 'card-prof-silas' }
-      ];
+      function escapeHtml(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
 
-      mapping.forEach(function (m) {
-        const prof = VilhenaStore.getProfessor(m.id);
-        const card = document.getElementById(m.cardId);
-        if (prof && card) {
-          const img = card.querySelector('img.professores_img');
-          const nameEl = card.querySelector('.professor__nome');
-          const gradEl = card.querySelector('.professor__graduacao--registro');
-          if (img && prof.foto) img.src = prof.foto;
-          if (nameEl && prof.nome) nameEl.textContent = prof.nome;
-          if (gradEl && prof.graduacao) gradEl.textContent = prof.graduacao;
+      function syncAllData() {
+        if (typeof VilhenaStore === 'undefined') return;
+
+        const mapping = [
+          { id: 'jefferson-vilhena', cardId: 'card-prof-jefferson' },
+          { id: 'adriano-padua', cardId: 'card-prof-adriano' },
+          { id: 'manoel-jeferson', cardId: 'card-prof-manoel' },
+          { id: 'wildbruno-costa', cardId: 'card-prof-wildbruno' },
+          { id: 'jonas-santos', cardId: 'card-prof-jonas' },
+          { id: 'cintia-suely', cardId: 'card-prof-cintia' },
+          { id: 'lucio-depaula', cardId: 'card-prof-lucio' },
+          { id: 'famir-salmen', cardId: 'card-prof-famir' },
+          { id: 'luiz-carlos', cardId: 'card-prof-luiz' },
+          { id: 'gerson-nascimento', cardId: 'card-prof-gerson' },
+          { id: 'fernando-mota', cardId: 'card-prof-fernando' },
+          { id: 'silas-silva', cardId: 'card-prof-silas' }
+        ];
+
+        // 1. Atualiza e controla visibilidade dos 12 professores padrão
+        mapping.forEach(function (m) {
+          const prof = VilhenaStore.getProfessor(m.id);
+          const card = document.getElementById(m.cardId);
+          if (card) {
+            const isPublic = VilhenaStore.isProfessorPublico(m.id);
+            if (!isPublic) {
+              card.style.display = 'none';
+            } else {
+              card.style.display = '';
+              if (prof) {
+                const img = card.querySelector('img.professores_img');
+                const nameEl = card.querySelector('.professor__nome');
+                const gradEl = card.querySelector('.professor__graduacao--registro');
+                if (img && prof.foto) img.src = prof.foto;
+                if (nameEl && prof.nome) nameEl.textContent = prof.nome;
+                if (gradEl && prof.graduacao) gradEl.textContent = prof.graduacao;
+              }
+            }
+          }
+        });
+
+        // 2. Renderiza apenas novos professores devidamente aprovados e visíveis
+        const allProfessores = VilhenaStore.getProfessores();
+        const defaultProfIds = new Set(mapping.map(m => m.id).concat(['lucio-de-paula']));
+        const profContainer = document.querySelector('.professores');
+
+        if (profContainer) {
+          Object.keys(allProfessores).forEach(function (id) {
+            if (!defaultProfIds.has(id)) {
+              const prof = allProfessores[id];
+              const isPublic = VilhenaStore.isProfessorPublico(id);
+              let card = document.getElementById('card-prof-' + id);
+
+              if (!isPublic) {
+                if (card) card.remove();
+                return;
+              }
+
+              if (!prof || !prof.nome) return;
+
+              if (!card) {
+                card = document.createElement('div');
+                card.className = 'professores__conteudo';
+                card.id = 'card-prof-' + id;
+                profContainer.appendChild(card);
+              }
+
+              card.innerHTML = `
+                <img src="${prof.foto || 'img/professores/jeffersonVilhena.png'}" alt="Professor ${escapeHtml(prof.nome)}" class="professores_img" onerror="this.src='img/professores/jeffersonVilhena.png'">
+                <div class="professores__nome--graducao">
+                  <h3 class="professor__nome professor__none">${escapeHtml(prof.nome)}</h3>
+                  <p class="professor__graduacao--registro">${escapeHtml(prof.graduacao || 'Faixa preta')}</p>
+                  <p>${escapeHtml(prof.registro || 'Registro CBJJ')}</p>
+                  <a href="professor.html?id=${encodeURIComponent(id)}" class="button">Saiba Mais</a>
+                </div>
+              `;
+            }
+          });
         }
-      });
+
+        // 3. Renderiza apenas filiais aprovadas e visíveis
+        const allFiliais = VilhenaStore.getFiliais();
+        const defaultFilialIds = new Set([
+          'jefferson-vilhena', 'adriano-padua', 'manoel-jeferson', 'wildbruno-costa',
+          'jonas-santos', 'cintia-suely', 'lucio-de-paula', 'famir-salmen',
+          'luiz-carlos', 'gerson-nascimento', 'fernando-mota', 'silas-silva'
+        ]);
+        const filiaisGrid = document.getElementById('grid-filiais') || document.querySelector('#filiais .cards.grid');
+
+        if (filiaisGrid) {
+          // Filiais padrão
+          defaultFilialIds.forEach(function (defId) {
+            const card = document.querySelector(`#filiais a[href*="id=${defId}"]`);
+            if (card) {
+              const parentCard = card.closest('.card');
+              if (parentCard) {
+                parentCard.style.display = VilhenaStore.isFilialPublica(defId) ? '' : 'none';
+              }
+            }
+          });
+
+          // Novas filiais
+          Object.keys(allFiliais).forEach(function (id) {
+            if (!defaultFilialIds.has(id)) {
+              const filial = allFiliais[id];
+              const isPublic = VilhenaStore.isFilialPublica(id);
+              let card = document.getElementById('card-filial-' + id);
+
+              if (!isPublic) {
+                if (card) card.remove();
+                return;
+              }
+
+              if (!filial || !filial.nome) return;
+
+              if (!card) {
+                card = document.createElement('div');
+                card.className = 'card';
+                card.id = 'card-filial-' + id;
+                filiaisGrid.appendChild(card);
+              }
+
+              card.innerHTML = `
+                <span class="filial-card-tag">Nova Filial</span>
+                <h3 class="title">${escapeHtml(filial.nome)}</h3>
+                <p class="filial-prof-name">Prof. ${escapeHtml(filial.professorNome || '')}</p>
+                <p class="filial-address">${escapeHtml(filial.endereco || '')}</p>
+                <div class="filial-card-actions">
+                  <a href="filial.html?id=${encodeURIComponent(id)}" class="button">Ver Horários e Local</a>
+                  <a href="professor.html?id=${encodeURIComponent(id)}" class="button btn-secondary">Perfil do Professor</a>
+                </div>
+              `;
+            }
+          });
+        }
+      }
+
+      // Executa inicialmente e ouve eventos de atualização em tempo real
+      syncAllData();
+      window.addEventListener('vilhena:data-updated', syncAllData);
     })();
   </script>
 </body>

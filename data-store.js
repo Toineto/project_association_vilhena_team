@@ -559,22 +559,32 @@
     'filial-silas-silva': 'silas-silva'
   };
 
+  const memoryStore = {};
+
   function readJSON(key, fallback) {
     try {
-      const raw = localStorage.getItem(key);
-      if (!raw) return fallback;
-      return JSON.parse(raw);
-    } catch (err) {
-      console.warn('Erro ao ler armazenamento:', err);
-      return fallback;
+      if (typeof localStorage !== 'undefined' && localStorage) {
+        const raw = localStorage.getItem(key);
+        if (!raw) return fallback;
+        return JSON.parse(raw);
+      }
+    } catch (err) {}
+    if (Object.prototype.hasOwnProperty.call(memoryStore, key)) {
+      return memoryStore[key];
     }
+    return fallback;
   }
 
   function writeJSON(key, data) {
     try {
-      localStorage.setItem(key, JSON.stringify(data));
+      memoryStore[key] = data;
+      if (typeof localStorage !== 'undefined' && localStorage) {
+        localStorage.setItem(key, JSON.stringify(data));
+      }
       // Notifica outras abas/componentes sobre atualização
-      window.dispatchEvent(new CustomEvent('vilhena:data-updated', { detail: { key, timestamp: Date.now() } }));
+      if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function' && typeof CustomEvent !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('vilhena:data-updated', { detail: { key, timestamp: Date.now() } }));
+      }
       return true;
     } catch (err) {
       console.error('Erro ao salvar no armazenamento:', err);
@@ -619,7 +629,19 @@
       }
       const result = {};
       Object.keys(DEFAULT_PROFESSORES).forEach(function (id) {
-        result[id] = Object.assign({}, DEFAULT_PROFESSORES[id], custom[id] || {});
+        result[id] = Object.assign({
+          status: 'aprovado',
+          visivelNoSite: true
+        }, DEFAULT_PROFESSORES[id], custom[id] || {});
+      });
+      // Inclui novos professores cadastrados dinamicamente
+      Object.keys(custom).forEach(function (id) {
+        if (!result[id]) {
+          result[id] = Object.assign({
+            status: 'pendente',
+            visivelNoSite: false
+          }, custom[id]);
+        }
       });
       return result;
     },
@@ -641,7 +663,19 @@
       }
       const result = {};
       Object.keys(DEFAULT_FILIAIS).forEach(function (id) {
-        result[id] = Object.assign({}, DEFAULT_FILIAIS[id], custom[id] || {});
+        result[id] = Object.assign({
+          status: 'aprovado',
+          visivelNoSite: true
+        }, DEFAULT_FILIAIS[id], custom[id] || {});
+      });
+      // Inclui novas filiais cadastradas dinamicamente
+      Object.keys(custom).forEach(function (id) {
+        if (!result[id]) {
+          result[id] = Object.assign({
+            status: 'pendente',
+            visivelNoSite: false
+          }, custom[id]);
+        }
       });
       return result;
     },
@@ -652,6 +686,200 @@
       const cleanId = ALIASES[id] || id;
       const all = this.getFiliais();
       return all[cleanId] || null;
+    },
+
+    // Verifica se o usuário atual é o Mestre da Equipe (Jefferson Vilhena)
+    isMaster: function (id) {
+      if (!id) return false;
+      const cleanId = ALIASES[id] || id;
+      return cleanId === 'jefferson-vilhena';
+    },
+
+    // Verifica se o professor está aprovado e configurado para aparecer publicamente
+    isProfessorPublico: function (id) {
+      if (!id) return false;
+      const cleanId = ALIASES[id] || id;
+      const prof = this.getProfessor(cleanId);
+      if (!prof) return false;
+      return prof.status === 'aprovado' && prof.visivelNoSite !== false;
+    },
+
+    // Verifica se a filial está aprovada e configurada para aparecer publicamente
+    isFilialPublica: function (id) {
+      if (!id) return false;
+      const cleanId = ALIASES[id] || id;
+      const filial = this.getFilial(cleanId);
+      if (!filial) return false;
+      return filial.status === 'aprovado' && filial.visivelNoSite !== false;
+    },
+
+    // Controle de acesso à página pública do professor
+    canAccessProfessorPage: function (profId) {
+      if (!profId) return { allowed: false, isPreview: false, status: 'not_found' };
+      const cleanId = ALIASES[profId] || profId;
+      const prof = this.getProfessor(cleanId);
+      if (!prof) return { allowed: false, isPreview: false, status: 'not_found' };
+
+      const isPublic = this.isProfessorPublico(cleanId);
+      if (isPublic) {
+        return { allowed: true, isPreview: false, status: 'aprovado', professor: prof };
+      }
+
+      // Permite prévia se for o Mestre Jefferson Vilhena ou o próprio professor
+      const session = this.getCurrentSession();
+      if (session) {
+        if (this.isMaster(session.professorId)) {
+          return { allowed: true, isPreview: true, role: 'master', status: prof.status, professor: prof };
+        }
+        if (session.professorId === cleanId) {
+          return { allowed: true, isPreview: true, role: 'owner', status: prof.status, professor: prof };
+        }
+      }
+
+      return { allowed: false, isPreview: false, status: prof.status || 'pendente', professor: prof };
+    },
+
+    // Controle de acesso à página pública da filial
+    canAccessFilialPage: function (filialId) {
+      if (!filialId) return { allowed: false, isPreview: false, status: 'not_found' };
+      const cleanId = ALIASES[filialId] || filialId;
+      const filial = this.getFilial(cleanId);
+      if (!filial) return { allowed: false, isPreview: false, status: 'not_found' };
+
+      const isPublic = this.isFilialPublica(cleanId);
+      if (isPublic) {
+        return { allowed: true, isPreview: false, status: 'aprovado', filial: filial };
+      }
+
+      const session = this.getCurrentSession();
+      if (session) {
+        if (this.isMaster(session.professorId)) {
+          return { allowed: true, isPreview: true, role: 'master', status: filial.status, filial: filial };
+        }
+        if (session.professorId === cleanId) {
+          return { allowed: true, isPreview: true, role: 'owner', status: filial.status, filial: filial };
+        }
+      }
+
+      return { allowed: false, isPreview: false, status: filial.status || 'pendente', filial: filial };
+    },
+
+    // Retorna todos os cadastros pendentes de aprovação
+    getProfessoresPendentes: function () {
+      const all = this.getProfessores();
+      return Object.keys(all)
+        .filter(function (id) {
+          return all[id].status === 'pendente';
+        })
+        .map(function (id) {
+          return all[id];
+        });
+    },
+
+    // Retorna lista com todos os professores cadastrados (excluindo Jefferson Vilhena se desejar listar outros)
+    getTodosProfessoresLista: function () {
+      const all = this.getProfessores();
+      return Object.keys(all).map(function (id) {
+        return all[id];
+      });
+    },
+
+    // Mestre aprova cadastro do professor
+    aprovarProfessor: function (id) {
+      if (!id) return { success: false, message: 'ID do professor inválido.' };
+      const cleanId = ALIASES[id] || id;
+      const customProfs = readJSON(STORAGE_KEYS.PROFESSORES, {});
+      const customFiliais = readJSON(STORAGE_KEYS.FILIAIS, {});
+
+      const prof = this.getProfessor(cleanId);
+      if (!prof) return { success: false, message: 'Professor não encontrado.' };
+
+      customProfs[cleanId] = Object.assign({}, customProfs[cleanId] || prof, {
+        status: 'aprovado',
+        visivelNoSite: true,
+        aprovadoPor: 'Jefferson Vilhena',
+        aprovadoEm: Date.now()
+      });
+      writeJSON(STORAGE_KEYS.PROFESSORES, customProfs);
+
+      const filial = this.getFilial(cleanId);
+      if (filial) {
+        customFiliais[cleanId] = Object.assign({}, customFiliais[cleanId] || filial, {
+          status: 'aprovado',
+          visivelNoSite: true
+        });
+        writeJSON(STORAGE_KEYS.FILIAIS, customFiliais);
+      }
+
+      return {
+        success: true,
+        message: 'Professor ' + prof.nome + ' aprovado com sucesso! A página e a filial agora estão visíveis no site.'
+      };
+    },
+
+    // Mestre rejeita ou suspende cadastro do professor
+    rejeitarProfessor: function (id, motivo) {
+      if (!id) return { success: false, message: 'ID do professor inválido.' };
+      const cleanId = ALIASES[id] || id;
+      const customProfs = readJSON(STORAGE_KEYS.PROFESSORES, {});
+      const customFiliais = readJSON(STORAGE_KEYS.FILIAIS, {});
+
+      const prof = this.getProfessor(cleanId);
+      if (!prof) return { success: false, message: 'Professor não encontrado.' };
+
+      customProfs[cleanId] = Object.assign({}, customProfs[cleanId] || prof, {
+        status: 'rejeitado',
+        visivelNoSite: false,
+        motivoRejeicao: motivo || 'Cadastro não homologado pela Matriz'
+      });
+      writeJSON(STORAGE_KEYS.PROFESSORES, customProfs);
+
+      const filial = this.getFilial(cleanId);
+      if (filial) {
+        customFiliais[cleanId] = Object.assign({}, customFiliais[cleanId] || filial, {
+          status: 'rejeitado',
+          visivelNoSite: false
+        });
+        writeJSON(STORAGE_KEYS.FILIAIS, customFiliais);
+      }
+
+      return {
+        success: true,
+        message: 'Cadastro do professor ' + prof.nome + ' foi rejeitado.'
+      };
+    },
+
+    // Mestre alterna visibilidade pública da página no site
+    toggleVisibilidade: function (id, forcarVisivel) {
+      if (!id) return { success: false, message: 'ID do professor inválido.' };
+      const cleanId = ALIASES[id] || id;
+      const customProfs = readJSON(STORAGE_KEYS.PROFESSORES, {});
+      const customFiliais = readJSON(STORAGE_KEYS.FILIAIS, {});
+
+      const prof = this.getProfessor(cleanId);
+      if (!prof) return { success: false, message: 'Professor não encontrado.' };
+
+      const estadoAtual = prof.visivelNoSite !== false;
+      const novoEstado = (typeof forcarVisivel === 'boolean') ? forcarVisivel : !estadoAtual;
+
+      customProfs[cleanId] = Object.assign({}, customProfs[cleanId] || prof, {
+        visivelNoSite: novoEstado
+      });
+      writeJSON(STORAGE_KEYS.PROFESSORES, customProfs);
+
+      const filial = this.getFilial(cleanId);
+      if (filial) {
+        customFiliais[cleanId] = Object.assign({}, customFiliais[cleanId] || filial, {
+          visivelNoSite: novoEstado
+        });
+        writeJSON(STORAGE_KEYS.FILIAIS, customFiliais);
+      }
+
+      return {
+        success: true,
+        visivel: novoEstado,
+        message: novoEstado ? ('A página do Prof. ' + prof.nome + ' agora está visível no site!') : ('A página do Prof. ' + prof.nome + ' foi ocultada do site público.')
+      };
     },
 
     // Atualiza os dados de um professor
@@ -722,9 +950,211 @@
       return true;
     },
 
-    // Credenciais e Autenticação
+    // Credenciais e Autenticação (mescla credenciais padrão com novos professores)
     getCredenciais: function () {
-      return readJSON(STORAGE_KEYS.CREDENCIAIS, DEFAULT_CREDENCIAIS);
+      const custom = readJSON(STORAGE_KEYS.CREDENCIAIS, {});
+      return Object.assign({}, DEFAULT_CREDENCIAIS, custom);
+    },
+
+    // Gera identificador URL-friendly para novos professores
+    slugify: function (text) {
+      if (!text) return '';
+      return String(text)
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    },
+
+    // Verifica se um nome de usuário já está registrado
+    isUsernameAvailable: function (username) {
+      if (!username) return false;
+      const cleanUser = String(username).trim().toLowerCase();
+      const creds = this.getCredenciais();
+      for (const user of Object.keys(creds)) {
+        if (user.toLowerCase() === cleanUser) return false;
+      }
+      return true;
+    },
+
+    // Cadastra um novo professor com filial própria e credenciais de acesso
+    registerProfessor: function (dados) {
+      if (!dados) {
+        return { success: false, message: 'Dados de cadastro não informados.' };
+      }
+
+      const nome = sanitizeString((dados.nome || '').trim());
+      if (!nome || nome.length < 3) {
+        return { success: false, message: 'O nome completo do professor deve ter no mínimo 3 caracteres.' };
+      }
+
+      const rawUser = (dados.username || '').trim().toLowerCase();
+      const cleanUser = rawUser.replace(/[^a-z0-9._-]/g, '');
+      if (!cleanUser || cleanUser.length < 3) {
+        return { success: false, message: 'O usuário de acesso deve ter no mínimo 3 caracteres (apenas letras, números, ponto ou traço).' };
+      }
+
+      if (!this.isUsernameAvailable(cleanUser)) {
+        return { success: false, message: 'O usuário "' + cleanUser + '" já está em uso por outro professor. Escolha outro usuário.' };
+      }
+
+      const senha = dados.senha || '';
+      if (!senha || senha.length < 4) {
+        return { success: false, message: 'A senha de acesso deve ter no mínimo 4 caracteres.' };
+      }
+
+      const graduacao = sanitizeString((dados.graduacao || '').trim()) || 'Faixa preta';
+      const registro = sanitizeString((dados.registro || '').trim()) || 'Registro CBJJ: Em homologação';
+      const bio = sanitizeString((dados.bio || '').trim()) || 'Professor credenciado pela Associação Equipe Vilhena Jiu-Jitsu, dedicado ao ensino da arte suave, aperfeiçoamento técnico, disciplina e formação ética e física de seus alunos no tatame.';
+      const endereco = sanitizeString((dados.endereco || '').trim()) || 'Associação Equipe Vilhena Jiu-Jitsu';
+      const filialNome = sanitizeString((dados.filialNome || '').trim()) || ('Filial ' + nome.split(' ')[0] + ' (Prof. ' + nome + ')');
+      const whatsapp = sanitizeString((dados.whatsapp || '').trim()) || '+5594984486969';
+      const whatsappDisplay = sanitizeString((dados.whatsappDisplay || '').trim()) || '(94) 98448-6969';
+      const foto = dados.foto || 'img/professores/jeffersonVilhena.png';
+      const filialHero = dados.filialHero || 'img/vilhenamatriz.png';
+
+      // Gera ID único a partir do nome
+      let baseId = this.slugify(nome);
+      if (!baseId || baseId.length < 2) {
+        baseId = 'prof-' + cleanUser;
+      }
+      let id = baseId;
+      let counter = 1;
+      const allProfs = this.getProfessores();
+      while (allProfs[id]) {
+        counter++;
+        id = baseId + '-' + counter;
+      }
+
+      const galeria = (Array.isArray(dados.galeria) && dados.galeria.length > 0) ? dados.galeria : [
+        foto,
+        'img/vilhenamatriz.png',
+        'img/sobrenos.png'
+      ];
+
+      const horarios = (Array.isArray(dados.horarios) && dados.horarios.length > 0) ? dados.horarios : [
+        'Segunda a Sexta: 07h00 - 08h30 (Adulto Matinal)',
+        'Segunda, Quarta e Sexta: 18h30 - 19h30 (Kids & Juvenil)',
+        'Segunda a Sexta: 19h30 - 21h00 (Adulto Todos os Níveis)',
+        'Sábado: 09h00 - 11h00 (Treino Livre & Open Mat)'
+      ];
+
+      // 1. Objeto do Professor
+      const novoProfessor = {
+        id: id,
+        nome: nome,
+        graduacao: graduacao,
+        registro: registro,
+        bio: bio,
+        foto: foto,
+        endereco: endereco,
+        filialId: id,
+        filialNome: filialNome,
+        galeria: galeria,
+        whatsapp: whatsapp,
+        whatsappDisplay: whatsappDisplay,
+        criadoEm: Date.now(),
+        isCustom: true,
+        status: 'pendente', // 'pendente' | 'aprovado' | 'rejeitado'
+        visivelNoSite: false, // Só é visível após aprovação do Mestre Jefferson Vilhena
+        aprovadoPor: null,
+        aprovadoEm: null
+      };
+
+      // 2. Objeto da Filial
+      const novaFilial = {
+        id: id,
+        nome: filialNome,
+        professorId: id,
+        professorNome: nome,
+        hero: filialHero,
+        descricao: sanitizeString(dados.descricaoFilial || '') || ('Unidade oficial da Associação Equipe Vilhena Jiu-Jitsu, sob a responsabilidade do Professor ' + nome + ' (' + graduacao + '). Ambiente projetado para desenvolvimento técnico, disciplina, segurança e espírito de família.'),
+        responsavel: 'Professor Responsável: ' + nome + ' (' + graduacao + (registro ? ' - ' + registro : '') + ')',
+        horarios: horarios,
+        endereco: endereco,
+        galeria: galeria,
+        whatsapp: whatsapp,
+        whatsappDisplay: whatsappDisplay,
+        criadoEm: Date.now(),
+        isCustom: true,
+        status: 'pendente',
+        visivelNoSite: false
+      };
+
+      // Salva Professor
+      const customProfessores = readJSON(STORAGE_KEYS.PROFESSORES, {});
+      customProfessores[id] = novoProfessor;
+      writeJSON(STORAGE_KEYS.PROFESSORES, customProfessores);
+
+      // Salva Filial
+      const customFiliais = readJSON(STORAGE_KEYS.FILIAIS, {});
+      customFiliais[id] = novaFilial;
+      writeJSON(STORAGE_KEYS.FILIAIS, customFiliais);
+
+      // Salva Credenciais
+      const customCreds = readJSON(STORAGE_KEYS.CREDENCIAIS, {});
+      customCreds[cleanUser] = {
+        professorId: id,
+        senha: senha,
+        criadoEm: Date.now()
+      };
+      writeJSON(STORAGE_KEYS.CREDENCIAIS, customCreds);
+
+      // Efetua login imediatamente
+      const loginResult = this.login(cleanUser, senha);
+
+      return {
+        success: true,
+        message: 'Cadastro recebido com sucesso! O perfil está em análise e aguarda aprovação do Mestre Jefferson Vilhena para ser publicado no site oficial.',
+        professor: novoProfessor,
+        filial: novaFilial,
+        id: id,
+        username: cleanUser,
+        session: loginResult.session,
+        isPendente: true
+      };
+    },
+
+    // Exclui professor cadastrado dinamicamente e seus dados
+    deleteProfessor: function (id) {
+      if (!id) return false;
+      const cleanId = ALIASES[id] || id;
+      if (cleanId === 'jefferson-vilhena') return false; // Mestre não pode ser excluído
+
+      const customProfessores = readJSON(STORAGE_KEYS.PROFESSORES, {});
+      const customFiliais = readJSON(STORAGE_KEYS.FILIAIS, {});
+      const customCreds = readJSON(STORAGE_KEYS.CREDENCIAIS, {});
+
+      // Se for professor fundador padrão, oculta do site
+      if (DEFAULT_PROFESSORES[cleanId]) {
+        customProfessores[cleanId] = Object.assign({}, customProfessores[cleanId] || DEFAULT_PROFESSORES[cleanId], {
+          visivelNoSite: false,
+          status: 'rejeitado'
+        });
+        writeJSON(STORAGE_KEYS.PROFESSORES, customProfessores);
+        return true;
+      }
+
+      delete customProfessores[cleanId];
+      delete customFiliais[cleanId];
+
+      for (const [user, cred] of Object.entries(customCreds)) {
+        if (cred.professorId === cleanId) {
+          delete customCreds[user];
+        }
+      }
+
+      writeJSON(STORAGE_KEYS.PROFESSORES, customProfessores);
+      writeJSON(STORAGE_KEYS.FILIAIS, customFiliais);
+      writeJSON(STORAGE_KEYS.CREDENCIAIS, customCreds);
+
+      const session = this.getCurrentSession();
+      if (session && session.professorId === cleanId) {
+        this.logout();
+      }
+
+      return true;
     },
 
     // Proteção contra ataques de força bruta (Rate Limiting)
@@ -845,27 +1275,44 @@
       };
 
       try {
-        localStorage.setItem(STORAGE_KEYS.SESSAO, JSON.stringify(session));
+        if (typeof localStorage !== 'undefined' && localStorage) {
+          localStorage.setItem(STORAGE_KEYS.SESSAO, JSON.stringify(session));
+        }
       } catch (e) {}
+      memoryStore[STORAGE_KEYS.SESSAO] = session;
 
-      window.dispatchEvent(new CustomEvent('vilhena:auth-changed', { detail: { loggedIn: true, session: session } }));
+      if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function' && typeof CustomEvent !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('vilhena:auth-changed', { detail: { loggedIn: true, session: session } }));
+      }
 
       return { success: true, professor: professor, session: session };
     },
 
     logout: function () {
       try {
-        localStorage.removeItem(STORAGE_KEYS.SESSAO);
+        if (typeof localStorage !== 'undefined' && localStorage) {
+          localStorage.removeItem(STORAGE_KEYS.SESSAO);
+        }
       } catch (e) {}
-      window.dispatchEvent(new CustomEvent('vilhena:auth-changed', { detail: { loggedIn: false } }));
+      delete memoryStore[STORAGE_KEYS.SESSAO];
+
+      if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function' && typeof CustomEvent !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('vilhena:auth-changed', { detail: { loggedIn: false } }));
+      }
       return true;
     },
 
     getCurrentSession: function () {
       try {
-        const raw = localStorage.getItem(STORAGE_KEYS.SESSAO);
-        if (!raw) return null;
-        const session = JSON.parse(raw);
+        let session = null;
+        if (typeof localStorage !== 'undefined' && localStorage) {
+          const raw = localStorage.getItem(STORAGE_KEYS.SESSAO);
+          if (raw) session = JSON.parse(raw);
+        }
+        if (!session && memoryStore[STORAGE_KEYS.SESSAO]) {
+          session = memoryStore[STORAGE_KEYS.SESSAO];
+        }
+        if (!session) return null;
 
         // Validação de integridade e token
         if (!session || !session.professorId || !session.token) {

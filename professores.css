@@ -23,6 +23,57 @@
   line-height: 1.6;
 }
 
+/* Banner de Convite para Novos Professores */
+.banner-cadastro-prof {
+  max-width: 1120px;
+  width: calc(100% - 3rem);
+  margin: 0 auto 2.5rem auto;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.08) 0%, rgba(220, 38, 38, 0.02) 100%);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-sizing: border-box;
+}
+
+body.dark-mode .banner-cadastro-prof,
+html.dark-mode .banner-cadastro-prof {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.04) 100%);
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.banner-cadastro-prof-text h4 {
+  font-family: var(--title-font);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--title-color);
+  margin-bottom: 0.35rem;
+}
+
+.banner-cadastro-prof-text p {
+  font-size: 0.9375rem;
+  color: var(--text-color);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.banner-cadastro-prof .button {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .banner-cadastro-prof {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem 1.5rem;
+    gap: 1rem;
+  }
+}
+
 .proffessores__icone-titulo {
   display: flex;
   flex-direction: column;

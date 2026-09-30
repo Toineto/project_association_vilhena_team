@@ -61,12 +61,23 @@
       <div class="auth-card">
         <div class="auth-header">
           <img src="img/logo300px.png" alt="Equipe Vilhena" class="auth-logo" />
-          <h1 class="auth-title">Área do Professor</h1>
-          <p class="auth-subtitle">Acesse para gerenciar sua filial, horários, fotos da galeria, perfil e contatos.</p>
+          <h1 class="auth-title" id="auth-main-title">Área do Professor</h1>
+          <p class="auth-subtitle" id="auth-main-subtitle">Acesse para gerenciar sua filial ou cadastre-se para ter sua página oficial no site.</p>
+        </div>
+
+        <!-- Seletor de Modo: Login ou Cadastro -->
+        <div class="auth-tabs-segmented" role="tablist">
+          <button type="button" class="auth-segment-btn active" id="seg-btn-login" onclick="switchAuthMode('login')">
+            🔑 Já sou Professor (Entrar)
+          </button>
+          <button type="button" class="auth-segment-btn" id="seg-btn-register" onclick="switchAuthMode('register')">
+            🥋 Novo Professor (Cadastrar-se)
+          </button>
         </div>
 
         <div id="login-message" class="auth-message"></div>
 
+        <!-- FORMULÁRIO 1: LOGIN -->
         <form id="form-login" onsubmit="handleLoginSubmit(event)">
           <div class="form-group">
             <label for="login-username" class="form-label">Usuário de Acesso</label>
@@ -116,17 +127,237 @@
           <button type="submit" class="btn-submit" id="btn-entrar">
             Entrar no Painel
           </button>
+
+          <p class="auth-switch-note">
+            É novo professor da associação? <a href="javascript:void(0)" onclick="switchAuthMode('register')">Cadastre-se aqui e crie sua página</a>
+          </p>
+        </form>
+
+        <!-- FORMULÁRIO 2: CADASTRO DE NOVO PROFESSOR -->
+        <form id="form-register" style="display: none;" onsubmit="handleRegisterSubmit(event)">
+          <div class="reg-section-divider">👤 1. Identificação do Professor</div>
+
+          <!-- Prévia e Upload de Foto -->
+          <div class="reg-avatar-section">
+            <div class="reg-avatar-preview">
+              <img id="reg-avatar-preview-img" src="img/professores/jeffersonVilhena.png" alt="Prévia da foto de perfil" />
+            </div>
+            <div class="reg-avatar-upload">
+              <label class="form-label" style="margin-bottom: 0.15rem;">Foto Oficial de Perfil</label>
+              <button type="button" class="btn-upload-avatar" onclick="document.getElementById('reg-input-file').click()">
+                📷 Escolher Foto do Dispositivo
+              </button>
+              <input
+                type="file"
+                id="reg-input-file"
+                accept="image/*"
+                style="display:none;"
+                onchange="handleRegPhotoChange(event)"
+              />
+              <input type="hidden" id="reg-foto-data" value="img/professores/jeffersonVilhena.png" />
+              <span class="reg-avatar-hint">Formatos JPG ou PNG (otimização e recorte automático)</span>
+            </div>
+          </div>
+
+          <div class="form-row-2col">
+            <div class="form-group">
+              <label for="reg-nome" class="form-label">Nome Completo *</label>
+              <input
+                type="text"
+                id="reg-nome"
+                class="form-input"
+                placeholder="ex: Lucas Gabriel Mendes"
+                required
+                oninput="handleRegNameInput(this.value)"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="reg-username" class="form-label">Usuário de Acesso ao Painel *</label>
+              <input
+                type="text"
+                id="reg-username"
+                class="form-input"
+                placeholder="ex: lucas.mendes"
+                required
+                autocomplete="username"
+              />
+              <small style="font-size: 0.72rem; color: var(--text-color); opacity: 0.85;">Será usado para fazer login no painel</small>
+            </div>
+          </div>
+
+          <div class="form-row-2col">
+            <div class="form-group">
+              <label for="reg-graduacao" class="form-label">Graduação / Faixa *</label>
+              <select id="reg-graduacao" class="form-select" required onchange="handleRegGraduacaoChange(this.value)">
+                <option value="Faixa preta IV Grau">Faixa preta IV Grau</option>
+                <option value="Faixa preta III Grau">Faixa preta III Grau</option>
+                <option value="Faixa preta II Grau">Faixa preta II Grau</option>
+                <option value="Faixa preta I Grau">Faixa preta I Grau</option>
+                <option value="Faixa preta" selected>Faixa preta</option>
+                <option value="Faixa Marrom">Faixa Marrom (Instrutor)</option>
+                <option value="Faixa Coral (Mestre VII Grau)">Faixa Coral (Mestre VII Grau)</option>
+                <option value="outro">Outra Graduação...</option>
+              </select>
+              <input
+                type="text"
+                id="reg-graduacao-custom"
+                class="form-input"
+                placeholder="Digite sua faixa / graduação"
+                style="display:none; margin-top: 0.5rem;"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="reg-registro" class="form-label">Registro CBJJ / FPJJ</label>
+              <input
+                type="text"
+                id="reg-registro"
+                class="form-input"
+                placeholder="ex: Registro CBJJ: 421890"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-bio" class="form-label">Biografia e Filosofia Marcial</label>
+            <textarea
+              id="reg-bio"
+              class="form-textarea"
+              rows="3"
+              placeholder="Compartilhe seu tempo de tatame, histórico, conquistas e metodologia de ensino na Equipe Vilhena..."
+            ></textarea>
+          </div>
+
+          <div class="reg-section-divider">🏛️ 2. Dados da Sua Filial / Tatame</div>
+
+          <div class="form-group">
+            <label for="reg-filial-nome" class="form-label">Nome da Filial / Academia *</label>
+            <input
+              type="text"
+              id="reg-filial-nome"
+              class="form-input"
+              placeholder="ex: Filial Novo Progresso (Prof. Lucas Mendes)"
+              required
+            />
+          </div>
+
+          <div class="form-row-2col">
+            <div class="form-group">
+              <label for="reg-endereco" class="form-label">Endereço Completo do Tatame *</label>
+              <input
+                type="text"
+                id="reg-endereco"
+                class="form-input"
+                placeholder="ex: Av. Brasil, 450 - Centro, Redenção - PA"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="reg-whatsapp" class="form-label">WhatsApp para Contato *</label>
+              <input
+                type="text"
+                id="reg-whatsapp"
+                class="form-input"
+                placeholder="(94) 98448-6969"
+                required
+                oninput="handleFormatPhone(this)"
+              />
+            </div>
+          </div>
+
+          <div class="reg-section-divider">🔒 3. Definição de Senha de Acesso</div>
+
+          <div class="form-row-2col">
+            <div class="form-group">
+              <label for="reg-password" class="form-label">Senha *</label>
+              <div class="input-password-wrapper">
+                <input
+                  type="password"
+                  id="reg-password"
+                  class="form-input"
+                  placeholder="Mínimo 4 caracteres"
+                  required
+                  autocomplete="new-password"
+                />
+                <button
+                  type="button"
+                  class="btn-toggle-password"
+                  onclick="togglePasswordVisibilityField('reg-password')"
+                  title="Mostrar/ocultar senha"
+                >
+                  👁️
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-password-confirm" class="form-label">Confirmar Senha *</label>
+              <div class="input-password-wrapper">
+                <input
+                  type="password"
+                  id="reg-password-confirm"
+                  class="form-input"
+                  placeholder="Repita a senha"
+                  required
+                  autocomplete="new-password"
+                />
+                <button
+                  type="button"
+                  class="btn-toggle-password"
+                  onclick="togglePasswordVisibilityField('reg-password-confirm')"
+                  title="Mostrar/ocultar senha"
+                >
+                  👁️
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="btn-cadastrar-prof" style="margin-top: 1rem;">
+            🥋 Concluir Cadastro e Criar Minha Página
+          </button>
+
+          <p class="auth-switch-note">
+            Já possui cadastro? <a href="javascript:void(0)" onclick="switchAuthMode('login')">Fazer login agora</a>
+          </p>
         </form>
 
         <div class="auth-security-notice" id="auth-security-notice">
           <span>🛡️</span>
           <div>
-            <strong>Área Exclusiva para Professores Registrados</strong>
+            <strong>Área Exclusiva da Associação Equipe Vilhena Jiu-Jitsu</strong>
             <p style="margin: 0.25rem 0 0 0; font-size: 0.75rem; color: var(--text-color);">
-              Acesso exclusivo aos instrutores credenciados da Associação Equipe Vilhena Jiu-Jitsu. Tentativas não autorizadas são bloqueadas por segurança.
+              Professores e filiais credenciados recebem página pública personalizada no site oficial e painel para atualização de treinos, fotos e contatos.
             </p>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE SUCESSO DO CADASTRO (AGUARDANDO APROVAÇÃO) -->
+    <div id="modal-sucesso-cadastro" class="modal-overlay" style="display: none;">
+      <div class="modal-card">
+        <div class="modal-celebrate-icon">🥋⏳</div>
+        <h2 class="modal-title">Cadastro Enviado para Homologação!</h2>
+        <p class="modal-description">
+          Bem-vindo, <strong><span id="modal-novo-prof-nome"></span></strong>!
+          Seu cadastro foi recebido com sucesso pela Associação Equipe Vilhena Jiu-Jitsu.
+          O <strong>Mestre Jefferson Vilhena</strong> irá avaliar seu cadastro para aprovar a exibição da sua página e filial no site oficial.
+          Enquanto isso, você já pode acessar seu painel para personalizar fotos, horários e biografia!
+        </p>
+        <div class="modal-links-grid">
+          <a id="modal-btn-ver-perfil" href="#" target="_blank" class="modal-link-btn" style="background: #475569;">
+            👁️ Pré-visualizar Minha Página
+          </a>
+          <a id="modal-btn-ver-filial" href="#" target="_blank" class="modal-link-btn secondary">
+            🏛️ Pré-visualizar Minha Filial
+          </a>
+        </div>
+        <button type="button" class="btn-submit" style="margin-top: 0.5rem;" onclick="fecharModalSucesso()">
+          ⚙️ Acessar Meu Painel Agora
+        </button>
       </div>
     </div>
 
@@ -162,6 +393,22 @@
         </div>
       </div>
 
+      <!-- Banner de Destaque da Página Pública do Professor -->
+      <div id="dash-banner-public-page" class="banner-novo-professor">
+        <div class="banner-novo-professor-text">
+          <strong>🥋 Sua página pública e filial estão ativas no site!</strong>
+          <span style="opacity: 0.85; margin-left: 0.35rem;">Todas as edições feitas neste painel são salvas e sincronizadas automaticamente no site.</span>
+        </div>
+        <div class="banner-novo-professor-links">
+          <a id="banner-link-perfil" href="professor.html" target="_blank" class="modal-link-btn" style="padding: 0.4rem 0.85rem; font-size: 0.8125rem;">
+            🔗 Abrir Minha Página
+          </a>
+          <a id="banner-link-filial" href="filial.html" target="_blank" class="modal-link-btn secondary" style="padding: 0.4rem 0.85rem; font-size: 0.8125rem;">
+            🏛️ Abrir Minha Filial
+          </a>
+        </div>
+      </div>
+
       <!-- Navegação por Abas (com swipe e pills otimizados para mobile) -->
       <div class="tabs-nav-wrapper">
         <div class="tabs-nav" id="main-tabs-nav">
@@ -182,6 +429,10 @@
           </button>
           <button type="button" class="tab-btn" onclick="switchTab('tab-seguranca')">
             <span class="tab-icon">⚙️</span> <span class="tab-text">Segurança</span>
+          </button>
+          <button type="button" class="tab-btn tab-btn-master" id="tab-btn-aprovacoes" onclick="switchTab('tab-aprovacoes')" style="display: none;">
+            <span class="tab-icon">🛡️</span> <span class="tab-text">Aprovações &amp; Visibilidade</span>
+            <span class="badge-pendencias zero" id="badge-pendencias-count">0</span>
           </button>
         </div>
         <div class="tabs-scroll-indicator" aria-hidden="true">→</div>
@@ -523,6 +774,80 @@
           </div>
         </div>
 
+        <!-- ABA EXCLUSIVA DO MESTRE: APROVAÇÃO DE CADASTROS E CONTROLE DE VISIBILIDADE -->
+        <div id="tab-aprovacoes" class="tab-content">
+          <div class="section-intro">
+            <h3>🛡️ Gestão de Professores e Controle de Visibilidade</h3>
+            <p>Como Presidente da Associação Equipe Vilhena, você decide quais novos professores são aprovados e controla a exibição pública de qualquer página e filial no site oficial.</p>
+          </div>
+
+          <!-- Métricas Resumo -->
+          <div class="metrics-row">
+            <div class="metric-card">
+              <div class="metric-icon-box amber">⏳</div>
+              <div>
+                <div class="metric-value" id="stat-pendentes">0</div>
+                <div class="metric-label">Cadastros Pendentes</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon-box green">🥋</div>
+              <div>
+                <div class="metric-value" id="stat-visiveis">0</div>
+                <div class="metric-label">Páginas Ativas no Site</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon-box slate">⏸️</div>
+              <div>
+                <div class="metric-value" id="stat-ocultos">0</div>
+                <div class="metric-label">Páginas Ocultadas</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seção 1: Novos Cadastros Aguardando Aprovação -->
+          <div style="margin-bottom: 2.5rem;">
+            <div class="section-intro" style="margin-bottom: 1.25rem;">
+              <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--title-color); display: flex; align-items: center; gap: 0.5rem;">
+                ⏳ Novos Cadastros Aguardando Aprovação
+              </h4>
+              <p>Os novos professores só terão sua página e filial publicadas no site após você clicar em <strong>Aprovar e Publicar</strong>.</p>
+            </div>
+
+            <div id="container-pendentes" class="approval-list-container">
+              <!-- Renderizado via JavaScript -->
+            </div>
+          </div>
+
+          <!-- Seção 2: Controle de Exibição no Site (Todos os Professores) -->
+          <div class="visibility-card">
+            <div class="section-intro" style="margin-bottom: 1rem;">
+              <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--title-color); display: flex; align-items: center; gap: 0.5rem;">
+                🌐 Controle de Exibição no Site Oficial
+              </h4>
+              <p>Ative ou pause a exibição pública de qualquer professor e filial. Professores com a chave desativada não aparecerão nas listas do site.</p>
+            </div>
+
+            <div class="visibility-table-responsive">
+              <table class="vis-table">
+                <thead>
+                  <tr>
+                    <th>Professor</th>
+                    <th>Filial / Tatame</th>
+                    <th>Status</th>
+                    <th>Visível no Site?</th>
+                    <th style="text-align: right;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-professores-visibilidade">
+                  <!-- Renderizado via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
         <!-- Barra Inferior Fixa de Salvar -->
         <div class="sticky-save-bar">
           <div class="save-bar-container">
@@ -582,6 +907,215 @@
       }
     }
 
+    // Alternar entre modo de Login e Cadastro
+    function switchAuthMode(mode) {
+      const segLogin = document.getElementById('seg-btn-login');
+      const segReg = document.getElementById('seg-btn-register');
+      const formLogin = document.getElementById('form-login');
+      const formReg = document.getElementById('form-register');
+      const authCard = document.querySelector('.auth-card');
+      const authTitle = document.getElementById('auth-main-title');
+      const authSub = document.getElementById('auth-main-subtitle');
+      const msgBox = document.getElementById('login-message');
+      if (msgBox) msgBox.style.display = 'none';
+
+      if (mode === 'register') {
+        if (segLogin) segLogin.classList.remove('active');
+        if (segReg) segReg.classList.add('active');
+        if (formLogin) formLogin.style.display = 'none';
+        if (formReg) formReg.style.display = 'block';
+        if (authCard) authCard.classList.add('auth-card-wide');
+        if (authTitle) authTitle.textContent = 'Cadastro de Novo Professor';
+        if (authSub) authSub.textContent = 'Preencha os dados abaixo para publicar sua página de professor e o tatame da sua filial.';
+      } else {
+        if (segReg) segReg.classList.remove('active');
+        if (segLogin) segLogin.classList.add('active');
+        if (formReg) formReg.style.display = 'none';
+        if (formLogin) formLogin.style.display = 'block';
+        if (authCard) authCard.classList.remove('auth-card-wide');
+        if (authTitle) authTitle.textContent = 'Área do Professor';
+        if (authSub) authSub.textContent = 'Acesse para gerenciar sua filial ou cadastre-se para ter sua página oficial no site.';
+      }
+    }
+
+    // Auto-sugestão de usuário e filial a partir do nome
+    let usernameManuallyChanged = false;
+    document.addEventListener('DOMContentLoaded', function () {
+      const userInp = document.getElementById('reg-username');
+      if (userInp) {
+        userInp.addEventListener('input', function () {
+          usernameManuallyChanged = true;
+        });
+      }
+    });
+
+    function handleRegNameInput(nome) {
+      const userInp = document.getElementById('reg-username');
+      const filialInp = document.getElementById('reg-filial-nome');
+      const cleanNome = (nome || '').trim();
+
+      if (!cleanNome) return;
+
+      if (!usernameManuallyChanged && userInp) {
+        const parts = cleanNome
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9\s]/g, '')
+          .split(/\s+/);
+
+        if (parts.length >= 2) {
+          userInp.value = parts[0] + '.' + parts[parts.length - 1];
+        } else if (parts.length === 1) {
+          userInp.value = parts[0];
+        }
+      }
+
+      if (filialInp && (!filialInp.value || filialInp.dataset.auto === 'true')) {
+        filialInp.dataset.auto = 'true';
+        filialInp.value = 'Filial Prof. ' + cleanNome;
+      }
+    }
+
+    function handleRegGraduacaoChange(val) {
+      const customInp = document.getElementById('reg-graduacao-custom');
+      if (!customInp) return;
+      if (val === 'outro') {
+        customInp.style.display = 'block';
+        customInp.required = true;
+        customInp.focus();
+      } else {
+        customInp.style.display = 'none';
+        customInp.required = false;
+      }
+    }
+
+    function handleRegPhotoChange(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      VilhenaStore.compressImage(file, 800, 800, 0.85)
+        .then(function (dataUrl) {
+          const preview = document.getElementById('reg-avatar-preview-img');
+          const hidden = document.getElementById('reg-foto-data');
+          if (preview) preview.src = dataUrl;
+          if (hidden) hidden.value = dataUrl;
+          showToast('Foto processada com sucesso!', 'success');
+        })
+        .catch(function (err) {
+          showToast('Erro ao carregar foto: ' + err.message, 'error');
+        });
+    }
+
+    function handleFormatPhone(input) {
+      let v = input.value.replace(/\D/g, '');
+      if (v.length > 11) v = v.substring(0, 11);
+      if (v.length > 6) {
+        input.value = '(' + v.substring(0, 2) + ') ' + v.substring(2, 7) + '-' + v.substring(7);
+      } else if (v.length > 2) {
+        input.value = '(' + v.substring(0, 2) + ') ' + v.substring(2);
+      } else if (v.length > 0) {
+        input.value = '(' + v;
+      }
+    }
+
+    function togglePasswordVisibilityField(fieldId) {
+      const input = document.getElementById(fieldId);
+      if (!input) return;
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    // Submissão do Cadastro de Novo Professor
+    function handleRegisterSubmit(e) {
+      e.preventDefault();
+
+      const msgBox = document.getElementById('login-message');
+      const btn = document.getElementById('btn-cadastrar-prof');
+
+      const nome = document.getElementById('reg-nome').value.trim();
+      const username = document.getElementById('reg-username').value.trim().toLowerCase();
+      const graduacaoSelect = document.getElementById('reg-graduacao').value;
+      const graduacao = (graduacaoSelect === 'outro')
+        ? (document.getElementById('reg-graduacao-custom').value.trim() || 'Faixa preta')
+        : graduacaoSelect;
+      const registro = document.getElementById('reg-registro').value.trim();
+      const bio = document.getElementById('reg-bio').value.trim();
+      const filialNome = document.getElementById('reg-filial-nome').value.trim();
+      const endereco = document.getElementById('reg-endereco').value.trim();
+      const whatsappRaw = document.getElementById('reg-whatsapp').value.trim();
+      const pass = document.getElementById('reg-password').value;
+      const passConfirm = document.getElementById('reg-password-confirm').value;
+      const foto = document.getElementById('reg-foto-data').value || 'img/professores/jeffersonVilhena.png';
+
+      // Validações
+      if (pass !== passConfirm) {
+        msgBox.className = 'auth-message error';
+        msgBox.textContent = 'As senhas digitadas não coincidem. Digite a mesma senha em ambos os campos.';
+        msgBox.style.display = 'block';
+        showToast('As senhas não coincidem.', 'error');
+        document.getElementById('reg-password-confirm').focus();
+        return;
+      }
+
+      if (pass.length < 4) {
+        msgBox.className = 'auth-message error';
+        msgBox.textContent = 'A senha de acesso deve ter no mínimo 4 caracteres.';
+        msgBox.style.display = 'block';
+        showToast('Senha muito curta.', 'error');
+        return;
+      }
+
+      // Converte whatsapp para padrão internacional
+      let cleanDigits = whatsappRaw.replace(/\D/g, '');
+      let wppInt = '+55' + cleanDigits;
+      if (cleanDigits.startsWith('55') && cleanDigits.length >= 12) {
+        wppInt = '+' + cleanDigits;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Criando seu cadastro e páginas...';
+
+      setTimeout(function () {
+        const result = VilhenaStore.registerProfessor({
+          nome: nome,
+          username: username,
+          senha: pass,
+          graduacao: graduacao,
+          registro: registro || ('Registro CBJJ: ' + Math.floor(100000 + Math.random() * 900000)),
+          bio: bio,
+          foto: foto,
+          filialNome: filialNome,
+          endereco: endereco,
+          whatsapp: wppInt,
+          whatsappDisplay: whatsappRaw,
+          filialHero: 'img/vilhenamatriz.png'
+        });
+
+        btn.disabled = false;
+        btn.textContent = '🥋 Concluir Cadastro e Criar Minha Página';
+
+        if (result.success) {
+          // Preenche modal de sucesso
+          document.getElementById('modal-novo-prof-nome').textContent = result.professor.nome;
+          document.getElementById('modal-btn-ver-perfil').href = 'professor.html?id=' + encodeURIComponent(result.id);
+          document.getElementById('modal-btn-ver-filial').href = 'filial.html?id=' + encodeURIComponent(result.id);
+          document.getElementById('modal-sucesso-cadastro').style.display = 'flex';
+
+          showToast('Professor ' + result.professor.nome + ' cadastrado com sucesso!', 'success');
+        } else {
+          msgBox.className = 'auth-message error';
+          msgBox.textContent = result.message;
+          msgBox.style.display = 'block';
+          showToast(result.message, 'error');
+        }
+      }, 200);
+    }
+
+    function fecharModalSucesso() {
+      document.getElementById('modal-sucesso-cadastro').style.display = 'none';
+      checkAuthAndRender();
+    }
+
     // Verifica autenticação ativa e renderiza a view adequada com proteção de acesso
     function checkAuthAndRender() {
       const session = VilhenaStore.getCurrentSession();
@@ -606,6 +1140,13 @@
 
         viewLogin.style.display = 'flex';
         viewDash.style.display = 'none';
+
+        // Abre modo cadastro se informado via URL
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('action') === 'register' || window.location.hash === '#cadastro') {
+          switchAuthMode('register');
+        }
+
         try {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (e) {}
@@ -698,8 +1239,100 @@
       document.getElementById('dash-filial-nome-chip').textContent = currentFilialData.nome;
 
       // Links públicos
-      document.getElementById('btn-ver-perfil').href = 'professor.html?id=' + profId;
-      document.getElementById('btn-ver-filial').href = 'filial.html?id=' + profId;
+      const profUrl = 'professor.html?id=' + encodeURIComponent(profId);
+      const filialUrl = 'filial.html?id=' + encodeURIComponent(profId);
+      document.getElementById('btn-ver-perfil').href = profUrl;
+      document.getElementById('btn-ver-filial').href = filialUrl;
+
+      // Banner dinâmico de status e visibilidade pública
+      const bannerBox = document.getElementById('dash-banner-public-page');
+      if (bannerBox) {
+        const status = currentProfData.status || 'aprovado';
+        const isVisible = currentProfData.visivelNoSite !== false;
+
+        if (status === 'pendente') {
+          bannerBox.className = 'banner-novo-professor banner-status-pendente';
+          bannerBox.innerHTML = `
+            <div class="banner-novo-professor-text">
+              <strong>⏳ Seu cadastro está em análise pela Matriz!</strong>
+              <span style="opacity: 0.9; margin-left: 0.35rem; display: block; margin-top: 0.25rem;">
+                A sua página de professor e da sua filial aguardam a autorização do <strong>Mestre Jefferson Vilhena</strong> para aparecerem no site oficial.
+                Você pode preencher e salvar seus dados, horários e fotos normalmente no painel.
+              </span>
+            </div>
+            <div class="banner-novo-professor-links">
+              <a href="${profUrl}" target="_blank" class="modal-link-btn" style="padding: 0.4rem 0.85rem; font-size: 0.8125rem; background: #64748b;">
+                👁️ Pré-visualizar Minha Página
+              </a>
+              <a href="${filialUrl}" target="_blank" class="modal-link-btn secondary" style="padding: 0.4rem 0.85rem; font-size: 0.8125rem;">
+                🏛️ Pré-visualizar Filial
+              </a>
+            </div>
+          `;
+        } else if (status === 'rejeitado') {
+          bannerBox.className = 'banner-novo-professor banner-status-rejeitado';
+          bannerBox.innerHTML = `
+            <div class="banner-novo-professor-text">
+              <strong>❌ Cadastro Não Homologado pela Matriz</strong>
+              <span style="opacity: 0.9; margin-left: 0.35rem; display: block; margin-top: 0.25rem;">
+                Seu cadastro não foi homologado ou está suspenso pelo Mestre Jefferson Vilhena. Suas páginas permanecem ocultas do público.
+              </span>
+            </div>
+            <div class="banner-novo-professor-links">
+              <a href="https://api.whatsapp.com/send?phone=5594984486969&text=Ol%C3%A1%20Mestre%20Jefferson,%20gostaria%20de%20falar%20sobre%20meu%20cadastro%20na%20Equipe%20Vilhena" target="_blank" class="modal-link-btn" style="padding: 0.4rem 0.85rem; font-size: 0.8125rem; background: #dc2626;">
+                💬 Falar com a Matriz
+              </a>
+            </div>
+          `;
+        } else if (!isVisible) {
+          bannerBox.className = 'banner-novo-professor banner-status-oculto';
+          bannerBox.innerHTML = `
+            <div class="banner-novo-professor-text">
+              <strong>⏸️ Sua página está pausada no site público</strong>
+              <span style="opacity: 0.9; margin-left: 0.35rem; display: block; margin-top: 0.25rem;">
+                A exibição pública do seu perfil e filial foi pausada pelo Mestre Jefferson Vilhena. Suas alterações continuam salvas no painel.
+              </span>
+            </div>
+            <div class="banner-novo-professor-links">
+              <a href="${profUrl}" target="_blank" class="modal-link-btn" style="padding: 0.4rem 0.85rem; font-size: 0.8125rem; background: #64748b;">
+                👁️ Pré-visualizar Página
+              </a>
+            </div>
+          `;
+        } else {
+          bannerBox.className = 'banner-novo-professor';
+          bannerBox.innerHTML = `
+            <div class="banner-novo-professor-text">
+              <strong>🥋 Sua página pública e filial estão ativas no site!</strong>
+              <span style="opacity: 0.85; margin-left: 0.35rem;">Todas as edições feitas neste painel são salvas e sincronizadas automaticamente no site.</span>
+            </div>
+            <div class="banner-novo-professor-links">
+              <a id="banner-link-perfil" href="${profUrl}" target="_blank" class="modal-link-btn" style="padding: 0.4rem 0.85rem; font-size: 0.8125rem;">
+                🔗 Abrir Minha Página
+              </a>
+              <a id="banner-link-filial" href="${filialUrl}" target="_blank" class="modal-link-btn secondary" style="padding: 0.4rem 0.85rem; font-size: 0.8125rem;">
+                🏛️ Abrir Minha Filial
+              </a>
+            </div>
+          `;
+        }
+      }
+
+      // Controle de Aba Exclusiva do Mestre (Jefferson Vilhena)
+      const isMaster = VilhenaStore.isMaster(profId);
+      const tabBtnAprovacoes = document.getElementById('tab-btn-aprovacoes');
+      if (tabBtnAprovacoes) {
+        if (isMaster) {
+          tabBtnAprovacoes.style.display = 'inline-flex';
+          renderMasterAprovacoesTab();
+        } else {
+          tabBtnAprovacoes.style.display = 'none';
+          const activeContent = document.querySelector('.tab-content.active');
+          if (activeContent && activeContent.id === 'tab-aprovacoes') {
+            switchTab('tab-perfil');
+          }
+        }
+      }
 
       // Aba 1: Perfil
       document.getElementById('field-prof-nome').value = currentProfData.nome || '';
@@ -742,7 +1375,7 @@
       });
 
       const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(function (b) {
-        return b.getAttribute('onclick').includes(tabId);
+        return b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId);
       });
       if (targetBtn) {
         targetBtn.classList.add('active');
@@ -755,6 +1388,241 @@
 
       const targetContent = document.getElementById(tabId);
       if (targetContent) targetContent.classList.add('active');
+
+      const saveBar = document.querySelector('.sticky-save-bar');
+      if (saveBar) {
+        saveBar.style.display = (tabId === 'tab-aprovacoes') ? 'none' : 'block';
+      }
+
+      if (tabId === 'tab-aprovacoes') {
+        renderMasterAprovacoesTab();
+      }
+    }
+
+    // Renderização do Painel do Mestre (Aprovação de Professores e Visibilidade)
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function renderMasterAprovacoesTab() {
+      if (!currentProfId || !VilhenaStore.isMaster(currentProfId)) return;
+
+      const pendentes = VilhenaStore.getProfessoresPendentes();
+      const allProfs = VilhenaStore.getProfessores();
+      const allFiliais = VilhenaStore.getFiliais();
+
+      // Métricas
+      let visiveisCount = 0;
+      let ocultosCount = 0;
+
+      Object.keys(allProfs).forEach(function (id) {
+        if (VilhenaStore.isProfessorPublico(id)) {
+          visiveisCount++;
+        } else {
+          ocultosCount++;
+        }
+      });
+
+      const statPendentes = document.getElementById('stat-pendentes');
+      const statVisiveis = document.getElementById('stat-visiveis');
+      const statOcultos = document.getElementById('stat-ocultos');
+      const badgeCount = document.getElementById('badge-pendencias-count');
+
+      if (statPendentes) statPendentes.textContent = pendentes.length;
+      if (statVisiveis) statVisiveis.textContent = visiveisCount;
+      if (statOcultos) statOcultos.textContent = ocultosCount;
+
+      if (badgeCount) {
+        badgeCount.textContent = pendentes.length;
+        if (pendentes.length > 0) {
+          badgeCount.classList.remove('zero');
+        } else {
+          badgeCount.classList.add('zero');
+        }
+      }
+
+      // 1. Renderiza Cadastros Pendentes
+      const containerPendentes = document.getElementById('container-pendentes');
+      if (containerPendentes) {
+        if (pendentes.length === 0) {
+          containerPendentes.innerHTML = `
+            <div class="empty-state-card">
+              <div class="empty-state-icon">✅</div>
+              <div class="empty-state-title">Nenhum cadastro pendente de aprovação</div>
+              <div class="empty-state-desc">Todos os novos professores cadastrados foram avaliados e respondidos pela Matriz.</div>
+            </div>
+          `;
+        } else {
+          containerPendentes.innerHTML = '';
+          pendentes.forEach(function (prof) {
+            const filial = allFiliais[prof.id] || {};
+            const card = document.createElement('div');
+            card.className = 'approval-card pending';
+            card.innerHTML = `
+              <div class="approval-card-main">
+                <img src="${prof.foto || 'img/professores/jeffersonVilhena.png'}" alt="${escapeHtml(prof.nome)}" class="approval-card-avatar" onerror="this.src='img/professores/jeffersonVilhena.png'">
+                <div class="approval-card-info">
+                  <div class="approval-card-title-row">
+                    <h5 class="approval-card-name">${escapeHtml(prof.nome)}</h5>
+                    <span class="approval-status-tag pending">⏳ Aguardando Aprovação</span>
+                  </div>
+                  <div class="approval-card-meta">
+                    <span class="approval-meta-item">🥋 <strong>${escapeHtml(prof.graduacao || 'Faixa preta')}</strong></span>
+                    <span class="approval-meta-item">📜 ${escapeHtml(prof.registro || 'Registro CBJJ')}</span>
+                    <span class="approval-meta-item">🏛️ ${escapeHtml(filial.nome || prof.filialNome || 'Filial')}</span>
+                    <span class="approval-meta-item">📍 ${escapeHtml(filial.endereco || prof.endereco || 'Endereço')}</span>
+                    <span class="approval-meta-item">📱 ${escapeHtml(prof.whatsappDisplay || prof.whatsapp || '')}</span>
+                  </div>
+                  ${prof.bio ? `<div class="approval-bio-box"><strong>Biografia marcial:</strong> ${escapeHtml(prof.bio)}</div>` : ''}
+                </div>
+              </div>
+              <div class="approval-card-actions">
+                <a href="professor.html?id=${encodeURIComponent(prof.id)}" target="_blank" class="btn-action-preview">
+                  👁️ Pré-visualizar Página
+                </a>
+                <a href="filial.html?id=${encodeURIComponent(prof.id)}" target="_blank" class="btn-action-preview">
+                  🏛️ Pré-visualizar Filial
+                </a>
+                <button type="button" class="btn-action-reject" onclick="handleRejeitarProf('${prof.id}')">
+                  ❌ Recusar
+                </button>
+                <button type="button" class="btn-action-delete" onclick="handleExcluirProf('${prof.id}')" title="Excluir cadastro permanentemente">
+                  🗑️ Excluir
+                </button>
+                <button type="button" class="btn-action-approve" onclick="handleAprovarProf('${prof.id}')">
+                  ✅ Aprovar e Publicar no Site
+                </button>
+              </div>
+            `;
+            containerPendentes.appendChild(card);
+          });
+        }
+      }
+
+      // 2. Renderiza Tabela de Visibilidade de Todos os Professores
+      const tbody = document.getElementById('tbody-professores-visibilidade');
+      if (tbody) {
+        tbody.innerHTML = '';
+        const profList = Object.keys(allProfs).map(id => allProfs[id]);
+
+        profList.forEach(function (prof) {
+          const filial = allFiliais[prof.id] || {};
+          const isMasterRow = prof.id === 'jefferson-vilhena';
+          const isVisible = prof.status === 'aprovado' && prof.visivelNoSite !== false;
+          const tr = document.createElement('tr');
+
+          let statusBadgeHtml = '';
+          if (prof.status === 'pendente') {
+            statusBadgeHtml = '<span class="approval-status-tag pending">⏳ Pendente</span>';
+          } else if (prof.status === 'rejeitado') {
+            statusBadgeHtml = '<span class="approval-status-tag rejected">❌ Recusado</span>';
+          } else {
+            statusBadgeHtml = '<span class="approval-status-tag approved">✅ Aprovado</span>';
+          }
+
+          tr.innerHTML = `
+            <td>
+              <div class="vis-table-prof-cell">
+                <img src="${prof.foto || 'img/professores/jeffersonVilhena.png'}" alt="${escapeHtml(prof.nome)}" class="vis-table-prof-thumb" onerror="this.src='img/professores/jeffersonVilhena.png'">
+                <div>
+                  <strong>${escapeHtml(prof.nome)}</strong> ${isMasterRow ? '<span style="font-size: 0.72rem; background: #dc2626; color: #fff; padding: 0.1rem 0.4rem; border-radius: 4px; margin-left: 0.25rem;">Mestre / Matriz</span>' : ''}
+                  <div style="font-size: 0.78rem; color: var(--text-color);">${escapeHtml(prof.graduacao || '')}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div style="font-weight: 500;">${escapeHtml(filial.nome || prof.filialNome || 'Filial')}</div>
+              <div style="font-size: 0.75rem; color: var(--text-color); max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                ${escapeHtml(filial.endereco || prof.endereco || '')}
+              </div>
+            </td>
+            <td>
+              ${statusBadgeHtml}
+            </td>
+            <td>
+              ${isMasterRow ? `
+                <span class="vis-status-text visible">Sempre Ativo</span>
+              ` : `
+                <label class="vis-toggle-label">
+                  <div class="vis-switch">
+                    <input type="checkbox" ${isVisible ? 'checked' : ''} onchange="handleToggleVisibilidade('${prof.id}', this.checked)">
+                    <span class="vis-slider"></span>
+                  </div>
+                  <span class="vis-status-text ${isVisible ? 'visible' : 'hidden'}">
+                    ${isVisible ? 'Sim (Visível)' : 'Não (Oculto)'}
+                  </span>
+                </label>
+              `}
+            </td>
+            <td style="text-align: right; white-space: nowrap;">
+              <a href="professor.html?id=${encodeURIComponent(prof.id)}" target="_blank" class="btn-action-preview" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">
+                👤 Página
+              </a>
+              <a href="filial.html?id=${encodeURIComponent(prof.id)}" target="_blank" class="btn-action-preview" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">
+                🏛️ Filial
+              </a>
+              ${(!isMasterRow && prof.isCustom) ? `
+                <button type="button" class="btn-action-delete" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;" onclick="handleExcluirProf('${prof.id}')" title="Excluir permanentemente">
+                  🗑️
+                </button>
+              ` : ''}
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    // Ações de Aprovação do Mestre Jefferson Vilhena
+    function handleAprovarProf(id) {
+      const res = VilhenaStore.aprovarProfessor(id);
+      if (res.success) {
+        showToast(res.message, 'success');
+        renderMasterAprovacoesTab();
+      } else {
+        showToast(res.message, 'error');
+      }
+    }
+
+    function handleRejeitarProf(id) {
+      const motivo = prompt('Informe o motivo da recusa ou observação (opcional):', 'Cadastro não homologado pela Matriz');
+      if (motivo === null) return;
+      const res = VilhenaStore.rejeitarProfessor(id, motivo);
+      if (res.success) {
+        showToast(res.message, 'info');
+        renderMasterAprovacoesTab();
+      } else {
+        showToast(res.message, 'error');
+      }
+    }
+
+    function handleToggleVisibilidade(id, checked) {
+      const res = VilhenaStore.toggleVisibilidade(id, checked);
+      if (res.success) {
+        showToast(res.message, 'info');
+        renderMasterAprovacoesTab();
+      } else {
+        showToast(res.message, 'error');
+      }
+    }
+
+    function handleExcluirProf(id) {
+      const prof = VilhenaStore.getProfessor(id);
+      const nome = prof ? prof.nome : id;
+      if (!confirm('Tem certeza de que deseja excluir o cadastro do professor ' + nome + '?\n\nEsta ação removerá o perfil, a filial e o acesso ao painel.')) {
+        return;
+      }
+      const ok = VilhenaStore.deleteProfessor(id);
+      if (ok) {
+        showToast('Cadastro do professor ' + nome + ' excluído com sucesso.', 'info');
+        renderMasterAprovacoesTab();
+      } else {
+        showToast('Não foi possível excluir este cadastro.', 'error');
+      }
     }
 
     // Manipulação de Upload de Imagens com compressão
