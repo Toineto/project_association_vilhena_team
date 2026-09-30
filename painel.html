@@ -68,10 +68,10 @@
         <!-- Seletor de Modo: Login ou Cadastro -->
         <div class="auth-tabs-segmented" role="tablist">
           <button type="button" class="auth-segment-btn active" id="seg-btn-login" onclick="switchAuthMode('login')">
-            🔑 Já sou Professor (Entrar)
+            Entrar
           </button>
           <button type="button" class="auth-segment-btn" id="seg-btn-register" onclick="switchAuthMode('register')">
-            🥋 Novo Professor (Cadastrar-se)
+            Cadastrar-se
           </button>
         </div>
 
@@ -776,43 +776,66 @@
 
         <!-- ABA EXCLUSIVA DO MESTRE: APROVAÇÃO DE CADASTROS E CONTROLE DE VISIBILIDADE -->
         <div id="tab-aprovacoes" class="tab-content">
-          <div class="section-intro">
-            <h3>🛡️ Gestão de Professores e Controle de Visibilidade</h3>
-            <p>Como Presidente da Associação Equipe Vilhena, você decide quais novos professores são aprovados e controla a exibição pública de qualquer página e filial no site oficial.</p>
+          <!-- Banner Executivo do Mestre -->
+          <div class="master-header-banner">
+            <div class="master-header-meta">
+              <span class="master-header-badge">
+                <span class="master-header-dot"></span>
+                Gabinete da Presidência · Matriz
+              </span>
+              <span class="master-header-association">Associação Equipe Vilhena Jiu-Jitsu</span>
+            </div>
+            <h3 class="master-header-title">Gestão de Professores &amp; Publicações no Site</h3>
+            <p class="master-header-subtitle">
+              Avalie e homologue novos cadastros de professores e controle em tempo real a publicação de páginas e filiais em todo o site oficial.
+            </p>
           </div>
 
-          <!-- Métricas Resumo -->
+          <!-- Métricas Executivas Interativas -->
           <div class="metrics-row">
-            <div class="metric-card">
-              <div class="metric-icon-box amber">⏳</div>
-              <div>
+            <div class="metric-card metric-interactive active" id="metric-card-all" onclick="setMasterFilter('all')" title="Ver todos os professores cadastrados">
+              <div class="metric-info">
+                <div class="metric-label">Total Cadastrados</div>
+                <div class="metric-value" id="stat-total">0</div>
+              </div>
+              <div class="metric-icon-box slate">🥋</div>
+            </div>
+
+            <div class="metric-card metric-interactive" id="metric-card-pending" onclick="setMasterFilter('pending')" title="Filtrar cadastros aguardando aprovação">
+              <div class="metric-info">
+                <div class="metric-label">Aguardando Homologação</div>
                 <div class="metric-value" id="stat-pendentes">0</div>
-                <div class="metric-label">Cadastros Pendentes</div>
               </div>
+              <div class="metric-icon-box amber" id="metric-icon-pending">⏳</div>
             </div>
-            <div class="metric-card">
-              <div class="metric-icon-box green">🥋</div>
-              <div>
+
+            <div class="metric-card metric-interactive" id="metric-card-visible" onclick="setMasterFilter('visible')" title="Filtrar páginas ativas no ar">
+              <div class="metric-info">
+                <div class="metric-label">Páginas no Ar</div>
                 <div class="metric-value" id="stat-visiveis">0</div>
-                <div class="metric-label">Páginas Ativas no Site</div>
               </div>
+              <div class="metric-icon-box green">🌐</div>
             </div>
-            <div class="metric-card">
-              <div class="metric-icon-box slate">⏸️</div>
-              <div>
-                <div class="metric-value" id="stat-ocultos">0</div>
+
+            <div class="metric-card metric-interactive" id="metric-card-hidden" onclick="setMasterFilter('hidden')" title="Filtrar páginas pausadas">
+              <div class="metric-info">
                 <div class="metric-label">Páginas Ocultadas</div>
+                <div class="metric-value" id="stat-ocultos">0</div>
               </div>
+              <div class="metric-icon-box slate">⏸️</div>
             </div>
           </div>
 
-          <!-- Seção 1: Novos Cadastros Aguardando Aprovação -->
-          <div style="margin-bottom: 2.5rem;">
-            <div class="section-intro" style="margin-bottom: 1.25rem;">
-              <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--title-color); display: flex; align-items: center; gap: 0.5rem;">
-                ⏳ Novos Cadastros Aguardando Aprovação
-              </h4>
-              <p>Os novos professores só terão sua página e filial publicadas no site após você clicar em <strong>Aprovar e Publicar</strong>.</p>
+          <!-- Seção 1: Novos Cadastros Aguardando Homologação -->
+          <div class="pending-section-wrapper" id="section-pendentes-wrapper">
+            <div class="section-subheading">
+              <div class="section-subheading-text">
+                <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--title-color);">
+                  Novos Cadastros Aguardando Homologação
+                </h4>
+                <p>Estes professores se cadastraram recentemente e precisam da autorização da Matriz para que suas páginas fiquem visíveis no site.</p>
+              </div>
+              <span class="pending-counter-pill" id="pending-counter-pill">0 pendentes</span>
             </div>
 
             <div id="container-pendentes" class="approval-list-container">
@@ -820,30 +843,71 @@
             </div>
           </div>
 
-          <!-- Seção 2: Controle de Exibição no Site (Todos os Professores) -->
+          <!-- Seção 2: Controle de Exibição no Site (Todos os Professores) - DIV SELECIONADA -->
           <div class="visibility-card">
-            <div class="section-intro" style="margin-bottom: 1rem;">
-              <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--title-color); display: flex; align-items: center; gap: 0.5rem;">
-                🌐 Controle de Exibição no Site Oficial
-              </h4>
-              <p>Ative ou pause a exibição pública de qualquer professor e filial. Professores com a chave desativada não aparecerão nas listas do site.</p>
+            <div class="visibility-card-header">
+              <div class="visibility-card-title-group">
+                <h4 class="visibility-card-title">Diretório Oficial &amp; Controle de Visibilidade</h4>
+                <p class="visibility-card-subtitle">
+                  Ative ou pause instantaneamente qualquer perfil ou tatame no site oficial.
+                </p>
+              </div>
+
+              <!-- Barra de Ferramentas: Busca + Filtros -->
+              <div class="visibility-toolbar">
+                <div class="visibility-search-box">
+                  <span class="search-icon" aria-hidden="true">🔍</span>
+                  <input
+                    type="search"
+                    id="input-busca-professores"
+                    placeholder="Buscar por nome, filial ou faixa..."
+                    class="visibility-search-input"
+                    oninput="handleBuscaProfessores(this.value)"
+                  />
+                  <button type="button" id="btn-limpar-busca" class="btn-clear-search" onclick="limparBuscaProfessores()" style="display: none;" title="Limpar busca">✕</button>
+                </div>
+
+                <div class="visibility-segmented-filters" role="tablist" aria-label="Filtro de Professores">
+                  <button type="button" class="filter-tab-btn active" id="flt-all" onclick="setMasterFilter('all')">
+                    Todos <span class="filter-tab-count" id="count-flt-all">0</span>
+                  </button>
+                  <button type="button" class="filter-tab-btn" id="flt-visible" onclick="setMasterFilter('visible')">
+                    Ativos <span class="filter-tab-count" id="count-flt-visible">0</span>
+                  </button>
+                  <button type="button" class="filter-tab-btn" id="flt-pending" onclick="setMasterFilter('pending')">
+                    Pendentes <span class="filter-tab-count" id="count-flt-pending">0</span>
+                  </button>
+                  <button type="button" class="filter-tab-btn" id="flt-hidden" onclick="setMasterFilter('hidden')">
+                    Pausados <span class="filter-tab-count" id="count-flt-hidden">0</span>
+                  </button>
+                </div>
+              </div>
             </div>
 
+            <!-- Tabela Estilizada e Responsiva -->
             <div class="visibility-table-responsive">
               <table class="vis-table">
                 <thead>
                   <tr>
-                    <th>Professor</th>
-                    <th>Filial / Tatame</th>
-                    <th>Status</th>
-                    <th>Visível no Site?</th>
-                    <th style="text-align: right;">Ações</th>
+                    <th style="min-width: 250px;">Professor &amp; Graduação</th>
+                    <th style="min-width: 210px;">Filial / Tatame</th>
+                    <th style="min-width: 140px;">Situação</th>
+                    <th style="min-width: 170px;">Exibir no Site?</th>
+                    <th style="min-width: 150px; text-align: right;">Ações Rápidas</th>
                   </tr>
                 </thead>
                 <tbody id="tbody-professores-visibilidade">
                   <!-- Renderizado via JavaScript -->
                 </tbody>
               </table>
+            </div>
+
+            <!-- Mensagem se busca não retornar resultados -->
+            <div id="vis-table-empty" class="vis-table-empty-state" style="display: none;">
+              <div class="empty-state-icon">🔍</div>
+              <div class="empty-state-title">Nenhum professor encontrado</div>
+              <div class="empty-state-desc">Nenhum registro corresponde aos filtros ou ao termo de busca aplicado.</div>
+              <button type="button" class="btn-reset-filters" onclick="resetMasterFilters()">Limpar Filtros e Ver Todos</button>
             </div>
           </div>
         </div>
@@ -1399,13 +1463,63 @@
       }
     }
 
-    // Renderização do Painel do Mestre (Aprovação de Professores e Visibilidade)
+    // ========================================================
+    // PAINEL EXCLUSIVO DO MESTRE JEFFERSON VILHENA
+    // GESTÃO DE PROFESSORES, APROVAÇÕES E DIRETÓRIO OFICIAL
+    // ========================================================
+
+    let masterVisFilter = 'all'; // 'all' | 'visible' | 'pending' | 'hidden'
+    let masterSearchQuery = '';
+
     function escapeHtml(str) {
       return String(str || '')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;');
+    }
+
+    function setMasterFilter(filter) {
+      masterVisFilter = filter;
+
+      // Atualiza botões segmented filter
+      document.querySelectorAll('.filter-tab-btn').forEach(function (btn) {
+        btn.classList.remove('active');
+      });
+      const targetBtn = document.getElementById('flt-' + filter);
+      if (targetBtn) targetBtn.classList.add('active');
+
+      // Atualiza cards métricos interativos
+      document.querySelectorAll('.metric-interactive').forEach(function (card) {
+        card.classList.remove('active');
+      });
+      const targetMetric = document.getElementById('metric-card-' + filter);
+      if (targetMetric) targetMetric.classList.add('active');
+
+      renderMasterAprovacoesTab();
+    }
+
+    function handleBuscaProfessores(query) {
+      masterSearchQuery = (query || '').trim().toLowerCase();
+      const btnClear = document.getElementById('btn-limpar-busca');
+      if (btnClear) {
+        btnClear.style.display = masterSearchQuery ? 'inline-flex' : 'none';
+      }
+      renderMasterAprovacoesTab();
+    }
+
+    function limparBuscaProfessores() {
+      const inp = document.getElementById('input-busca-professores');
+      if (inp) inp.value = '';
+      masterSearchQuery = '';
+      const btnClear = document.getElementById('btn-limpar-busca');
+      if (btnClear) btnClear.style.display = 'none';
+      renderMasterAprovacoesTab();
+    }
+
+    function resetMasterFilters() {
+      limparBuscaProfessores();
+      setMasterFilter('all');
     }
 
     function renderMasterAprovacoesTab() {
@@ -1415,45 +1529,77 @@
       const allProfs = VilhenaStore.getProfessores();
       const allFiliais = VilhenaStore.getFiliais();
 
-      // Métricas
+      // Métricas gerais
+      let totalCount = 0;
       let visiveisCount = 0;
       let ocultosCount = 0;
+      let pendentesCount = pendentes.length;
 
-      Object.keys(allProfs).forEach(function (id) {
-        if (VilhenaStore.isProfessorPublico(id)) {
+      const profList = Object.keys(allProfs).map(function (id) {
+        return allProfs[id];
+      });
+
+      profList.forEach(function (prof) {
+        totalCount++;
+        const isPub = VilhenaStore.isProfessorPublico(prof.id);
+        if (prof.status === 'pendente') {
+          // Já contabilizado em pendentes
+        } else if (isPub) {
           visiveisCount++;
         } else {
           ocultosCount++;
         }
       });
 
+      // Atualiza cards de métricas
+      const statTotal = document.getElementById('stat-total');
       const statPendentes = document.getElementById('stat-pendentes');
       const statVisiveis = document.getElementById('stat-visiveis');
       const statOcultos = document.getElementById('stat-ocultos');
       const badgeCount = document.getElementById('badge-pendencias-count');
+      const pendingPill = document.getElementById('pending-counter-pill');
 
-      if (statPendentes) statPendentes.textContent = pendentes.length;
+      if (statTotal) statTotal.textContent = totalCount;
+      if (statPendentes) statPendentes.textContent = pendentesCount;
       if (statVisiveis) statVisiveis.textContent = visiveisCount;
       if (statOcultos) statOcultos.textContent = ocultosCount;
 
+      if (pendingPill) {
+        pendingPill.textContent = pendentesCount === 0 ? 'Nenhuma pendência' : (pendentesCount === 1 ? '1 cadastro pendente' : pendentesCount + ' cadastros pendentes');
+        pendingPill.className = 'pending-counter-pill' + (pendentesCount > 0 ? ' has-items' : '');
+      }
+
       if (badgeCount) {
-        badgeCount.textContent = pendentes.length;
-        if (pendentes.length > 0) {
+        badgeCount.textContent = pendentesCount;
+        if (pendentesCount > 0) {
           badgeCount.classList.remove('zero');
         } else {
           badgeCount.classList.add('zero');
         }
       }
 
-      // 1. Renderiza Cadastros Pendentes
+      // Atualiza contadores dos botões de filtro
+      const cntAll = document.getElementById('count-flt-all');
+      const cntVis = document.getElementById('count-flt-visible');
+      const cntPen = document.getElementById('count-flt-pending');
+      const cntHid = document.getElementById('count-flt-hidden');
+
+      if (cntAll) cntAll.textContent = totalCount;
+      if (cntVis) cntVis.textContent = visiveisCount;
+      if (cntPen) cntPen.textContent = pendentesCount;
+      if (cntHid) cntHid.textContent = ocultosCount;
+
+      // 1. Renderiza Seção de Cadastros Pendentes
+      const sectionPendentesWrapper = document.getElementById('section-pendentes-wrapper');
       const containerPendentes = document.getElementById('container-pendentes');
+
       if (containerPendentes) {
         if (pendentes.length === 0) {
           containerPendentes.innerHTML = `
-            <div class="empty-state-card">
-              <div class="empty-state-icon">✅</div>
-              <div class="empty-state-title">Nenhum cadastro pendente de aprovação</div>
-              <div class="empty-state-desc">Todos os novos professores cadastrados foram avaliados e respondidos pela Matriz.</div>
+            <div class="empty-state-card" style="padding: 2.25rem 1.5rem;">
+              <div class="empty-state-icon">🛡️</div>
+              <div class="empty-state-title">Nenhum cadastro pendente de homologação</div>
+              <div class="empty-state-desc">Todos os novos professores da Associação Equipe Vilhena foram avaliados pela Matriz.</div>
             </div>
           `;
         } else {
@@ -1464,37 +1610,55 @@
             card.className = 'approval-card pending';
             card.innerHTML = `
               <div class="approval-card-main">
-                <img src="${prof.foto || 'img/professores/jeffersonVilhena.png'}" alt="${escapeHtml(prof.nome)}" class="approval-card-avatar" onerror="this.src='img/professores/jeffersonVilhena.png'">
+                <img
+                  src="${prof.foto || 'img/professores/jeffersonVilhena.png'}"
+                  alt="${escapeHtml(prof.nome)}"
+                  class="approval-card-avatar"
+                  onerror="this.src='img/professores/jeffersonVilhena.png'"
+                />
                 <div class="approval-card-info">
                   <div class="approval-card-title-row">
                     <h5 class="approval-card-name">${escapeHtml(prof.nome)}</h5>
-                    <span class="approval-status-tag pending">⏳ Aguardando Aprovação</span>
+                    <span class="vis-status-indicator pendente"><span class="status-indicator-dot"></span>Aguardando Homologação</span>
                   </div>
                   <div class="approval-card-meta">
                     <span class="approval-meta-item">🥋 <strong>${escapeHtml(prof.graduacao || 'Faixa preta')}</strong></span>
+                    <span aria-hidden="true" style="opacity: 0.4;">·</span>
                     <span class="approval-meta-item">📜 ${escapeHtml(prof.registro || 'Registro CBJJ')}</span>
+                    <span aria-hidden="true" style="opacity: 0.4;">·</span>
                     <span class="approval-meta-item">🏛️ ${escapeHtml(filial.nome || prof.filialNome || 'Filial')}</span>
+                    <span aria-hidden="true" style="opacity: 0.4;">·</span>
                     <span class="approval-meta-item">📍 ${escapeHtml(filial.endereco || prof.endereco || 'Endereço')}</span>
-                    <span class="approval-meta-item">📱 ${escapeHtml(prof.whatsappDisplay || prof.whatsapp || '')}</span>
+                    ${(prof.whatsappDisplay || prof.whatsapp) ? `
+                      <span aria-hidden="true" style="opacity: 0.4;">·</span>
+                      <a href="https://api.whatsapp.com/send?phone=${encodeURIComponent(prof.whatsapp || '')}" target="_blank" class="approval-meta-item link-wpp">
+                        📱 ${escapeHtml(prof.whatsappDisplay || prof.whatsapp || '')}
+                      </a>
+                    ` : ''}
                   </div>
-                  ${prof.bio ? `<div class="approval-bio-box"><strong>Biografia marcial:</strong> ${escapeHtml(prof.bio)}</div>` : ''}
+                  ${prof.bio ? `
+                    <div class="approval-bio-box">
+                      <div class="approval-bio-label">Resumo Marcial / Apresentação:</div>
+                      <div class="approval-bio-text">${escapeHtml(prof.bio)}</div>
+                    </div>
+                  ` : ''}
                 </div>
               </div>
               <div class="approval-card-actions">
-                <a href="professor.html?id=${encodeURIComponent(prof.id)}" target="_blank" class="btn-action-preview">
+                <a href="professor.html?id=${encodeURIComponent(prof.id)}" target="_blank" class="btn-action-preview" title="Abrir rascunho da página do professor">
                   👁️ Pré-visualizar Página
                 </a>
-                <a href="filial.html?id=${encodeURIComponent(prof.id)}" target="_blank" class="btn-action-preview">
+                <a href="filial.html?id=${encodeURIComponent(prof.id)}" target="_blank" class="btn-action-preview secondary" title="Abrir rascunho da filial">
                   🏛️ Pré-visualizar Filial
                 </a>
-                <button type="button" class="btn-action-reject" onclick="handleRejeitarProf('${prof.id}')">
-                  ❌ Recusar
+                <button type="button" class="btn-action-reject" onclick="handleRejeitarProf('${prof.id}')" title="Recusar homologação">
+                  Recusar Cadastro
                 </button>
-                <button type="button" class="btn-action-delete" onclick="handleExcluirProf('${prof.id}')" title="Excluir cadastro permanentemente">
-                  🗑️ Excluir
+                <button type="button" class="btn-action-delete" onclick="handleExcluirProf('${prof.id}')" title="Excluir cadastro permanentemente do sistema">
+                  Excluir
                 </button>
-                <button type="button" class="btn-action-approve" onclick="handleAprovarProf('${prof.id}')">
-                  ✅ Aprovar e Publicar no Site
+                <button type="button" class="btn-action-approve" onclick="handleAprovarProf('${prof.id}')" title="Aprovar e liberar exibição pública no site">
+                  ✓ Aprovar e Publicar no Site
                 </button>
               </div>
             `;
@@ -1503,77 +1667,164 @@
         }
       }
 
-      // 2. Renderiza Tabela de Visibilidade de Todos os Professores
+      // 2. Renderiza Tabela de Visibilidade com Filtro e Busca
       const tbody = document.getElementById('tbody-professores-visibilidade');
+      const emptyStateTable = document.getElementById('vis-table-empty');
+
       if (tbody) {
         tbody.innerHTML = '';
-        const profList = Object.keys(allProfs).map(id => allProfs[id]);
 
-        profList.forEach(function (prof) {
-          const filial = allFiliais[prof.id] || {};
-          const isMasterRow = prof.id === 'jefferson-vilhena';
-          const isVisible = prof.status === 'aprovado' && prof.visivelNoSite !== false;
-          const tr = document.createElement('tr');
+        // Filtra a lista
+        let filteredList = profList.slice();
 
-          let statusBadgeHtml = '';
-          if (prof.status === 'pendente') {
-            statusBadgeHtml = '<span class="approval-status-tag pending">⏳ Pendente</span>';
-          } else if (prof.status === 'rejeitado') {
-            statusBadgeHtml = '<span class="approval-status-tag rejected">❌ Recusado</span>';
-          } else {
-            statusBadgeHtml = '<span class="approval-status-tag approved">✅ Aprovado</span>';
-          }
+        // 1. Aplica filtro de status
+        if (masterVisFilter === 'visible') {
+          filteredList = filteredList.filter(function (p) {
+            return VilhenaStore.isProfessorPublico(p.id);
+          });
+        } else if (masterVisFilter === 'pending') {
+          filteredList = filteredList.filter(function (p) {
+            return p.status === 'pendente';
+          });
+        } else if (masterVisFilter === 'hidden') {
+          filteredList = filteredList.filter(function (p) {
+            return !VilhenaStore.isProfessorPublico(p.id) && p.status !== 'pendente';
+          });
+        }
 
-          tr.innerHTML = `
-            <td>
-              <div class="vis-table-prof-cell">
-                <img src="${prof.foto || 'img/professores/jeffersonVilhena.png'}" alt="${escapeHtml(prof.nome)}" class="vis-table-prof-thumb" onerror="this.src='img/professores/jeffersonVilhena.png'">
-                <div>
-                  <strong>${escapeHtml(prof.nome)}</strong> ${isMasterRow ? '<span style="font-size: 0.72rem; background: #dc2626; color: #fff; padding: 0.1rem 0.4rem; border-radius: 4px; margin-left: 0.25rem;">Mestre / Matriz</span>' : ''}
-                  <div style="font-size: 0.78rem; color: var(--text-color);">${escapeHtml(prof.graduacao || '')}</div>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div style="font-weight: 500;">${escapeHtml(filial.nome || prof.filialNome || 'Filial')}</div>
-              <div style="font-size: 0.75rem; color: var(--text-color); max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                ${escapeHtml(filial.endereco || prof.endereco || '')}
-              </div>
-            </td>
-            <td>
-              ${statusBadgeHtml}
-            </td>
-            <td>
-              ${isMasterRow ? `
-                <span class="vis-status-text visible">Sempre Ativo</span>
-              ` : `
-                <label class="vis-toggle-label">
-                  <div class="vis-switch">
-                    <input type="checkbox" ${isVisible ? 'checked' : ''} onchange="handleToggleVisibilidade('${prof.id}', this.checked)">
-                    <span class="vis-slider"></span>
+        // 2. Aplica busca em texto
+        if (masterSearchQuery) {
+          filteredList = filteredList.filter(function (p) {
+            const filial = allFiliais[p.id] || {};
+            const q = masterSearchQuery;
+            const nome = (p.nome || '').toLowerCase();
+            const grad = (p.graduacao || '').toLowerCase();
+            const filNome = (filial.nome || p.filialNome || '').toLowerCase();
+            const end = (filial.endereco || p.endereco || '').toLowerCase();
+            return nome.includes(q) || grad.includes(q) || filNome.includes(q) || end.includes(q);
+          });
+        }
+
+        if (filteredList.length === 0) {
+          if (emptyStateTable) emptyStateTable.style.display = 'block';
+        } else {
+          if (emptyStateTable) emptyStateTable.style.display = 'none';
+
+          // Ordena: Mestre Jefferson Vilhena primeiro, depois em ordem alfabética
+          filteredList.sort(function (a, b) {
+            if (a.id === 'jefferson-vilhena') return -1;
+            if (b.id === 'jefferson-vilhena') return 1;
+            return (a.nome || '').localeCompare(b.nome || '');
+          });
+
+          filteredList.forEach(function (prof) {
+            const filial = allFiliais[prof.id] || {};
+            const isMasterRow = prof.id === 'jefferson-vilhena';
+            const isVisible = prof.status === 'aprovado' && prof.visivelNoSite !== false;
+            const tr = document.createElement('tr');
+            if (isMasterRow) tr.className = 'tr-master-row';
+
+            let statusIndicatorHtml = '';
+            if (prof.status === 'pendente') {
+              statusIndicatorHtml = `
+                <span class="vis-status-indicator pendente">
+                  <span class="status-indicator-dot"></span>Em Análise
+                </span>
+              `;
+            } else if (prof.status === 'rejeitado') {
+              statusIndicatorHtml = `
+                <span class="vis-status-indicator recusado">
+                  <span class="status-indicator-dot"></span>Recusado
+                </span>
+              `;
+            } else if (isVisible) {
+              statusIndicatorHtml = `
+                <span class="vis-status-indicator publico">
+                  <span class="status-indicator-dot"></span>Publicado
+                </span>
+              `;
+            } else {
+              statusIndicatorHtml = `
+                <span class="vis-status-indicator pausado">
+                  <span class="status-indicator-dot"></span>Pausado
+                </span>
+              `;
+            }
+
+            tr.innerHTML = `
+              <td>
+                <div class="vis-table-prof-cell">
+                  <div class="vis-table-avatar-wrapper">
+                    <img
+                      src="${prof.foto || 'img/professores/jeffersonVilhena.png'}"
+                      alt="${escapeHtml(prof.nome)}"
+                      class="vis-table-prof-thumb"
+                      onerror="this.src='img/professores/jeffersonVilhena.png'"
+                    />
+                    <span class="avatar-status-pip ${isVisible ? 'online' : (prof.status === 'pendente' ? 'pending' : 'offline')}"></span>
                   </div>
-                  <span class="vis-status-text ${isVisible ? 'visible' : 'hidden'}">
-                    ${isVisible ? 'Sim (Visível)' : 'Não (Oculto)'}
-                  </span>
-                </label>
-              `}
-            </td>
-            <td style="text-align: right; white-space: nowrap;">
-              <a href="professor.html?id=${encodeURIComponent(prof.id)}" target="_blank" class="btn-action-preview" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">
-                👤 Página
-              </a>
-              <a href="filial.html?id=${encodeURIComponent(prof.id)}" target="_blank" class="btn-action-preview" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">
-                🏛️ Filial
-              </a>
-              ${(!isMasterRow && prof.isCustom) ? `
-                <button type="button" class="btn-action-delete" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;" onclick="handleExcluirProf('${prof.id}')" title="Excluir permanentemente">
-                  🗑️
-                </button>
-              ` : ''}
-            </td>
-          `;
-          tbody.appendChild(tr);
-        });
+                  <div>
+                    <div class="vis-prof-name-row">
+                      <strong class="vis-prof-name">${escapeHtml(prof.nome)}</strong>
+                      ${isMasterRow ? '<span class="vis-tag-master">Presidente</span>' : ''}
+                    </div>
+                    <div class="vis-prof-subtitle">
+                      ${escapeHtml(prof.graduacao || 'Faixa Preta')}
+                      ${prof.registro ? ` · <span style="opacity: 0.85;">${escapeHtml(prof.registro)}</span>` : ''}
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="vis-filial-name">${escapeHtml(filial.nome || prof.filialNome || 'Filial Matriz')}</div>
+                <div class="vis-filial-address" title="${escapeHtml(filial.endereco || prof.endereco || '')}">
+                  ${escapeHtml(filial.endereco || prof.endereco || 'Endereço não informado')}
+                </div>
+              </td>
+              <td>
+                ${statusIndicatorHtml}
+              </td>
+              <td>
+                ${isMasterRow ? `
+                  <div class="vis-lock-status" title="A Matriz do Mestre Jefferson Vilhena está permanentemente publicada.">
+                    <span class="lock-icon">🔒</span> Sempre no ar
+                  </div>
+                ` : `
+                  <label class="vis-toggle-label" title="${isVisible ? 'Clique para ocultar este professor do site' : 'Clique para publicar este professor no site'}">
+                    <div class="vis-switch">
+                      <input
+                        type="checkbox"
+                        ${isVisible ? 'checked' : ''}
+                        onchange="handleToggleVisibilidade('${prof.id}', this.checked)"
+                        aria-label="Alternar exibição pública de ${escapeHtml(prof.nome)}"
+                      />
+                      <span class="vis-slider"></span>
+                    </div>
+                    <span class="vis-switch-caption ${isVisible ? 'active' : 'inactive'}">
+                      ${isVisible ? 'Visível no site' : 'Ocultado'}
+                    </span>
+                  </label>
+                `}
+              </td>
+              <td style="text-align: right; white-space: nowrap;">
+                <div class="vis-actions-container">
+                  <a href="professor.html?id=${encodeURIComponent(prof.id)}" target="_blank" class="vis-action-link" title="Visualizar página de perfil">
+                    <span>Perfil</span> ↗
+                  </a>
+                  <a href="filial.html?id=${encodeURIComponent(prof.id)}" target="_blank" class="vis-action-link secondary" title="Visualizar filial">
+                    <span>Filial</span> ↗
+                  </a>
+                  ${(!isMasterRow && prof.isCustom) ? `
+                    <button type="button" class="vis-action-delete-btn" onclick="handleExcluirProf('${prof.id}')" title="Excluir cadastro deste professor">
+                      ✕
+                    </button>
+                  ` : ''}
+                </div>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
       }
     }
 
@@ -1613,7 +1864,7 @@
     function handleExcluirProf(id) {
       const prof = VilhenaStore.getProfessor(id);
       const nome = prof ? prof.nome : id;
-      if (!confirm('Tem certeza de que deseja excluir o cadastro do professor ' + nome + '?\n\nEsta ação removerá o perfil, a filial e o acesso ao painel.')) {
+      if (!confirm('Tem certeza de que deseja excluir o cadastro do professor ' + nome + '?\n\nEsta ação removerá o perfil, a filial e as credenciais de acesso ao painel.')) {
         return;
       }
       const ok = VilhenaStore.deleteProfessor(id);
