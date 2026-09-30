@@ -1067,6 +1067,18 @@ html.dark-mode .perfil-whatsapp-section {
   border-top-color: rgba(255, 255, 255, 0.08);
 }
 
+/* Horários e Galeria Integrados na Filial */
+.filial-sub-section {
+  margin-top: 2rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode .filial-sub-section,
+html.dark-mode .filial-sub-section {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
 /* WhatsApp Box */
 .whatsapp-test-box {
   margin-top: 1.25rem;

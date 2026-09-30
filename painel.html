@@ -393,22 +393,6 @@
         </div>
       </div>
 
-      <!-- Banner de Destaque da Página Pública do Professor -->
-      <div id="dash-banner-public-page" class="banner-novo-professor">
-        <div class="banner-novo-professor-text">
-          <strong>🥋 Sua página pública e filial estão ativas no site!</strong>
-          <span style="opacity: 0.85; margin-left: 0.35rem;">Todas as edições feitas neste painel são salvas e sincronizadas automaticamente no site.</span>
-        </div>
-        <div class="banner-novo-professor-links">
-          <a id="banner-link-perfil" href="professor.html" target="_blank" class="modal-link-btn" style="padding: 0.4rem 0.85rem; font-size: 0.8125rem;">
-            🔗 Abrir Minha Página
-          </a>
-          <a id="banner-link-filial" href="filial.html" target="_blank" class="modal-link-btn secondary" style="padding: 0.4rem 0.85rem; font-size: 0.8125rem;">
-            🏛️ Abrir Minha Filial
-          </a>
-        </div>
-      </div>
-
       <!-- Navegação por Abas (com swipe e pills otimizados para mobile) -->
       <div class="tabs-nav-wrapper">
         <div class="tabs-nav" id="main-tabs-nav">
@@ -417,12 +401,6 @@
           </button>
           <button type="button" class="tab-btn" onclick="switchTab('tab-filial')">
             <span class="tab-icon">🏛️</span> <span class="tab-text">Minha Filial</span>
-          </button>
-          <button type="button" class="tab-btn" onclick="switchTab('tab-horarios')">
-            <span class="tab-icon">⏰</span> <span class="tab-text">Horários</span>
-          </button>
-          <button type="button" class="tab-btn" onclick="switchTab('tab-galeria')">
-            <span class="tab-icon">🖼️</span> <span class="tab-text">Galeria</span>
           </button>
           <button type="button" class="tab-btn" onclick="switchTab('tab-seguranca')">
             <span class="tab-icon">⚙️</span> <span class="tab-text">Segurança</span>
@@ -644,85 +622,97 @@
               placeholder="Apresente os diferenciais da unidade, tatame, vestiários, programas oferecidos..."
             ></textarea>
           </div>
-        </div>
 
-        <!-- ABA 3: HORÁRIOS DE TREINO -->
-        <div id="tab-horarios" class="tab-content">
-          <div class="section-intro">
-            <h3>Grade de Aulas e Horários</h3>
-            <p>Adicione, edite ou remova os horários de treino de Jiu-Jitsu (Kids, Iniciantes, Adulto, No-Gi, Competição).</p>
-          </div>
-
-          <div class="horarios-list" id="horarios-container">
-            <!-- Preenchido dinamicamente via JS -->
-          </div>
-
-          <div class="add-horario-box">
-            <input
-              type="text"
-              id="input-novo-horario"
-              class="form-input"
-              placeholder="ex: Segunda a Sexta: 19h30 - 21h00 (Adulto Geral & Competição)"
-            />
-            <button
-              type="button"
-              class="btn-primary"
-              style="white-space: nowrap; padding: 0.8125rem 1.25rem;"
-              onclick="adicionarHorario()"
-            >
-              + Adicionar Horário
-            </button>
-          </div>
-        </div>
-
-        <!-- ABA 4: GALERIA DE FOTOS -->
-        <div id="tab-galeria" class="tab-content">
-          <div class="section-intro">
-            <h3>Fotos da Galeria</h3>
-            <p>Gerencie as fotos que aparecem na galeria da sua filial e do seu perfil.</p>
-          </div>
-
-          <div class="gallery-grid" id="galeria-preview-grid">
-            <!-- Preenchido dinamicamente via JS -->
-          </div>
-
-          <div class="gallery-upload-card">
-            <div class="form-label" style="margin-bottom: 0.75rem;">Adicionar Nova Foto à Galeria</div>
-            <div
-              class="dropzone"
-              id="dropzone-galeria"
-              onclick="document.getElementById('input-file-galeria').click()"
-            >
-              <span class="dropzone-icon">🖼️</span>
-              <div class="dropzone-text">Toque para selecionar ou arrastar foto</div>
-              <div class="dropzone-hint">A imagem será otimizada e adicionada à sua coleção.</div>
-              <input
-                type="file"
-                id="input-file-galeria"
-                class="file-hidden-input"
-                accept="image/*"
-                onchange="handleNovaFotoGaleria(event)"
-              />
+          <!-- SEÇÃO INTEGRADA: GRADE DE HORÁRIOS DA FILIAL -->
+          <div class="filial-sub-section">
+            <div class="section-subheading">
+              <div class="section-subheading-text">
+                <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--title-color); display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.25rem 0;">
+                  <span>⏰</span> Grade de Aulas e Horários
+                </h4>
+                <p style="margin: 0; font-size: 0.8125rem; color: var(--text-color);">
+                  Defina as turmas e horários de treino oferecidos nesta filial (Kids, Iniciantes, Adulto, Competição).
+                </p>
+              </div>
             </div>
-            <div class="gallery-link-row">
+
+            <div class="horarios-list" id="horarios-container">
+              <!-- Preenchido dinamicamente via JS -->
+            </div>
+
+            <div class="add-horario-box">
               <input
                 type="text"
-                id="input-url-galeria"
+                id="input-novo-horario"
                 class="form-input"
-                placeholder="Ou cole a URL de uma imagem para adicionar à galeria..."
+                placeholder="ex: Segunda a Sexta: 19h30 - 21h00 (Adulto Geral & Competição)"
               />
               <button
                 type="button"
-                class="btn-secondary"
-                onclick="adicionarUrlGaleria()"
+                class="btn-primary"
+                style="white-space: nowrap; padding: 0.8125rem 1.25rem;"
+                onclick="adicionarHorario()"
               >
-                + Adicionar por Link
+                + Adicionar Horário
               </button>
+            </div>
+          </div>
+
+          <!-- SEÇÃO INTEGRADA: GALERIA DE FOTOS DO TATAME -->
+          <div class="filial-sub-section">
+            <div class="section-subheading">
+              <div class="section-subheading-text">
+                <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--title-color); display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.25rem 0;">
+                  <span>🖼️</span> Galeria de Fotos do Tatame
+                </h4>
+                <p style="margin: 0; font-size: 0.8125rem; color: var(--text-color);">
+                  Fotos que serão exibidas na apresentação visual da sua filial e perfil de professor.
+                </p>
+              </div>
+            </div>
+
+            <div class="gallery-grid" id="galeria-preview-grid">
+              <!-- Preenchido dinamicamente via JS -->
+            </div>
+
+            <div class="gallery-upload-card">
+              <div class="form-label" style="margin-bottom: 0.75rem;">Adicionar Nova Foto à Galeria</div>
+              <div
+                class="dropzone"
+                id="dropzone-galeria"
+                onclick="document.getElementById('input-file-galeria').click()"
+              >
+                <span class="dropzone-icon">🖼️</span>
+                <div class="dropzone-text">Toque para selecionar ou arrastar foto</div>
+                <div class="dropzone-hint">A imagem será otimizada e adicionada à sua coleção.</div>
+                <input
+                  type="file"
+                  id="input-file-galeria"
+                  class="file-hidden-input"
+                  accept="image/*"
+                  onchange="handleNovaFotoGaleria(event)"
+                />
+              </div>
+              <div class="gallery-link-row">
+                <input
+                  type="text"
+                  id="input-url-galeria"
+                  class="form-input"
+                  placeholder="Ou cole a URL de uma imagem para adicionar à galeria..."
+                />
+                <button
+                  type="button"
+                  class="btn-secondary"
+                  onclick="adicionarUrlGaleria()"
+                >
+                  + Adicionar por Link
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- ABA 5: SEGURANÇA & BACKUP -->
+        <!-- ABA 3: SEGURANÇA & BACKUP -->
         <div id="tab-seguranca" class="tab-content">
           <div class="section-intro">
             <h3>Segurança da Conta e Cópia de Segurança</h3>
