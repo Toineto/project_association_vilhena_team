@@ -424,9 +424,6 @@
           <button type="button" class="tab-btn" onclick="switchTab('tab-galeria')">
             <span class="tab-icon">🖼️</span> <span class="tab-text">Galeria</span>
           </button>
-          <button type="button" class="tab-btn" onclick="switchTab('tab-contato')">
-            <span class="tab-icon">📱</span> <span class="tab-text">WhatsApp</span>
-          </button>
           <button type="button" class="tab-btn" onclick="switchTab('tab-seguranca')">
             <span class="tab-icon">⚙️</span> <span class="tab-text">Segurança</span>
           </button>
@@ -512,6 +509,60 @@
               rows="5"
               placeholder="Escreva sua história, títulos, tempo de tatame e filosofia de ensino..."
             ></textarea>
+          </div>
+
+          <!-- SEÇÃO INTEGRADA: CONTATO OFICIAL & WHATSAPP -->
+          <div class="perfil-whatsapp-section">
+            <div class="section-subheading" style="margin-bottom: 1.15rem;">
+              <div class="section-subheading-text">
+                <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--title-color); display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.25rem 0;">
+                  <span>📱</span> WhatsApp Oficial de Atendimento
+                </h4>
+                <p style="margin: 0; font-size: 0.8125rem; color: var(--text-color);">
+                  Este número de WhatsApp é o canal oficial de atendimento aos alunos da sua filial e página pública.
+                </p>
+              </div>
+            </div>
+
+            <div class="form-grid-fields">
+              <div class="form-group">
+                <label for="field-contato-whatsapp" class="form-label">Número do WhatsApp com DDI e DDD</label>
+                <input
+                  type="text"
+                  id="field-contato-whatsapp"
+                  class="form-input"
+                  placeholder="+5594984486969"
+                  required
+                />
+                <small class="form-hint-text">
+                  Utilize o formato internacional com sinal de mais (+), ex: <strong>+5594984486969</strong>
+                </small>
+              </div>
+
+              <div class="form-group">
+                <label for="field-contato-display" class="form-label">Texto de Exibição do Telefone</label>
+                <input
+                  type="text"
+                  id="field-contato-display"
+                  class="form-input"
+                  placeholder="(94) 98448-6969"
+                  required
+                />
+                <small class="form-hint-text">
+                  Como o número será visualizado no site (ex: <strong>(94) 98448-6969</strong>)
+                </small>
+              </div>
+            </div>
+
+            <div class="whatsapp-test-box">
+              <div class="whatsapp-test-desc">
+                <div class="whatsapp-test-title">Teste de Conexão WhatsApp</div>
+                <div class="whatsapp-test-sub">Verifique se o link gerado abrirá seu WhatsApp corretamente.</div>
+              </div>
+              <a id="btn-testar-whatsapp" href="#" target="_blank" class="btn-whatsapp-action">
+                Testar no WhatsApp
+              </a>
+            </div>
           </div>
         </div>
 
@@ -671,55 +722,7 @@
           </div>
         </div>
 
-        <!-- ABA 5: CONTATOS & WHATSAPP -->
-        <div id="tab-contato" class="tab-content">
-          <div class="section-intro">
-            <h3>Canais de Atendimento e WhatsApp</h3>
-            <p>Configure os números para contato direto dos alunos com você e sua equipe.</p>
-          </div>
-
-          <div class="form-grid-fields">
-            <div class="form-group">
-              <label for="field-contato-whatsapp" class="form-label">Número do WhatsApp com DDI e DDD</label>
-              <input
-                type="text"
-                id="field-contato-whatsapp"
-                class="form-input"
-                placeholder="+5594984486969"
-                required
-              />
-              <small class="form-hint-text">
-                Utilize o formato internacional com sinal de mais (+), ex: <strong>+5594984486969</strong>
-              </small>
-            </div>
-
-            <div class="form-group">
-              <label for="field-contato-display" class="form-label">Texto de Exibição do Telefone</label>
-              <input
-                type="text"
-                id="field-contato-display"
-                class="form-input"
-                placeholder="(94) 98448-6969"
-                required
-              />
-              <small class="form-hint-text">
-                Como o número será visualizado no site (ex: <strong>(94) 98448-6969</strong>)
-              </small>
-            </div>
-          </div>
-
-          <div class="whatsapp-test-box">
-            <div class="whatsapp-test-desc">
-              <div class="whatsapp-test-title">Teste de Conexão WhatsApp</div>
-              <div class="whatsapp-test-sub">Verifique se o link gerado abrirá seu WhatsApp corretamente.</div>
-            </div>
-            <a id="btn-testar-whatsapp" href="#" target="_blank" class="btn-whatsapp-action">
-              Testar no WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- ABA 6: SEGURANÇA & BACKUP -->
+        <!-- ABA 5: SEGURANÇA & BACKUP -->
         <div id="tab-seguranca" class="tab-content">
           <div class="section-intro">
             <h3>Segurança da Conta e Cópia de Segurança</h3>

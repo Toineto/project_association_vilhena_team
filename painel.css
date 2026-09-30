@@ -1055,6 +1055,18 @@ html.dark-mode .gallery-upload-card {
   margin-top: 1rem;
 }
 
+/* WhatsApp Integrado no Perfil */
+.perfil-whatsapp-section {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode .perfil-whatsapp-section,
+html.dark-mode .perfil-whatsapp-section {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
 /* WhatsApp Box */
 .whatsapp-test-box {
   margin-top: 1.25rem;
